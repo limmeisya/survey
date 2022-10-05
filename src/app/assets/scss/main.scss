@@ -1,0 +1,19 @@
+$theme-colors: (
+  "primary": #f7931d,
+  "secondary": #f15a22,
+);
+
+$border-radius: 0px;
+$border-radius-sm: 0px;
+$border-radius-lg: 0px;
+$border-radius-pill: 0px;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+:root {
+  --bs-body-font-family: Calibri, "Calibri Alt", Helvetica, sans-serif;
+}
+
+.btn {
+  --bs-btn-border-radius: 0px;
+}
