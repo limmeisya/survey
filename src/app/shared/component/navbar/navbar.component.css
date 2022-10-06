@@ -9,12 +9,12 @@
 .sidebar {
   margin: 0;
   padding: 0;
-  width: 265px;
+  width: 300px;
   background-color: #ffff;
   /* position: fixed;*/
   position: absolute;
   /* height: 100%; */
-  overflow: auto;
+  overflow: scroll;
 }
 
 .sidebar a {
@@ -35,7 +35,7 @@
 }
 
 div.content {
-  margin-left: 265px;
+  margin-left: 300px;
   /* padding: 1px 16px; */
   /* height: 1000px; */
 }

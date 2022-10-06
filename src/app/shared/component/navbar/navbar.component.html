@@ -24,12 +24,14 @@
       <div class="mb-5">
         <div class="d-flex flex-column align-items-center">
           <div
-            class="text-center border border-top-0 border-start-0 border-end-0 w-75 px-5 py-3 mb-3"
+            class="text-center border border-top-0 border-start-0 border-end-0 w-75 px-3 py-3 mb-3"
           >
-            <img
-              class="h-100 w-50 rounded-circle mb-3"
-              src="https://st4.depositphotos.com/11634452/21365/v/600/depositphotos_213659488-stock-illustration-picture-profile-icon-human-or.jpg"
-            />
+            <div class="d-flex justify-content-center w-100">
+              <img
+                class="img-fluid rounded-circle mb-3 w-50"
+                src="https://st4.depositphotos.com/11634452/21365/v/600/depositphotos_213659488-stock-illustration-picture-profile-icon-human-or.jpg"
+              />
+            </div>
             <div class="text-primary">Nanas Kuning</div>
           </div>
         </div>
@@ -39,10 +41,31 @@
         <a class="btn text-start px-3 mx-4 my-2">
           <i class="fa fa-user fa-lg me-2"></i> Prospect</a
         >
-        <a class="btn text-start px-3 mx-4 my-2">
-          <i class="fa fa-hand-holding-dollar fa-lg me-2"></i> Credit
-          Submission</a
+        <a
+          class="btn text-start px-3 mx-4 my-2"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseCreditSubmission"
         >
+          <i class="fa fa-hand-holding-dollar fa-lg me-2"></i>
+          Credit Submission
+          <i class="ms-2 fa-solid fa-chevron-down"></i>
+        </a>
+        <div class="collapse" id="collapseCreditSubmission">
+          <div class="ms-3">
+            <a class="btn text-start px-3 mx-4 my-2 collapse">
+              <i class="fa fa-database fa-lg me-2"></i>
+              Customer Data
+            </a>
+            <a class="btn text-start px-3 mx-4 my-2 collapse">
+              <i class="fa fa-keyboard fa-lg me-2"></i>
+              New Submission
+            </a>
+            <a class="btn text-start px-3 mx-4 my-2 collapse">
+              <i class="fas fa-file fa-lg me-2"></i>
+              Review
+            </a>
+          </div>
+        </div>
         <a class="btn text-start px-3 mx-4 my-2">
           <i class="fa fa-chart-pie fa-lg me-2"></i> Survey</a
         >
