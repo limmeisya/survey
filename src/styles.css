@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+.border-top-primary {
+  border-top: 1px solid #f7911d56;
+}
+
+.border-bottom-primary {
+  border-bottom: 1px solid #f7911d56;
+}
+
+.border-left-primary {
+  border-left: 1px solid #f7911d56;
+}
+
+.border-right-primary {
+  border-right: 1px solid #f7911d56;
+}
