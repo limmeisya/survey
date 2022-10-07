@@ -36,10 +36,16 @@
           </div>
         </div>
         <div class="d-flex flex-column">
-          <a class="btn text-start px-3 mx-4 my-2">
+          <a
+            [ngClass]="{ 'btn-primary text-white': setActive('Dashboard') }"
+            class="btn text-start px-3 mx-4 my-2"
+          >
             <i class="fa fa-landmark fa-lg me-2"></i> Dashboard</a
           >
-          <a class="btn text-start px-3 mx-4 my-2">
+          <a
+            [ngClass]="{ 'btn-primary text-white': setActive('Prospect') }"
+            class="btn text-start px-3 mx-4 my-2"
+          >
             <i class="fa fa-user fa-lg me-2"></i> Prospect</a
           >
           <a
@@ -53,27 +59,49 @@
           </a>
           <div class="collapse" id="collapseCreditSubmission">
             <div class="ms-3">
-              <a class="btn text-start px-3 mx-4 my-2 collapse">
+              <a
+                [ngClass]="{
+                  'btn-primary text-white': setActive('Customer Data')
+                }"
+                class="btn text-start px-3 mx-4 my-2 collapse"
+              >
                 <i class="fa fa-database fa-lg me-2"></i>
                 Customer Data
               </a>
-              <a class="btn text-start px-3 mx-4 my-2 collapse">
+              <a
+                [ngClass]="{
+                  'btn-primary text-white': setActive('New Submission')
+                }"
+                class="btn text-start px-3 mx-4 my-2 collapse"
+              >
                 <i class="fa fa-keyboard fa-lg me-2"></i>
                 New Submission
               </a>
-              <a class="btn text-start px-3 mx-4 my-2 collapse">
+              <a
+                [ngClass]="{ 'btn-primary text-white': setActive('Review') }"
+                class="btn text-start px-3 mx-4 my-2 collapse"
+              >
                 <i class="fas fa-file fa-lg me-2"></i>
                 Review
               </a>
             </div>
           </div>
-          <a class="btn text-start px-3 mx-4 my-2">
+          <a
+            [ngClass]="{ 'btn-primary text-white': setActive('Survey') }"
+            class="btn text-start px-3 mx-4 my-2"
+          >
             <i class="fa fa-chart-pie fa-lg me-2"></i> Survey</a
           >
-          <a class="btn text-start px-3 mx-4 my-2">
+          <a
+            [ngClass]="{ 'btn-primary text-white': setActive('Approval') }"
+            class="btn text-start px-3 mx-4 my-2"
+          >
             <i class="fa fa-thumbs-up fa-lg me-2"></i> Approval</a
           >
-          <a class="btn text-start px-3 mx-4 my-2">
+          <a
+            [ngClass]="{ 'btn-primary text-white': setActive('Disbursement') }"
+            class="btn text-start px-3 mx-4 my-2"
+          >
             <i class="fa fa-hand-holding-dollar fa-lg me-2"></i> Disbursement</a
           >
         </div>
@@ -85,7 +113,6 @@
   </div>
 
   <div class="content overflow-auto" style="height: 90%">
-    <h1 class="px-5 py-4 m-0 fw-bold">Application Name</h1>
     <router-outlet></router-outlet>
   </div>
 </div>
