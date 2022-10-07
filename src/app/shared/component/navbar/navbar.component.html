@@ -18,8 +18,9 @@
       class="btn btn-white text-primary"
       routerLink="/login"
     >
-      Hi Nanas Kuning!
+      Hi <span [innerText]="identifierForView"></span>
     </button>
+   
   </div>
 </nav>
 
@@ -31,34 +32,35 @@
         src="https://st4.depositphotos.com/11634452/21365/v/600/depositphotos_213659488-stock-illustration-picture-profile-icon-human-or.jpg"
         alt=""
       />
-      <div class="text-primary">Nanas Kuning</div>
+      <div class="text-primary" [innerText]="identifierForView"></div>
+      <div *ngIf="roleAdminCheck" class="text-black">ADMIN</div>
     </div>
-    <a class="btn text-start px-3 mx-4 my-2"
+    <a class="btn text-start px-3 mx-4 my-2" (click)="dashboardRoute()"
       ><img class="me-2" src="/assets/iconify/Group.svg" />Dashboard</a
     >
-    <a class="btn text-start px-3 mx-4 my-2"
+    <a class="btn text-start px-3 mx-4 my-2" (click)="prospectRoute()"
       ><img class="me-2" src="/assets/iconify/account_circle.svg" />Prospect</a
     >
-    <a class="btn text-start px-3 mx-4 my-2"
+    <a class="btn text-start px-3 mx-4 my-2" (click)="creditSubmissionRoute()"
       ><img class="me-2" src="/assets/iconify/order.svg" />Credit Submission</a
     >
-    <a class="btn text-start px-3 mx-4 my-2"
+    <a class="btn text-start px-3 mx-4 my-2" (click)="surveyRoute()"
       ><img
         class="me-2"
         src="/assets/iconify/flat-color-icons_survey.svg"
       />Survey</a
     >
-    <a class="btn text-start px-3 mx-4 my-2"
+    <a class="btn text-start px-3 mx-4 my-2" (click)="approvalRoute()"
       ><img class="me-2" src="/assets/iconify/manager-list.svg" />Approval</a
     >
-    <a class="btn text-start px-3 mx-4 my-2"
+    <a class="btn text-start px-3 mx-4 my-2" (click)="disbursementRoute()"
       ><img
         class="me-2"
         src="/assets/iconify/dashicons_money-alt.svg"
       />Disbursement</a
     >
   </div>
-  <a class="btn btn-primary text-white px-3 mx-4 my-2">Logout</a>
+  <a class="btn btn-primary text-white px-3 mx-4 my-2" (click)="logOut()">Logout</a>
 </div>
 
 <div class="content">
