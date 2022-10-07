@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -7,16 +6,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit(): void {}
-
-  href: String = this.router.url;
-
-  setActive(buttonName: String): Boolean {
-    if (this.href.toLowerCase().includes(buttonName.toLowerCase())) {
-      return true;
-    }
-    return false;
-  }
 }
