@@ -1,0 +1,16 @@
+.required:after {
+  content: " *";
+  color: red;
+}
+
+.form-group input {
+  font-size: 10pt;
+}
+
+.form-select {
+  font-size: 10pt;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}

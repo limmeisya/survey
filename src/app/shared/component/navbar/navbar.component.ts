@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/auth/model/IAuth';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navbar',
@@ -23,8 +24,11 @@ export class NavbarComponent implements OnInit {
       if(this.authService.getUserFromStorage()?.role!==Role.CUSTOMER){
       this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       this.roleAdminCheck = true
+      }
     }
-    }
+
+    this.surveyFormRoute()
+    this.surveyReviewRoute()
   }
 
   logOut(){
@@ -46,9 +50,36 @@ export class NavbarComponent implements OnInit {
     if(this.roleAdminCheck) this.route.navigateByUrl('/admin-credit-submission')
     else this.route.navigateByUrl('/credit-submission')
   }
-  surveyRoute(){
-    if(this.roleAdminCheck) this.route.navigateByUrl('/admin-survey')
-    else this.route.navigateByUrl('/survey')
+
+  surveyForm: string = ''
+  surveyList: string = ''
+
+  surveyFormRoute(){
+    if(this.roleAdminCheck) {
+      if(this.roleAdminCheck){
+        this.surveyForm = 'New Survey'
+        this.route.navigateByUrl('/admin-new-survey')
+      } else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Sorry...',
+          text: `You don't have authority to access this page!`
+        })
+      }
+    }else {
+      this.surveyForm = 'Survey Form'
+      this.route.navigateByUrl('/customer-survey-form')
+    }
+  }
+
+  surveyReviewRoute(){
+    if(this.roleAdminCheck) {
+      this.surveyList = 'Survey List'
+      this.route.navigateByUrl('/admin-survey-list')
+    }else {
+      this.surveyList = 'Survey List'
+      this.route.navigateByUrl('/customer-survey-details')
+    }
   }
 
   approvalRoute(){

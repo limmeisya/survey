@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
 
 
   loginForm: FormGroup = new FormGroup({
-    identifier : new FormControl(),
-    password : new FormControl(),
+    identifier : new FormControl(''),
+    password : new FormControl(''),
   })
 
   clearForm(): void {
@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
                           password:this.loginForm.value['password']}
 
       console.log(data);
-      
       this.service.login(data).subscribe({
         next : (res : any) => 
         {
@@ -66,7 +65,6 @@ export class LoginComponent implements OnInit {
     }
 
   }
-
 
   register(){
     Swal.fire('Register button was clicked')

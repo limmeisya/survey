@@ -8,7 +8,8 @@ import { CostumerCreditSubmissionComponent } from './costumer-credit-submission/
 import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-disbursement.component';
 import {CostumerPagesComponent} from './costumer-pages.component'
 import { CostumerProspectComponent } from './costumer-prospect/costumer-prospect.component';
-import { CostumerSurveyComponent } from './costumer-survey/costumer-survey.component';
+import { SurveyFormComponent } from './costumer-survey/survey-form/survey-form.component';
+import { SurveyReviewComponent } from './costumer-survey/survey-review/survey-review.component';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
@@ -39,8 +40,12 @@ const routes: Routes = [
         component : CostumerProspectComponent
       },
       {
-        path : 'survey',
-        component : CostumerSurveyComponent
+        path : 'customer-survey-form',
+        component : SurveyFormComponent
+      },
+      {
+        path : 'customer-survey-details',
+        component : SurveyReviewComponent
       },
     ]
   }

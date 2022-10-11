@@ -3,18 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './auth/component/login/login.component';
-import { NavbarComponent } from './shared/component/navbar/navbar.component';
-import { FooterComponent } from './shared/component/footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http'
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
-import { AdminPagesComponent } from './admin-pages/admin-pages.component';
-import { CostumerPagesComponent } from './costumer-pages/costumer-pages.component';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { AdminPagesModule } from './admin-pages/admin-pages.module';
 import { CostumerPagesModule } from './costumer-pages/costumer-pages.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -22,6 +21,7 @@ import { CostumerPagesModule } from './costumer-pages/costumer-pages.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     AdminPagesModule,
@@ -29,7 +29,10 @@ import { CostumerPagesModule } from './costumer-pages/costumer-pages.module';
     ReactiveFormsModule,
     AuthModule,
     HttpClientModule,
-    SharedModule
+    SharedModule,
+    MatIconModule,
+    MatNativeDateModule,
+    MatStepperModule,
   ],
   providers: [{provide:HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}],
   bootstrap: [AppComponent]

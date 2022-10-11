@@ -7,7 +7,8 @@ import { AdminCreditSubmissionComponent } from './admin-credit-submission/admin-
 import { AdminDisbursementComponent } from './admin-disbursement/admin-disbursement.component';
 import { AdminPagesComponent } from './admin-pages.component';
 import { AdminProspectComponent } from './admin-prospect/admin-prospect.component';
-import { AdminSurveyComponent } from './admin-survey/admin-survey.component';
+import { NewSurveyComponent } from './admin-survey/new-survey/new-survey.component';
+import { SurveyListComponent } from './admin-survey/survey-list/survey-list.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -38,8 +39,12 @@ const routes: Routes = [
         component : AdminProspectComponent
       },
       {
-        path : 'admin-survey',
-        component : AdminSurveyComponent
+        path : 'admin-new-survey',
+        component : NewSurveyComponent
+      },
+      {
+        path : 'admin-survey-list',
+        component : SurveyListComponent
       },
     ]
   }

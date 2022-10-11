@@ -6,5 +6,34 @@
     "pathRewrite": {
       "^/api": ""
     }
+  },
+
+  "/bank": {
+    "target": "http://localhost:3000/",
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/bank": ""
+    }
+  },
+
+  "/area": {
+    "target": "https://www.emsifa.com/api-wilayah-indonesia/",
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/area": ""
+    }
+  },
+
+  "/post": {
+    "target": "http://localhost:8081/",
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/post": ""
+    }
   }
 }
+
+

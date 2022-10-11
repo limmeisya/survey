@@ -1,13 +1,21 @@
+.content {
+  background-color: #f7911d05;
+}
+
+.navbar {
+  z-index: 999;
+}
+
 .sidebar {
   margin: 0;
   padding: 0;
-  width: 240px;
+  width: 300px;
   background-color: #ffff;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
+  /* position: fixed; */
+  position: absolute;
+  /* height: 100%; */
+  overflow: scroll;
 }
-
 .sidebar a {
   display: block;
   color: rgba(0, 0, 0, 0.816);
@@ -26,7 +34,7 @@
 }
 
 div.content {
-  margin-left: 240px;
+  margin-left: 300px;
   /* padding: 1px 16px; */
   /* height: 1000px; */
 }
