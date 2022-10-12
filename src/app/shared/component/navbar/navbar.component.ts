@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/auth/model/IAuth';
 import { AuthService } from 'src/app/auth/service/auth.service';
+import { CostumerSurveyService } from 'src/app/costumer-pages/costumer-survey/costumer-survey.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -11,11 +12,13 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private route : Router, private authService : AuthService) { }
+  constructor(private route : Router, private authService : AuthService, private readonly customerService: CostumerSurveyService) { }
 
   identifierForView : string = ""
   roleForView : string  = ""
   roleAdminCheck : Boolean = false
+
+  nik: string =""
 
   ngOnInit(): void {
     console.log();
@@ -26,9 +29,6 @@ export class NavbarComponent implements OnInit {
       this.roleAdminCheck = true
       }
     }
-
-    this.surveyFormRoute()
-    this.surveyReviewRoute()
   }
 
   logOut(){
@@ -51,36 +51,41 @@ export class NavbarComponent implements OnInit {
     else this.route.navigateByUrl('/credit-submission')
   }
 
-  surveyForm: string = ''
-  surveyList: string = ''
+  // surveyFormRoute(){
+  //   if(this.roleAdminCheck) {
+  //     if(this.roleAdminCheck){
+  //       this.route.navigateByUrl('/admin-new-survey')
+  //     } else{
+  //       Swal.fire({
+  //         icon: 'error',
+  //         title: 'Sorry...',
+  //         text: `You don't have authority to access this page!`
+  //       })
+  //     }
+  //   }else {
+  //     // this.route.navigateByUrl('/customer-survey-form')
+  //     this.customerService.getLoginInfo().subscribe((info)=>{
+  //       this.nik = info.identifier
+  //       console.log('NIK: ', this.nik);
+  //       this.route.navigateByUrl('/customer-survey-form/' + this.nik)
+  //     })
+  //   }
+  // }
 
-  surveyFormRoute(){
-    if(this.roleAdminCheck) {
-      if(this.roleAdminCheck){
-        this.surveyForm = 'New Survey'
-        this.route.navigateByUrl('/admin-new-survey')
-      } else{
-        Swal.fire({
-          icon: 'error',
-          title: 'Sorry...',
-          text: `You don't have authority to access this page!`
-        })
-      }
-    }else {
-      this.surveyForm = 'Survey Form'
-      this.route.navigateByUrl('/customer-survey-form')
-    }
+  surveyRoute(){
+     if(this.roleAdminCheck) this.route.navigateByUrl('/admin-survey-list')
+      else this.route.navigateByUrl('/cust-survey-list')
   }
 
-  surveyReviewRoute(){
-    if(this.roleAdminCheck) {
-      this.surveyList = 'Survey List'
-      this.route.navigateByUrl('/admin-survey-list')
-    }else {
-      this.surveyList = 'Survey List'
-      this.route.navigateByUrl('/customer-survey-details')
-    }
-  }
+  // surveyReviewRoute(){
+  //   if(this.roleAdminCheck) {
+  //     this.surveyList = 'Survey List'
+  //     this.route.navigateByUrl('/admin-survey-list')
+  //   }else {
+  //     this.surveyList = 'Survey List'
+  //     this.route.navigateByUrl('/customer-survey-details')
+  //   }
+  // }
 
   approvalRoute(){
     if(this.roleAdminCheck) this.route.navigateByUrl('/admin-approval')

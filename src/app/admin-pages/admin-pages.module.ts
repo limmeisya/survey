@@ -9,8 +9,9 @@ import { AdminApprovalComponent } from './admin-approval/admin-approval.componen
 import { AdminCreditSubmissionComponent } from './admin-credit-submission/admin-credit-submission.component';
 import { AdminDisbursementComponent } from './admin-disbursement/admin-disbursement.component';
 import { AdminProspectComponent } from './admin-prospect/admin-prospect.component';
-import { NewSurveyComponent } from './admin-survey/new-survey/new-survey.component';
-import { SurveyListComponent } from './admin-survey/survey-list/survey-list.component';
+import { AdmSurveyFormComponent } from './admin-survey/adm-survey-form/adm-survey-form.component';
+import { AdmSurveyListComponent } from './admin-survey/adm-survey-list/adm-survey-list.component';
+import { AdmSurveyReviewComponent } from './admin-survey/adm-survey-review/adm-survey-review.component';
 
 
 @NgModule({
@@ -21,8 +22,9 @@ import { SurveyListComponent } from './admin-survey/survey-list/survey-list.comp
     AdminCreditSubmissionComponent,
     AdminDisbursementComponent,
     AdminProspectComponent,
-    NewSurveyComponent,
-    SurveyListComponent
+    AdmSurveyFormComponent,
+    AdmSurveyListComponent,
+    AdmSurveyReviewComponent
   ],
   imports: [
     CommonModule,

@@ -8,11 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiResponse } from 'src/app/shared/model/ApiResponse';
 import Swal from 'sweetalert2';
 import { CostumerSurveyService } from '../costumer-survey.service';
 import {
+  AllSurveyReview,
   Banks,
   City,
+  CustomerData,
   CustomerSurveyData,
   District,
   ProfilingData,
@@ -29,6 +32,7 @@ import {
 })
 export class SurveyFormComponent implements OnInit {
   profileReview = new FormControl('');
+
 
   firstFormGroup: FormGroup = new FormGroup({
     surveyDataId: new FormControl(''),
@@ -72,6 +76,15 @@ export class SurveyFormComponent implements OnInit {
     internetAccess: new FormControl('', Validators.required),
   });
 
+  surveyForm: FormGroup = new FormGroup({
+    surveyId: new FormControl(''),
+    trxId: new FormControl('34567'),
+    form1:this.firstFormGroup,
+    form2:this.secondFormGroup,
+    form3:this.thirdFormGroup,
+    form4:this.forthFormGroup
+  })
+
   constructor(
     private route: ActivatedRoute,
     private readonly customerService: CostumerSurveyService,
@@ -81,6 +94,7 @@ export class SurveyFormComponent implements OnInit {
   ngOnInit(): void {
     this.loadBanks();
     this.loadProvinces();
+    this.getCustomerData()
   }
 
   formOne(property: string): FormGroup {
@@ -153,12 +167,7 @@ export class SurveyFormComponent implements OnInit {
   //   this.router.navigateByUrl('/loan-list')
   // }
 
-  submit(
-    firstForm: CustomerSurveyData,
-    secondForm: SpouseData,
-    thirdForm: RelativesData,
-    forthForm: ProfilingData
-  ) {
+  submit() {
     Swal.fire({
       title: 'Do you want to submit the survey?',
       showDenyButton: true,
@@ -166,25 +175,61 @@ export class SurveyFormComponent implements OnInit {
       denyButtonText: `Cancel`,
     }).then((result) => {
       if (result.isConfirmed) {
-        this.customerService.postFirstSurvey(firstForm).subscribe((res) => {
-          // console.log("DATA: ", res);
-          this.customerService          
-            .postSecondSurvey(secondForm)
-            .subscribe((res2) => {
-              this.customerService
-                .postThirdSurvey(thirdForm)
-                .subscribe((res3) => {
-                  this.customerService
-                    .postForthSurvey(forthForm)
-                    .subscribe((res4) => {
-                      this.router.navigateByUrl('customer-survey-details');
-                    });
-                });
-            });
+        console.log(this.surveyForm.value);
+        this.customerService.postSurvey(this.surveyForm.value).subscribe((res) => {
         });
         Swal.fire('Submited!', '', 'success');
       }
     });
+  }
+
+  nik: string = ''
+  customerFullName: string = ''
+  birthPlace: string = ''
+  birthDate: Date = new Date()
+  gender: string = ''
+  maritalStatus: string = ''
+  religion: string = ''
+  phoneNumber: string = ''
+  address: string = ''
+  rt: string = ''
+  rw: string = ''
+  ward: string = ''
+  district: string = ''
+  city: string = ''
+  province: string = ''
+  officeLocation: string= ''
+  businessPhoto: string= ''
+  postalCode: string= ''
+  occupationType: string = ''
+  getCustomerData(){
+    this.route.params.subscribe((parameter) => {
+      if (parameter && parameter['id']){
+        // console.log(parameter['id']);
+        this.customerService.getCustomerDataByNik(parameter['id']).subscribe((res: ApiResponse<CustomerData>) => {
+          console.log('Data loan', res);
+          this.nik = res.data.nik
+          this.customerFullName = res.data.customerFullName
+          this.birthPlace = res.data.birthPlace
+          this.birthDate = res.data.birthDate
+          this.gender = res.data.gender
+          this.occupationType = res.data.occupationType
+          this.maritalStatus = res.data.maritalStatus
+          this.religion = res.data.religion
+          this.phoneNumber = res.data.phoneNumber
+          this.address = res.data.address
+          this.rw = res.data.rw
+          this.rt = res.data.rt
+          this.ward = res.data.ward
+          this.district = res.data.district
+          this.province = res.data.province
+          this.city = res.data.city
+          this.officeLocation = res.data.officeLocation
+          this.businessPhoto = res.data.businessPhoto
+          this.postalCode = res.data.postalCode
+        })
+      }
+    })
   }
 
   dataBanks: Banks[] = [];

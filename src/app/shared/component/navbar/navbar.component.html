@@ -81,33 +81,11 @@
           </div>
           <a
             class="btn text-start px-3 mx-4 my-2"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseSurvey"
+            (click)="surveyRoute()"
           >
             <i class="fa fa-chart-pie fa-lg me-2"></i>
             Survey
-            <i class="ms-2 fa-solid fa-chevron-down"></i>
           </a>
-          <div class="collapse" id="collapseSurvey">
-            <div class="ms-3">
-              <a
-                class="btn text-start px-3 mx-4 my-2 collapse"
-                (click)="surveyFormRoute()"
-                routerLinkActive="btn-primary text-white"
-              >
-                <i class="fa fa-file fa-lg me-2"></i>
-                {{surveyForm}}
-              </a>
-              <a
-                class="btn text-start px-3 mx-4 my-2 collapse"
-                (click)="surveyReviewRoute()"
-                routerLinkActive="btn-primary text-white"
-              >
-                <i class="fa fa-file-alt fa-lg me-2"></i>
-                {{surveyList}}
-              </a>
-            </div>
-          </div>
 
           <a class="btn text-start px-3 mx-4 my-2">
             <i class="fa fa-thumbs-up fa-lg me-2"></i> Approval</a

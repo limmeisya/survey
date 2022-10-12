@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/shared/model/ApiResponse';
-import { Banks, City, CustomerData, CustomerSurveyData, District, ProfilingData, Province, RelativesData, SpouseData, Ward } from './customer-survey.model';
+import { AllSurveyReview, Banks, City, CustomerData, CustomerSurveyData, District, LoginData, ProfilingData, Province, RelativesData, SpouseData, Ward } from './customer-survey.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,12 @@ export class CostumerSurveyService {
     return this.http.get<Banks[]>('/bank/banks')
   }
 
-  public getCustomerDataById(id: string): Observable<ApiResponse<CustomerData>>{
-    return this.http.get<ApiResponse<CustomerData>>('/bank/customers/' + id)
+  public getCustomerDataByNik(nik: string): Observable<ApiResponse<CustomerData>>{
+    return this.http.get<ApiResponse<CustomerData>>('/bank/customers/' + nik)
+  }
+
+  public getLoginInfo(): Observable<LoginData>{
+    return this.http.get<LoginData>('/bank/login')
   }
 
   public getFirstFormById(id: string): Observable<ApiResponse<CustomerSurveyData>>{
@@ -39,20 +43,8 @@ export class CostumerSurveyService {
     return this.http.get<Ward[]>(`/area/api/villages/${districtId}.json`)
   }
 
-  public postFirstSurvey(data: CustomerSurveyData): Observable<ApiResponse<CustomerSurveyData>>{
-    return this.http.post<ApiResponse<CustomerSurveyData>>('/post/api/survey-data/', data)
-  }
-
-  public postSecondSurvey(data: SpouseData): Observable<ApiResponse<SpouseData>>{
-    return this.http.post<ApiResponse<SpouseData>>('/post/api/spouse/', data)
-  }
-
-  public postThirdSurvey(data: RelativesData): Observable<ApiResponse<RelativesData>>{
-    return this.http.post<ApiResponse<RelativesData>>('/post/api/relatives/', data)
-  }
-
-  public postForthSurvey(data: ProfilingData): Observable<ApiResponse<ProfilingData>>{
-    return this.http.post<ApiResponse<ProfilingData>>('/post/api/profile/', data)
+  public postSurvey(data: AllSurveyReview): Observable<ApiResponse<AllSurveyReview>>{
+    return this.http.post<ApiResponse<AllSurveyReview>>('/post/api/survey/', data)
   }
 
 }

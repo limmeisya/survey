@@ -11,12 +11,13 @@ import { CostumerCreditSubmissionComponent } from './costumer-credit-submission/
 import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-disbursement.component';
 import { SurveyReviewComponent } from './costumer-survey/survey-review/survey-review.component';
 import { SurveyFormComponent } from './costumer-survey/survey-form/survey-form.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SurveyListComponent } from './costumer-survey/survey-list/survey-list.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     CostumerCreditSubmissionComponent,
     CostumerDisbursementComponent,
     SurveyReviewComponent,
-    SurveyFormComponent
+    SurveyFormComponent,
+    SurveyListComponent
   ],
   imports: [
     CommonModule,

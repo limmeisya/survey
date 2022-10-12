@@ -17,14 +17,13 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
-    AdminPagesModule,
     CostumerPagesModule,
     ReactiveFormsModule,
     AuthModule,

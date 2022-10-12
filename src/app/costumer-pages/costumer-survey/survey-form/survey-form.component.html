@@ -12,6 +12,8 @@
             <mat-icon>done</mat-icon>
           </ng-template>
 
+          <form [formGroup]="surveyForm">
+
           <!-- TABLE -->
           <mat-step [stepControl]="profileReview" label="Customer Profile">
             <div class="form-group row" style="line-height: 1.2em">
@@ -27,14 +29,14 @@
                 <p>Phone Number</p>
               </div>
               <div class="col-4">
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
+                <p>: {{nik}}</p>
+                <p>: {{customerFullName}}</p>
+                <p>: {{gender}}</p>
+                <p>: {{birthPlace}}</p>
+                <p>: {{birthDate}}</p>
+                <p>: {{maritalStatus}}</p>
+                <p>: {{occupationType}}</p>
+                <p>: {{phoneNumber}}</p>
               </div>
               <div class="col-2">
                 <p>Address</p>
@@ -46,13 +48,13 @@
                 <p>Ward</p>
               </div>
               <div class="col-4">
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
-                <p>: A</p>
+                <p>: {{address}}</p>
+                <p>: {{rt}}</p>
+                <p>: {{rw}}</p>
+                <p>: {{province}}</p>
+                <p>: {{city}}</p>
+                <p>: {{district}}</p>
+                <p>: {{ward}}</p>
               </div>
             </div>
             <button
@@ -678,14 +680,8 @@
                         !firstFormGroup.valid
                       "
                       class="btn btn-secondary text-white me-2"
-                      (click)="
-                        submit(
-                          firstFormGroup.value,
-                          secondFormGroup.value,
-                          thirdFormGroup.value,
-                          forthFormGroup.value
-                        )
-                      "
+                      (click)="submit()"
+                      [formGroup]="surveyForm"
                     >
                       Submit
                     </button>
@@ -695,6 +691,7 @@
             </div>
           </mat-step>
           <!-- END OF CONTENT 4 -->
+          </form>
         </mat-horizontal-stepper>
       </div>
     </div>

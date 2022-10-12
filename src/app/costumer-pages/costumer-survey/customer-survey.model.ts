@@ -1,3 +1,9 @@
+export interface LoginData{
+    identifier: string,
+    role: string,
+    token: string
+}
+
 export interface CustomerData{
     customerId: string,
     nik: string,
@@ -18,6 +24,7 @@ export interface CustomerData{
     officeLocation: string,
     businessPhoto: string,
     postalCode: string,
+    occupationType: string
 }
 
 export interface CustomerSurveyData{
@@ -33,6 +40,7 @@ export interface CustomerSurveyData{
 
 export interface SpouseData{
     spouseId: string,
+    spouseNik: string,
     spouseName: string,
     spouseBirthdate: string,
     gender: string,
@@ -93,5 +101,10 @@ export interface Ward{
 }
 
 export interface AllSurveyReview{
-    
+    surveyId: string,
+    trxId: string,
+    firstForm: CustomerSurveyData,
+    secondForm: SpouseData,
+    thirdForm: RelativesData,
+    fourthForm: ProfilingData
 }

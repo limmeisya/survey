@@ -7,8 +7,9 @@ import { AdminCreditSubmissionComponent } from './admin-credit-submission/admin-
 import { AdminDisbursementComponent } from './admin-disbursement/admin-disbursement.component';
 import { AdminPagesComponent } from './admin-pages.component';
 import { AdminProspectComponent } from './admin-prospect/admin-prospect.component';
-import { NewSurveyComponent } from './admin-survey/new-survey/new-survey.component';
-import { SurveyListComponent } from './admin-survey/survey-list/survey-list.component';
+import { AdmSurveyFormComponent } from './admin-survey/adm-survey-form/adm-survey-form.component';
+import { AdmSurveyListComponent } from './admin-survey/adm-survey-list/adm-survey-list.component';
+import { AdmSurveyReviewComponent } from './admin-survey/adm-survey-review/adm-survey-review.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
@@ -39,12 +40,16 @@ const routes: Routes = [
         component : AdminProspectComponent
       },
       {
-        path : 'admin-new-survey',
-        component : NewSurveyComponent
+        path : 'adm-survey-form',
+        component : AdmSurveyFormComponent
       },
       {
-        path : 'admin-survey-list',
-        component : SurveyListComponent
+        path : 'adm-survey-list',
+        component : AdmSurveyListComponent
+      },
+      {
+        path : 'adm-survey-details',
+        component : AdmSurveyReviewComponent
       },
     ]
   }

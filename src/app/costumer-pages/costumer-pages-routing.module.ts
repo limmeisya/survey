@@ -9,6 +9,7 @@ import { CostumerDisbursementComponent } from './costumer-disbursement/costumer-
 import {CostumerPagesComponent} from './costumer-pages.component'
 import { CostumerProspectComponent } from './costumer-prospect/costumer-prospect.component';
 import { SurveyFormComponent } from './costumer-survey/survey-form/survey-form.component';
+import { SurveyListComponent } from './costumer-survey/survey-list/survey-list.component';
 import { SurveyReviewComponent } from './costumer-survey/survey-review/survey-review.component';
 import { HomeComponent } from './home/home.component';
 
@@ -40,12 +41,16 @@ const routes: Routes = [
         component : CostumerProspectComponent
       },
       {
-        path : 'customer-survey-form',
+        path : 'cust-survey-form/:id',
         component : SurveyFormComponent
       },
       {
-        path : 'customer-survey-details',
+        path : 'cust-survey-details',
         component : SurveyReviewComponent
+      },
+      {
+        path : 'cust-survey-list',
+        component : SurveyListComponent
       },
     ]
   }
