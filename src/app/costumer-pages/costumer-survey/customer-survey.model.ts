@@ -74,7 +74,7 @@ export interface ProfilingData{
 
 export interface Banks{
     name: string,
-    code: number
+    code: string
 }
 
 export interface Province{
@@ -103,8 +103,15 @@ export interface Ward{
 export interface AllSurveyReview{
     surveyId: string,
     trxId: string,
-    firstForm: CustomerSurveyData,
-    secondForm: SpouseData,
-    thirdForm: RelativesData,
-    fourthForm: ProfilingData
+    surveyData: CustomerSurveyData,
+    spouse: SpouseData,
+    relatives: RelativesData,
+    profile: ProfilingData
+}
+
+
+export interface LoanType{
+    id: string,
+    type: string,
+    maxLoan: number
 }

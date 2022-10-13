@@ -17,6 +17,15 @@
     }
   },
 
+  "/all": {
+    "target": "https://mocki.io/v1/9af24f7c-7337-4180-a041-19b888c541e2",
+    "logLevel": "debug",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/all": ""
+    }
+  },
+
   "/area": {
     "target": "https://www.emsifa.com/api-wilayah-indonesia/",
     "logLevel": "debug",

@@ -45,7 +45,11 @@ const routes: Routes = [
         component : SurveyFormComponent
       },
       {
-        path : 'cust-survey-details',
+        path : 'cust-survey-form/:id/:id2',
+        component : SurveyFormComponent
+      },
+      {
+        path : 'cust-survey-details/:id/:id2',
         component : SurveyReviewComponent
       },
       {

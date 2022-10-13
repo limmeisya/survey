@@ -8,12 +8,12 @@ import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/
 import { AuthInterceptor } from './shared/interceptor/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { AdminPagesModule } from './admin-pages/admin-pages.module';
 import { CostumerPagesModule } from './costumer-pages/costumer-pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
+import { AdminPagesModule } from './admin-pages/admin-pages.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +25,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     AppRoutingModule,
     FormsModule,
     CostumerPagesModule,
+    AdminPagesModule,
     ReactiveFormsModule,
     AuthModule,
     HttpClientModule,

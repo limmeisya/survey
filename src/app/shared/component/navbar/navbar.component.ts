@@ -74,7 +74,14 @@ export class NavbarComponent implements OnInit {
 
   surveyRoute(){
      if(this.roleAdminCheck) this.route.navigateByUrl('/admin-survey-list')
-      else this.route.navigateByUrl('/cust-survey-list')
+      else{
+        // this.route.navigateByUrl('/cust-survey-list')
+        this.customerService.getLoginInfo().subscribe((info)=>{
+          this.nik = info.identifier
+          console.log('NIK: ', this.nik);
+          this.route.navigateByUrl('/cust-survey-form/' + this.nik)
+        })
+      }
   }
 
   // surveyReviewRoute(){

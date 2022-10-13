@@ -24,6 +24,8 @@ import {
   SpouseData,
   Ward,
 } from '../customer-survey.model';
+import { DatePipe } from '@angular/common';
+import allBank from './allBank.json'
 
 @Component({
   selector: 'app-survey-form',
@@ -31,11 +33,15 @@ import {
   styleUrls: ['./survey-form.component.css'],
 })
 export class SurveyFormComponent implements OnInit {
+  relativeProvince: Partial<Province> = {};
+  relativeCity: Partial<City> = {};
+  relativeDistrict: Partial<District> = {};
+  relativeWard: Partial<Ward> = {};
+
   profileReview = new FormControl('');
 
-
   firstFormGroup: FormGroup = new FormGroup({
-    surveyDataId: new FormControl(''),
+    surveyDataId: new FormControl(null),
     mothersMaidenName: new FormControl('', Validators.required),
     latestEducationalLevel: new FormControl('', Validators.required),
     dependents: new FormControl('', [Validators.required]),
@@ -45,7 +51,7 @@ export class SurveyFormComponent implements OnInit {
     accountNumber: new FormControl('', Validators.required),
   });
   secondFormGroup: FormGroup = new FormGroup({
-    spouseId: new FormControl(''),
+    spouseId: new FormControl(null),
     spouseNik: new FormControl('', Validators.required),
     spouseName: new FormControl('', Validators.required),
     spouseBirthdate: new FormControl('', [Validators.required]),
@@ -54,7 +60,7 @@ export class SurveyFormComponent implements OnInit {
     spouseMothersMaidenName: new FormControl('', Validators.required),
   });
   thirdFormGroup: FormGroup = new FormGroup({
-    relativesId: new FormControl(''),
+    relativesId: new FormControl(null),
     relativesName: new FormControl('', Validators.required),
     relativesRelation: new FormControl('', Validators.required),
     relativesPhoneNumber: new FormControl(''),
@@ -62,13 +68,16 @@ export class SurveyFormComponent implements OnInit {
     relativesAddress: new FormControl('', Validators.required),
     relativesRt: new FormControl(''),
     relativesRw: new FormControl(''),
-    relativesWard: new FormControl('', Validators.required),
-    relativesDistrict: new FormControl('', Validators.required),
-    relativesCity: new FormControl('', Validators.required),
-    relativesProvince: new FormControl('', Validators.required),
+    relativesWard: new FormControl(this.relativeWard, Validators.required),
+    relativesDistrict: new FormControl(this.relativeDistrict, Validators.required),
+    relativesCity: new FormControl(this.relativeCity, Validators.required),
+    relativesProvince: new FormControl(this.relativeProvince, Validators.required),
   });
+
+  profiles: any[] = [];
+
   forthFormGroup: FormGroup = new FormGroup({
-    profileId: new FormControl(''),
+    profileId: new FormControl(null),
     breadwinner: new FormControl('', Validators.required),
     literacyAbility: new FormControl('', Validators.required),
     transportationOwner: new FormControl('', Validators.required),
@@ -78,11 +87,10 @@ export class SurveyFormComponent implements OnInit {
 
   surveyForm: FormGroup = new FormGroup({
     surveyId: new FormControl(''),
-    trxId: new FormControl('34567'),
-    form1:this.firstFormGroup,
-    form2:this.secondFormGroup,
-    form3:this.thirdFormGroup,
-    form4:this.forthFormGroup
+    surveyData:this.firstFormGroup,
+    profile:this.forthFormGroup,
+    spouse:this.secondFormGroup,
+    relatives:this.thirdFormGroup
   })
 
   constructor(
@@ -92,95 +100,54 @@ export class SurveyFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadBanks();
     this.loadProvinces();
     this.getCustomerData()
+    this.getSurveyData()
   }
+
 
   formOne(property: string): FormGroup {
     return this.firstFormGroup.get(property) as FormGroup;
   }
 
-  // const prevButton = document.querySelectorAll(".btn-prev")
-  // const nextButton = document.querySelectorAll(".btn-next")
-  // const progress = document.getElementById("progress")
-  // const formStep = document.querySelectorAll(".form-step")
-
-  // let formStepNumber = 0
-
-  // surveyForm: FormGroup = new FormGroup({
-  //   surveyDataId: new FormControl(''),
-  //   mothersMaidenName: new FormControl('', Validators.required),
-  //   latestEducationalLevel: new FormControl('', Validators.required),
-  //   dependents: new FormControl('', [Validators.required]),
-  //   email: new FormControl('', Validators.required),
-  //   bankName: new FormControl('', Validators.required),
-  //   accountName: new FormControl('', Validators.required),
-  //   accountNumber: new FormControl('', Validators.required),
-  // })
-
-  // addloan(loan: CustomerSurveyData){
-  //   this.route.params.subscribe((parameter) => {
-  //     if (parameter && parameter['id']){
-  //       console.log('ID: ', parameter['id']);
-  //       this.loanService.updateLoan(loan).subscribe({
-  //         next: () => this.router.navigateByUrl('/loan-list'),
-  //         error: (err) => alert ('Failed submit error!')
-  //       })
-  //     }else{
-  //       this.loanService.addLoan(loan).subscribe((res) => {
-  //         console.log('NEW DATA: ', res);
-  //         this.router.navigateByUrl('/loan-list')
-  //         })
-  //     }
-  //   })
-  // }
-
-  // getloanData(){
-  //   this.route.params.subscribe((parameter) => {
-  //     if (parameter && parameter['id']){
-  //       console.log(parameter['id']);
-  //       this.loanService.getLoanById(parameter['id']).subscribe((res: ApiResponse<LoanType>) => {
-  //         console.log('Data loan', res);
-  //         this.setFormGroup(res.data)
-  //       })
-  //     }
-  //   })
-  // }
-
-  // form(property: string): FormGroup{
-  //   return this.surveyForm.get(property) as FormGroup
-  // }
-
-  // setFormGroup(survey: CustomerSurveyData){
-  //   this.surveyForm.controls['surveyDataId'].setValue(survey.surveyDataId)
-  //   this.surveyForm.controls['mothersMaidenName'].setValue(survey.mothersMaidenName)
-  //   this.surveyForm.controls['latestEducationalLevel'].setValue(survey.latestEducationalLevel)
-  //   this.surveyForm.controls['dependents'].setValue(survey.dependents)
-  //   this.surveyForm.controls['email'].setValue(survey.email)
-  //   this.surveyForm.controls['bankName'].setValue(survey.bankName)
-  //   this.surveyForm.controls['accountName'].setValue(survey.accountName)
-  //   this.surveyForm.controls['accountName'].setValue(survey.accountName)
-  // }
-
-  // back(){
-  //   this.router.navigateByUrl('/loan-list')
-  // }
-
+  surveyId: string = ''
   submit() {
-    Swal.fire({
-      title: 'Do you want to submit the survey?',
-      showDenyButton: true,
-      confirmButtonText: `Submit`,
-      denyButtonText: `Cancel`,
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log(this.surveyForm.value);
-        this.customerService.postSurvey(this.surveyForm.value).subscribe((res) => {
-        });
-        Swal.fire('Submited!', '', 'success');
+    this.route.params.subscribe((parameter) => {
+      if (parameter['id2']){
+        console.log('SURVEY ID Before Update: ', parameter['id2']);
+        Swal.fire({
+          title: 'Do you want to update the survey?',
+          showDenyButton: true,
+          confirmButtonText: `Update`,
+          denyButtonText: `Cancel`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire('Updated!', '', 'success');
+            this.customerService.updateSurvey(this.surveyForm.value).subscribe((res) => {
+              this.surveyId = res.data.surveyId
+              console.log("Survey Id after Update ", this.surveyId);
+              this.router.navigateByUrl(`/cust-survey-details/${this.nikCustomer}/${this.surveyId}`)
+            });
+          }
+        })
+      }else{
+        Swal.fire({
+          title: 'Do you want to submit the survey?',
+          showDenyButton: true,
+          confirmButtonText: `Submit`,
+          denyButtonText: `Cancel`,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire('Submited!', '', 'success');
+            this.customerService.postSurvey(this.surveyForm.value).subscribe((res) => {
+              this.surveyId = res.data.surveyId
+              console.log("Survey Id is ", this.surveyId);
+              this.router.navigateByUrl(`/cust-survey-details/${this.nikCustomer}/${this.surveyId}`)
+            });
+          }
+        })
       }
-    });
+    })
   }
 
   nik: string = ''
@@ -202,12 +169,12 @@ export class SurveyFormComponent implements OnInit {
   businessPhoto: string= ''
   postalCode: string= ''
   occupationType: string = ''
+  nikCustomer: string =''
   getCustomerData(){
     this.route.params.subscribe((parameter) => {
+      this.nikCustomer = parameter['id']
       if (parameter && parameter['id']){
-        // console.log(parameter['id']);
-        this.customerService.getCustomerDataByNik(parameter['id']).subscribe((res: ApiResponse<CustomerData>) => {
-          console.log('Data loan', res);
+        this.customerService.getCustomerDataByNik(this.nikCustomer).subscribe((res: ApiResponse<CustomerData>) => {
           this.nik = res.data.nik
           this.customerFullName = res.data.customerFullName
           this.birthPlace = res.data.birthPlace
@@ -232,14 +199,61 @@ export class SurveyFormComponent implements OnInit {
     })
   }
 
-  dataBanks: Banks[] = [];
-  loadBanks() {
-    this.customerService.getBanks().subscribe({
-      next: (res: Banks[]) => {
-        this.dataBanks = res;
+  surveyRes: AllSurveyReview | undefined;
+  getSurveyData(){
+    this.route.params.subscribe((parameter) => {
+      if (parameter['id2']){
+        console.log(parameter['id2']);
+        this.customerService.getSurveyById(parameter['id2']).subscribe((res: ApiResponse<AllSurveyReview>) => {
+          console.log('Survey DATA for Edit: ', res.data);
+          this.surveyRes = res.data;
+          this.setFormGroup(this.surveyRes);
+          this.loadAddressesApi();
+          this.profiles[0] = this.surveyRes.profile.breadwinner
+          this.profiles[1] = this.surveyRes.profile.literacyAbility
+          this.profiles[2] = this.surveyRes.profile.transportationOwner
+          this.profiles[3] = this.surveyRes.profile.insuranceOwner
+          this.profiles[4] = this.surveyRes.profile.internetAccess
+        })
+      }
+    })
+  }
+
+  loadAddressesApi(): void {
+    this.customerService.getProvice(this.surveyRes!.relatives?.relativesProvince).subscribe({
+      next: (res: Province) => {
+        this.relativeProvince = res;
+        this.loadCity(this.relativeProvince.id);
+      },
+    });
+    this.customerService.getCity(this.surveyRes!.relatives?.relativesCity).subscribe({
+      next: (res: City) => {
+        this.relativeCity = res;
+        this.loadDistrict(this.relativeCity.id);
+      },
+    });
+    this.customerService.getDistrict(this.surveyRes!.relatives?.relativesDistrict).subscribe({
+      next: (res: District) => {
+        this.relativeDistrict = res;
+        this.loadWard(this.relativeDistrict.id);
+      },
+    });
+    this.customerService.getWard(this.surveyRes!.relatives?.relativesWard).subscribe({
+      next: (res: Ward) => {
+        this.relativeWard = res;
       },
     });
   }
+
+
+  dataBanks: Banks[] = allBank;
+  // loadBanks() {
+  //   this.customerService.getBanks().subscribe({
+  //     next: (res: Banks[]) => {
+  //       this.dataBanks = res;
+  //     },
+  //   });
+  // }
 
   dataProvincies: Province[] = [];
   loadProvinces() {
@@ -252,10 +266,12 @@ export class SurveyFormComponent implements OnInit {
 
   dataCities: City[] = [];
   loadCity(provId: any) {
+    console.log('Prov ID: ', provId);
     this.customerService.getCities(provId).subscribe({
       next: (res: City[]) => {
         this.dataCities = res;
       },
+      error: (err) => alert ('Failed load city!')
     });
   }
 
@@ -279,21 +295,48 @@ export class SurveyFormComponent implements OnInit {
 
   // pageTitle: String = 'Profiling Customer'
 
-  // submit() {
-  //   console.log(this.profilingForm.value.breadwinner);
-  //   console.log(this.profilingForm.value.literacy_ability);
-  //   console.log(this.profilingForm.value.transportation_owner);
-  //   console.log(this.profilingForm.value.insurance_owner);
-  //   console.log(this.profilingForm.value.internet_access);
+  setFormGroup(surveyForm: AllSurveyReview){
+    this.surveyForm.controls['surveyId'].setValue(surveyForm.surveyId)
 
-  // }
+    this.firstFormGroup.controls['surveyDataId'].setValue(surveyForm.surveyData.surveyDataId)
+    this.firstFormGroup.controls['mothersMaidenName'].setValue(surveyForm.surveyData.mothersMaidenName)
+    this.firstFormGroup.controls['latestEducationalLevel'].setValue(surveyForm.surveyData.latestEducationalLevel)
+    this.firstFormGroup.controls['dependents'].setValue(surveyForm.surveyData.dependents)
+    this.firstFormGroup.controls['email'].setValue(surveyForm.surveyData.email)
+    this.firstFormGroup.controls['bankName'].setValue(surveyForm.surveyData.bankName)
+    this.firstFormGroup.controls['accountName'].setValue(surveyForm.surveyData.accountName)
+    this.firstFormGroup.controls['accountNumber'].setValue(surveyForm.surveyData.accountNumber)
 
-  // setFormGroup(profiling: ProfilingCustomer){
-  //   this.profilingForm.controls['id'].setValue(profiling.id)
-  //   this.profilingForm.controls['breadwinner'].setValue(profiling.breadwinner)
-  //   this.profilingForm.controls['literacy_ability'].setValue(profiling.literacy_ability)
-  //   this.profilingForm.controls['transportation_owner'].setValue(profiling.transportation_owner)
-  //   this.profilingForm.controls['insurance_owner'].setValue(profiling.insurance_owner)
-  //   this.profilingForm.controls['internet_access'].setValue(profiling.internet_access)
-  // }
+    this.secondFormGroup.controls['spouseId'].setValue(surveyForm.spouse.spouseId)
+    this.secondFormGroup.controls['spouseNik'].setValue(surveyForm.spouse.spouseNik)
+    this.secondFormGroup.controls['spouseName'].setValue(surveyForm.spouse.spouseName)
+    if(surveyForm.spouse.spouseBirthdate) {
+      let datepipe: DatePipe = new DatePipe('en-US');
+      let date = datepipe.transform(new Date(surveyForm.spouse.spouseBirthdate),'YYYY-MM-dd')!;
+      this.secondFormGroup.controls['spouseBirthdate'].setValue(date)
+    }
+    this.secondFormGroup.controls['gender'].setValue(surveyForm.spouse.gender)
+    this.secondFormGroup.controls['spouseBirthplace'].setValue(surveyForm.spouse.spouseBirthplace)
+    this.secondFormGroup.controls['spouseMothersMaidenName'].setValue(surveyForm.spouse.spouseMothersMaidenName)
+
+    this.thirdFormGroup.controls['relativesId'].setValue(surveyForm.relatives.relativesId)
+    this.thirdFormGroup.controls['relativesName'].setValue(surveyForm.relatives.relativesName)
+    this.thirdFormGroup.controls['relativesRelation'].setValue(surveyForm.relatives.relativesRelation)
+    this.thirdFormGroup.controls['relativesPhoneNumber'].setValue(surveyForm.relatives.relativesPhoneNumber)
+    this.thirdFormGroup.controls['relativesCellNumber'].setValue(surveyForm.relatives.relativesCellNumber)
+    this.thirdFormGroup.controls['relativesAddress'].setValue(surveyForm.relatives.relativesAddress)
+    this.thirdFormGroup.controls['relativesRt'].setValue(surveyForm.relatives.relativesRt)
+    this.thirdFormGroup.controls['relativesRw'].setValue(surveyForm.relatives.relativesRw)
+    this.thirdFormGroup.controls['relativesWard'].setValue(surveyForm.relatives.relativesWard)
+    this.thirdFormGroup.controls['relativesDistrict'].setValue(surveyForm.relatives.relativesDistrict)
+    this.thirdFormGroup.controls['relativesCity'].setValue(surveyForm.relatives.relativesCity)
+    this.thirdFormGroup.controls['relativesProvince'].setValue(surveyForm.relatives.relativesProvince)
+
+    this.forthFormGroup.controls['profileId'].setValue(surveyForm.profile.profileId)
+    this.forthFormGroup.controls['breadwinner'].setValue(surveyForm.profile.breadwinner)
+    this.forthFormGroup.controls['literacyAbility'].setValue(surveyForm.profile.literacyAbility)
+    this.forthFormGroup.controls['transportationOwner'].setValue(surveyForm.profile.transportationOwner)
+    this.forthFormGroup.controls['insuranceOwner'].setValue(surveyForm.profile.insuranceOwner)
+    this.forthFormGroup.controls['internetAccess'].setValue(surveyForm.profile.internetAccess)
+  }
 }

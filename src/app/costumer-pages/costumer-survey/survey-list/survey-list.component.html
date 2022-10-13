@@ -10,65 +10,34 @@
     <div class="card-body d-flex justify-content-center">
 
       <!-- CONTENT -->
-
-<div class="col-lg-12 grid-margin stretch-card ">
-      <div class="row mb-3">
-        <div class="col-12">
-          <div class="col-md-3 ms-auto">
-          <div class="input-group rounded align-self-end">
-            <input type="search" class="form-control rounded justify-content-center" placeholder="Search by Transaction ID" aria-label="Search" aria-describedby="search-addon"  />
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="fas fa-search"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-<div class="row">
-          <div class="table table-responsive" style="width:100%">
-      <table class="table table-hover">
-        <thead>
-          <tr class="table-striped text-center text-white me-2">
-            <th scope="col">Transaction ID</th>
-            <th scope="col">Transaction Date</th>
-            <th scope="col">Survey Information</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="text-center">
-            <td>abcde12345</td>
-            <td>2022-10-9</td>
-            <td class="survey-information">
-                <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Details
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Update</a>
-                    <a class="dropdown-item" href="#">Details Survey</a>
-                </div>
-                </div>
-                            <!-- <span class="detail" [routerLink]="['survey']">Details</span> -->
-            </td>
-          </tr>
-          <tr class="text-center">
-            <td>abcd098763</td>
-            <td>2022-10-11</td>
-            <td>Details</td>
-          </tr>
-          <tr class="text-center">
-            <td>ghjkd12330</td>
-            <td>2022-10-9</td>
-            <td>Details</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-  </div>
-</div>
+      <table class="table">
+            <thead *ngIf="!isLoading; else loading" class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Loan Type</th>
+                    <th scope="col">Maximum Loan</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <div *ngIf="!hasData()">No Data Found</div>
+            <tbody *ngIf="hasData()" >
+                <tr *ngFor="let loan of listLoan let i = index">
+                    <th>{{i+1}}</th>
+                    <td>{{loan.type}}</td>
+                    <td>{{loan.maxLoan | currency:"IDR "}}</td>
+                    <td>
+                        <button (click)="fillSurvey()">Survey</button>
+                        <button (click)="detailsSurvey()">Details</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <ng-template #loading>
+            <div class="spinner-border spinner-border-sm" role="status">
+                <span class="sr-only"></span>
+            </div>
+        </ng-template>
+  
 
 
       <!-- END OF CONTENT -->

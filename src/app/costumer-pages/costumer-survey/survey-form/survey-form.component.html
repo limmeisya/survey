@@ -11,7 +11,6 @@
           <ng-template matStepperIcon="edit">
             <mat-icon>done</mat-icon>
           </ng-template>
-
           <form [formGroup]="surveyForm">
 
           <!-- TABLE -->
@@ -57,14 +56,21 @@
                 <p>: {{ward}}</p>
               </div>
             </div>
-            <button
-              mat-button
-              matStepperNext
-              class="btn btn-secondary m-1"
-              style="color: white"
-            >
-              Next
-            </button>
+            <br />
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-end">
+                  <button
+                    type="submit"
+                    class="btn btn-lg btn-warning text-white me-2"
+                  > Cancel
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    class="btn btn-secondary text-white me-2"
+                  > Next
+                  </button>
+                </div>
           </mat-step>
           <!-- END OF TABLE -->
 
@@ -166,23 +172,23 @@
                 </div>
               </div>
               <br />
-              <button
-                mat-button
-                matStepperPrevious
-                class="btn btn-prev btn-primary m-1"
-                style="color: white"
-              >
-                Previous
-              </button>
-              <button
-                mat-button
-                matStepperNext
-                [disabled]="!firstFormGroup.valid"
-                class="btn btn-secondary m-1"
-                style="color: white"
-              >
-                Next
-              </button>
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-end">
+                  <button
+                    mat-button
+                    matStepperPrevious
+                    type="submit"
+                    class="btn btn-lg btn-warning text-white me-2"
+                    >Previous
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    [disabled]="!firstFormGroup.valid"
+                    class="btn btn-secondary text-white me-2"
+                  > Next
+                  </button>
+                </div>
             </form>
           </mat-step>
           <!-- END OF CONTENT 1 -->
@@ -266,23 +272,24 @@
                 </div>
               </div>
               <br />
-              <button
-                mat-button
-                matStepperPrevious
-                class="btn btn-prev btn-primary m-1"
-                style="color: white"
-              >
-                Previous
-              </button>
-              <button
-                mat-button
-                matStepperNext
-                [disabled]="!secondFormGroup.valid"
-                class="btn btn-next btn-secondary m-1"
-                style="color: white"
-              >
-                Next
-              </button>
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-end">
+                  <button
+                    mat-button
+                    matStepperPrevious
+                    type="submit"
+                    class="btn btn-lg btn-warning text-white me-2"
+                    >Previous
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    [disabled]="!secondFormGroup.valid"
+                    class="btn btn-secondary me-2"
+                    style="color: white"
+                  > Next
+                  </button>
+                </div>
             </form>
           </mat-step>
           <!-- END OF CONTENT 2 -->
@@ -375,21 +382,9 @@
                   <label class="required" for="relativesProvince"
                     >Province</label
                   >
-                  <select
-                    name="relativesProvince"
-                    id="relativesProvince"
-                    class="form-select"
-                    formControlName="relativesProvince"
-                    #selectListCity
-                    (change)="loadCity(selectListCity.value)"
-                  >
+                  <select name="relativesProvince" id="relativesProvince" class="form-select" formControlName="relativesProvince" #selectListCity (change)="loadCity(selectListCity.value)" [(ngModel)]="this.relativeProvince.id">
                     <option value="" disabled selected>Select province</option>
-                    <option
-                      *ngFor="let prov of dataProvincies"
-                      [value]="prov.id"
-                    >
-                      {{ prov.name }}
-                    </option>
+                    <option *ngFor="let prov of dataProvincies" [value]="prov.id">{{ prov.name }}</option>
                   </select>
                 </div>
                 <div class="col-3">
@@ -401,6 +396,7 @@
                     formControlName="relativesCity"
                     #selectListDistric
                     (change)="loadDistrict(selectListDistric.value)"
+                    [(ngModel)]="this.relativeCity.id"
                   >
                     <option value="" disabled selected>Select city</option>
                     <option *ngFor="let city of dataCities" [value]="city.id">
@@ -417,6 +413,7 @@
                     id="relativesDistrict"
                     class="form-select"
                     formControlName="relativesDistrict"
+                    [(ngModel)]="this.relativeDistrict.id"
                     #selectListWard
                     (change)="loadWard(selectListWard.value)"
                   >
@@ -436,6 +433,7 @@
                     id="relativesWard"
                     class="form-select"
                     formControlName="relativesWard"
+                    [(ngModel)]="this.relativeWard.id"
                   >
                     <option value="" disabled selected>Select ward</option>
                     <option *ngFor="let ward of dataWards" [value]="ward.id">
@@ -445,23 +443,24 @@
                 </div>
               </div>
               <br />
-              <button
-                mat-button
-                matStepperPrevious
-                class="btn btn-prev btn-primary m-1"
-                style="color: white"
-              >
-                Previous
-              </button>
-              <button
-                mat-button
-                matStepperNext
-                [disabled]="!thirdFormGroup.valid"
-                class="btn btn-secondary m-1"
-                style="color: white"
-              >
-                Next
-              </button>
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-end">
+                  <button
+                    mat-button
+                    matStepperPrevious
+                    type="submit"
+                    class="btn btn-lg btn-warning text-white me-2"
+                    >Previous
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    [disabled]="!thirdFormGroup.valid"
+                    class="btn btn-secondary me-2"
+                    style="color: white"
+                  > Next
+                  </button>
+                </div>
             </form>
           </mat-step>
           <!-- END OF CONTENT 3 -->
@@ -492,9 +491,10 @@
                         type="radio"
                         name="breadwinner"
                         id="breadwinner"
-                        value="true"
+                        [value]="true"
                         formControlName="breadwinner"
                         required
+                        [(ngModel)]="profiles[0]"
                       />
                       <label class="form-check-label" for="breadwinner"
                         >Yes</label
@@ -505,9 +505,10 @@
                         type="radio"
                         name="breadwinner"
                         id="breadwinner"
-                        value="false"
+                        [value]="false"
                         formControlName="breadwinner"
                         required
+                        [(ngModel)]="profiles[0]"
                       />
                       <label class="form-check-label" for="breadwinner"
                         >No</label
@@ -531,8 +532,9 @@
                           type="radio"
                           name="literacyAbility"
                           id="literacyAbility"
-                          value="true"
+                          [value]="true"
                           formControlName="literacyAbility"
+                          [(ngModel)]="profiles[1]"
                         />
                         <label class="form-check-label" for="literacyAbility"
                           >Yes</label
@@ -544,7 +546,8 @@
                           name="literacyAbility"
                           id="literacyAbility"
                           formControlName="literacyAbility"
-                          value="false"
+                          [value]="false"
+                          [(ngModel)]="profiles[1]"
                         />
                         <label class="form-check-label" for="literacyAbility"
                           >No</label
@@ -568,8 +571,9 @@
                           type="radio"
                           name="transportationOwner"
                           id="transportationOwner"
-                          value="true"
+                          [value]="true"
                           formControlName="transportationOwner"
+                          [(ngModel)]="profiles[2]"
                         />
                         <label
                           class="form-check-label"
@@ -582,8 +586,9 @@
                           type="radio"
                           name="transportationOwner"
                           id="transportationOwner"
-                          value="false"
+                          [value]="false"
                           formControlName="transportationOwner"
+                          [(ngModel)]="profiles[2]"
                         />
                         <label
                           class="form-check-label"
@@ -609,8 +614,9 @@
                           type="radio"
                           name="insuranceOwner"
                           id="insuranceOwner"
-                          value="true"
+                          [value]="true"
                           formControlName="insuranceOwner"
+                          [(ngModel)]="profiles[3]"
                         />
                         <label class="form-check-label" for="insuranceOwner"
                           >Yes</label
@@ -621,8 +627,9 @@
                           type="radio"
                           name="insuranceOwner"
                           id="insuranceOwner"
-                          value="false"
+                          [value]="false"
                           formControlName="insuranceOwner"
+                          [(ngModel)]="profiles[3]"
                         />
                         <label class="form-check-label" for="insuranceOwner"
                           >No</label
@@ -643,8 +650,9 @@
                           type="radio"
                           name="internetAccess"
                           id="internetAccess"
-                          value="true"
+                          [value]="true"
                           formControlName="internetAccess"
+                          [(ngModel)]="profiles[4]"
                         />
                         <label class="form-check-label" for="internetAccess"
                           >Yes</label
@@ -655,23 +663,27 @@
                           type="radio"
                           name="internetAccess"
                           id="internetAccess"
-                          value="false"
+                          [value]="false"
                           formControlName="internetAccess"
+                          [(ngModel)]="profiles[4]"
                         />
                         <label class="form-check-label" for="internetAccess"
                           >No</label
                         >
                       </div>
                     </div>
-                    <button
-                      mat-button
-                      matStepperPrevious
-                      class="btn btn-prev btn-primary m-1"
-                      style="color: white"
-                    >
-                      Previous
-                    </button>
-                    <button
+                    <hr class="my-4" />
+
+                    <div class="col-12 d-flex justify-content-end">
+                      <button
+                        mat-button
+                        matStepperPrevious
+                        type="submit"
+                        class="btn btn-lg btn-warning text-white me-2"
+                      >
+                        Previous
+                      </button>
+                      <button
                       type="submit"
                       [disabled]="
                         !forthFormGroup.valid ||
@@ -682,9 +694,16 @@
                       class="btn btn-secondary text-white me-2"
                       (click)="submit()"
                       [formGroup]="surveyForm"
-                    >
-                      Submit
-                    </button>
+                      >
+                        Submit
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-lg btn-secondary text-white me-2"
+                      >
+                          Cancel
+                      </button>
+                    </div>
                   </div>
                 </form>
               </div>

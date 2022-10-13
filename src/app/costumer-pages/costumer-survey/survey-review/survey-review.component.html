@@ -1,1 +1,167 @@
-<p>survey-review works!</p>
+
+<h1 class="px-5 py-4 m-0 fw-bold" style="font-size: 24pt">Survey</h1>
+
+<div class="container px-5">
+  <div class="card">
+    <div class="card-header bg-white p-4">
+      <h4 class="m-0" style="font-size: 16pt">Survey Information</h4>
+    </div>
+    <div class="card-body d-flex justify-content-left">
+      <!-- CONTENT -->
+
+      <div >
+        <div class="row">
+
+          <div class="col-6">
+            <dl class="row">
+              <dt class="col-4 fw-lighter">Identity Number</dt>
+              <dd class="col-8">: {{nik}}</dd>
+              <dt class="col-4 fw-lighter">Name</dt>
+              <dd class="col-8">: {{customerFullName}}</dd>
+              <dt class="col-4 fw-lighter">Gender</dt>
+              <dd class="col-8">: {{gender}}</dd>
+              <dt class="col-4 fw-lighter">Place of Birth</dt>
+              <dd class="col-8">: {{birthPlace}}</dd>
+              <dt class="col-4 fw-lighter">Date of Birth</dt>
+              <dd class="col-8">: {{birthDate | date: 'dd/MM/yyyy'}}</dd>
+              <dt class="col-4 fw-lighter">Marital Status</dt>
+              <dd class="col-8">: {{maritalStatus}}</dd>
+              <dt class="col-4 fw-lighter">Occupation</dt>
+              <dd class="col-8">: {{officeLocation}}</dd>
+              <dt class="col-4 fw-lighter">Phone Number</dt>
+              <dd class="col-8">: {{phoneNumber}}</dd>
+            </dl>
+          </div>
+
+          <div class="col-6">
+            <dl class="row">
+              <dt class="col-4 fw-lighter">Address</dt>
+              <dd class="col-8">: {{address}}</dd>
+              <dt class="col-4 fw-lighter">RT / RW</dt>
+              <dd class="col-8">: {{rt}} / {{rw}}</dd>
+              <dt class="col-4 fw-lighter">Province</dt>
+              <dd class="col-8">: {{province.toString() | titlecase}}</dd>
+              <dt class="col-4 fw-lighter">City</dt>
+              <dd class="col-8">: {{city.toString() | titlecase}}</dd>
+              <dt class="col-4 fw-lighter">District</dt>
+              <dd class="col-8">: {{district.toString() | titlecase}}</dd>
+              <dt class="col-4 fw-lighter">Ward</dt>
+              <dd class="col-8">: {{ward.toString() | titlecase}}</dd>
+            </dl>
+          </div>
+
+        </div>
+<div class="row">
+
+          <div class="col-6">
+            <dl class="row">
+              <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
+                Customer Survey Data
+              </b></h6>
+              <dt class="col-4 fw-lighter">Mother's Maiden Name</dt>
+              <dd class="col-8">: {{mothersMaidenName}}</dd>
+              <dt class="col-4 fw-lighter">Degree</dt>
+              <dd class="col-8">: {{latestEducationalLevel}}</dd>
+              <dt class="col-4 fw-lighter">Dependent</dt>
+              <dd class="col-8">: {{dependents}}</dd>
+              <dt class="col-4 fw-lighter">Email</dt>
+              <dd class="col-8">: {{email}}</dd>
+              <dt class="col-4 fw-lighter">Bank</dt>
+              <dd class="col-8">: {{bankName}}</dd>
+              <dt class="col-4 fw-lighter">Account Name</dt>
+              <dd class="col-8">: {{accountName}}</dd>
+              <dt class="col-4 fw-lighter">Account Number</dt>
+              <dd class="col-8">: {{accountName}}</dd>
+            </dl>
+          </div>
+
+          <div class="col-6">
+            <dl class="row">
+              <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
+                Spouse Information
+              </b></h6>
+              <dt class="col-4 fw-lighter">Identity Number</dt>
+              <dd class="col-8">: {{spouseNik}}</dd>
+              <dt class="col-4 fw-lighter">Name</dt>
+              <dd class="col-8">: {{spouseName}}</dd>
+              <dt class="col-4 fw-lighter">Gender</dt>
+              <dd class="col-8">: {{genderSpouse}}</dd>
+              <dt class="col-4 fw-lighter">Place of Birth</dt>
+              <dd class="col-8">: {{spouseBirthplace}}</dd>
+              <dt class="col-4 fw-lighter">Date of Birth</dt>
+              <dd class="col-8">: {{spouseBirthdate | date: 'dd/MM/yyyy'}}</dd>
+              <dt class="col-4 fw-lighter">Mother's Maiden Name</dt>
+              <dd class="col-8">: {{spouseMothersMaidenName}}</dd>
+            </dl>
+          </div>
+          
+        </div>
+
+          <div class="row">
+            
+            <div class="col-6">
+              <dl class="row">
+              <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
+                Relative Information
+              </b></h6>
+              <dt class="col-4 fw-lighter">Relative Name</dt>
+              <dd class="col-8">: {{relativesName}}</dd>
+              <dt class="col-4 fw-lighter">Relation</dt>
+              <dd class="col-8">: {{relativesRelation}}</dd>
+              <dt class="col-4 fw-lighter">Telephone Number</dt>
+              <dd class="col-8">: {{relativesPhoneNumber}}</dd>
+              <dt class="col-4 fw-lighter">Phone Number</dt>
+              <dd class="col-8">: {{relativesCellNumber}}</dd>
+              <dt class="col-4 fw-lighter">Address</dt>
+              <dd class="col-8">: {{relativesAddress}}</dd>
+              <dt class="col-4 fw-lighter">RT / RW</dt>
+              <dd class="col-8">: {{relativesRt}} / {{relativesRw}}</dd>
+              <dt class="col-4 fw-lighter">Province</dt>
+              <dd class="col-8">: {{relativesProvince.toString() | titlecase}}</dd>
+              <dt class="col-4 fw-lighter">City</dt>
+              <dd class="col-8">: {{relativesCity.toString() | titlecase}}</dd>
+              <dt class="col-4 fw-lighter">District</dt>
+              <dd class="col-8">: {{relativesDistrict.toString() | titlecase}}</dd>
+              <dt class="col-4 fw-lighter">Ward</dt>
+              <dd class="col-8">: {{relativesWard.toString() | titlecase}}</dd>
+            </dl>   
+          </div>
+
+          <div class="col-6">
+            <dl class="row">
+              <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
+                Customer Profiling
+              </b></h6>
+              <dt class="col-4 fw-lighter">Main Breadwinner</dt>
+              <dd class="col-8">: {{breadwinner}}</dd>
+              <dt class="col-4 fw-lighter">Literacy Ability</dt>
+              <dd class="col-8">: {{literacyAbility}}</dd>
+              <dt class="col-4 fw-lighter">Transportation Ownership</dt>
+              <dd class="col-8">: {{transportationOwner}}</dd>
+              <dt class="col-4 fw-lighter">Health Insurance Ownership</dt>
+              <dd class="col-8">: {{insuranceOwner}}</dd>
+              <dt class="col-4 fw-lighter">Internet Accessbility</dt>
+              <dd class="col-8">: {{internetAccess}}</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+        
+
+      <!-- END OF CONTENT -->
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="col-10">
+      <div class="d-flex mb-5 justify-content-end">
+        <button type="submit" class="btn btn-primary text-white me-2" routerLink="cust-survey-list">
+            Back  
+        </button>
+        <button type="submit" class="btn btn-secondary text-white me-2" (click)="edit()">
+            Edit  
+        </button>
+    </div>
+    </div>
+  </div>
+  </div>
+</div>
