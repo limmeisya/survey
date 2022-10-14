@@ -3,6 +3,17 @@
   color: red;
 }
 
+/* .required-before::before {
+  content: "*";
+  color: red;
+  font-size: 8 pt;
+} */
+
+.warn {
+  font-size: 8pt;
+  color: red;
+}
+
 .form-group input {
   font-size: 10pt;
 }

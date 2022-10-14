@@ -40,6 +40,7 @@ export class SurveyFormComponent implements OnInit {
 
   profileReview = new FormControl('');
 
+  
   firstFormGroup: FormGroup = new FormGroup({
     surveyDataId: new FormControl(null),
     mothersMaidenName: new FormControl('', Validators.required),
@@ -50,6 +51,10 @@ export class SurveyFormComponent implements OnInit {
     accountName: new FormControl('', Validators.required),
     accountNumber: new FormControl('', Validators.required),
   });
+  firstForm(property: string): FormGroup{
+    return this.firstFormGroup.get(property) as FormGroup
+  }
+  
   secondFormGroup: FormGroup = new FormGroup({
     spouseId: new FormControl(null),
     spouseNik: new FormControl('', Validators.required),
@@ -59,12 +64,16 @@ export class SurveyFormComponent implements OnInit {
     spouseBirthplace: new FormControl('', Validators.required),
     spouseMothersMaidenName: new FormControl('', Validators.required),
   });
+  secondForm(property: string): FormGroup{
+    return this.secondFormGroup.get(property) as FormGroup
+  }
+
   thirdFormGroup: FormGroup = new FormGroup({
     relativesId: new FormControl(null),
     relativesName: new FormControl('', Validators.required),
     relativesRelation: new FormControl('', Validators.required),
     relativesPhoneNumber: new FormControl(''),
-    relativesCellNumber: new FormControl('', Validators.required),
+    relativesCellNumber: new FormControl('', [Validators.required, Validators.pattern("^((\\+62-?)|0)?[0-9]{10}$")]),
     relativesAddress: new FormControl('', Validators.required),
     relativesRt: new FormControl(''),
     relativesRw: new FormControl(''),
@@ -73,6 +82,9 @@ export class SurveyFormComponent implements OnInit {
     relativesCity: new FormControl(this.relativeCity, Validators.required),
     relativesProvince: new FormControl(this.relativeProvince, Validators.required),
   });
+  thirdForm(property: string): FormGroup{
+    return this.thirdFormGroup.get(property) as FormGroup
+  }
 
   profiles: any[] = [];
 
@@ -84,6 +96,9 @@ export class SurveyFormComponent implements OnInit {
     insuranceOwner: new FormControl('', Validators.required),
     internetAccess: new FormControl('', Validators.required),
   });
+  fourthForm(property: string): FormGroup{
+    return this.forthFormGroup.get(property) as FormGroup
+  }
 
   surveyForm: FormGroup = new FormGroup({
     surveyId: new FormControl(''),
