@@ -11,28 +11,15 @@ export class CostumerSurveyService {
 
   constructor(private readonly http: HttpClient) { }
 
-
-
   public getCustomerDataByNik(nik: string): Observable<ApiResponse<CustomerData>>{
     return this.http.get<ApiResponse<CustomerData>>('/bank/customers/' + nik)
   }
 
-  public getLoginInfo(): Observable<LoginData>{
-    return this.http.get<LoginData>('/bank/login')
-  }
-
-  public getFirstFormById(id: string): Observable<ApiResponse<CustomerSurveyData>>{
-    return this.http.get<ApiResponse<CustomerSurveyData>>('/api/loan-types/' + id)
-  }
-
-    public getLoan(): Observable<ApiResponse<LoanType[]>>{
-    return this.http.get<ApiResponse<LoanType[]>>('/api/loan-types')
-  }
 //================================BANK=======================================
   public getBanks(): Observable<Banks[]>{
     return this.http.get<Banks[]>('/bank/banks')
   }
-//=================================PROVINCE==================================
+//===========================INDONESIA AREA==================================
   public getProvicies(): Observable<Province[]>{
     return this.http.get<Province[]>('/area/api/provinces.json')
   }

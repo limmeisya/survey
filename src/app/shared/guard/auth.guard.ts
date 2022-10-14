@@ -9,7 +9,7 @@ import {
 } from '@angular/router';
 import {catchError, map, Observable, of} from 'rxjs';
 import {AuthService} from "../../auth/service/auth.service";
-import {LoginResponse, Role} from "../../auth/model/IAuth";
+import {LoginResponse, NewSigninResponse, Role} from "../../auth/model/IAuth";
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
   }
 
   authorize(): Observable<boolean> {
-    const user: LoginResponse | null = this.service.getUserFromStorage();
+    const user: NewSigninResponse | null = this.service.getUserFromStorage();
 
     console.log('auth guard result: ',user);
     

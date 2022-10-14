@@ -23,8 +23,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     console.log();
     if(this.authService.getUserFromStorage()?.role){
-      this.identifierForView = this.authService.getUserFromStorage()!.identifier
-      if(this.authService.getUserFromStorage()?.role!==Role.CUSTOMER){
+      this.identifierForView = this.authService.getUserFromStorage()!.nik
+      if(this.authService.getUserFromStorage()?.role !== Role.CUSTOMER){
       this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       this.roleAdminCheck = true
       }
@@ -51,48 +51,13 @@ export class NavbarComponent implements OnInit {
     else this.route.navigateByUrl('/credit-submission')
   }
 
-  // surveyFormRoute(){
-  //   if(this.roleAdminCheck) {
-  //     if(this.roleAdminCheck){
-  //       this.route.navigateByUrl('/admin-new-survey')
-  //     } else{
-  //       Swal.fire({
-  //         icon: 'error',
-  //         title: 'Sorry...',
-  //         text: `You don't have authority to access this page!`
-  //       })
-  //     }
-  //   }else {
-  //     // this.route.navigateByUrl('/customer-survey-form')
-  //     this.customerService.getLoginInfo().subscribe((info)=>{
-  //       this.nik = info.identifier
-  //       console.log('NIK: ', this.nik);
-  //       this.route.navigateByUrl('/customer-survey-form/' + this.nik)
-  //     })
-  //   }
-  // }
-
   surveyRoute(){
      if(this.roleAdminCheck) this.route.navigateByUrl('/admin-survey-list')
       else{
-        // this.route.navigateByUrl('/cust-survey-list')
-        this.customerService.getLoginInfo().subscribe((info)=>{
-          this.nik = info.identifier
-          console.log('NIK: ', this.nik);
-          this.route.navigateByUrl('/cust-survey-form/' + this.nik)
-        })
+        this.nik = this.authService.getUserFromStorage()!.nik
+        this.route.navigateByUrl('/cust-survey-form/' + this.nik)
       }
   }
-
-  // surveyReviewRoute(){
-  //   if(this.roleAdminCheck) {
-  //     this.surveyList = 'Survey List'
-  //     this.route.navigateByUrl('/admin-survey-list')
-  //   }else {
-  //     this.surveyList = 'Survey List'
-  //     this.route.navigateByUrl('/customer-survey-details')
-  //   }
-  // }
 
   approvalRoute(){
     if(this.roleAdminCheck) this.route.navigateByUrl('/admin-approval')

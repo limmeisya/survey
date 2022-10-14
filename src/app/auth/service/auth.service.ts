@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CommonResponse } from 'src/app/shared/model/CommonResponse';
-import { AuthRequest, LoginResponse, UserResponse } from '../model/IAuth';
+import { ApiResponse } from 'src/app/shared/model/ApiResponse';
+import { AuthRequest, LoginResponse, NewSigninResponse, UserResponse } from '../model/IAuth';
 
 @Injectable({
   providedIn: 'root'
@@ -11,34 +11,29 @@ export class AuthService {
 
   constructor(private readonly http:HttpClient) { }
 
-  register(auth: AuthRequest): Observable<CommonResponse<UserResponse>> {
-    return this.http.post<CommonResponse<UserResponse>>('/api/auth/signup', auth);
+  register(auth: AuthRequest): Observable<ApiResponse<UserResponse>> {
+    return this.http.post<ApiResponse<UserResponse>>('/api/api/auth/register-customer', auth);
   }
 
-  login(auth: AuthRequest): Observable<any> {
-    return this.http.post<any>('/api/auth/signin', auth);
+  login(auth: AuthRequest): Observable<AuthRequest> {
+    return this.http.post<AuthRequest>('/api/api/auth/login', auth);
   }
 
-  getUserById(id: string): Observable<CommonResponse<UserResponse>> {
-    return this.http.get<CommonResponse<UserResponse>>(`/api/users/${id}`);
+  getUserByNik(nik: string): Observable<ApiResponse<UserResponse>> {
+    return this.http.get<ApiResponse<UserResponse>>(`/api/api/users/${nik}`);
   }
 
-  getUserFromToken(): Observable<CommonResponse<UserResponse>> {
-    return this.http.get<CommonResponse<UserResponse>>('/api/users/me');
+  getUserFromToken(): Observable<ApiResponse<UserResponse>> {
+    return this.http.get<ApiResponse<UserResponse>>('/api/api/auth/users/me');
   }
 
-  storeUser(data: LoginResponse): void {
+  storeUser(data: NewSigninResponse): void {
     if (data) sessionStorage.setItem('user', JSON.stringify(data));
     return;
   }
 
-  getUserFromStorage(): LoginResponse | null {
-    // const user : any = {identifier:sessionStorage.getItem('identifier'),
-    // role:sessionStorage.getItem('role'),
-    // token:sessionStorage.getItem('token')}   
-    // const user: string = sessionStorage.getItem('user') as string;
+  getUserFromStorage(): NewSigninResponse | null {
     const user: string = sessionStorage.getItem('user') as string;
-
     if (user) return JSON.parse(user);
     return null;
   }

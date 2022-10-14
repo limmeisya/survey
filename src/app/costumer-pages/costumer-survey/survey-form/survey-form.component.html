@@ -67,7 +67,7 @@
                   <button
                     mat-button
                     matStepperNext
-                    class="btn btn-secondary text-white me-2"
+                    class="btn btn-lg btn-secondary text-white me-2"
                   > Next
                   </button>
                 </div>
@@ -173,7 +173,7 @@
               </div>
               <br />
               <hr class="my-4" />
-                <div class="col-12 d-flex justify-content-end">
+                <div class="col-12 d-flex justify-content-between">
                   <button
                     mat-button
                     matStepperPrevious
@@ -185,7 +185,7 @@
                     mat-button
                     matStepperNext
                     [disabled]="!firstFormGroup.valid"
-                    class="btn btn-secondary text-white me-2"
+                    class="btn btn-lg btn-secondary text-white me-2"
                   > Next
                   </button>
                 </div>
@@ -273,7 +273,7 @@
               </div>
               <br />
               <hr class="my-4" />
-                <div class="col-12 d-flex justify-content-end">
+                <div class="col-12 d-flex justify-content-between">
                   <button
                     mat-button
                     matStepperPrevious
@@ -285,7 +285,7 @@
                     mat-button
                     matStepperNext
                     [disabled]="!secondFormGroup.valid"
-                    class="btn btn-secondary me-2"
+                    class="btn btn-lg btn-secondary me-2"
                     style="color: white"
                   > Next
                   </button>
@@ -444,7 +444,7 @@
               </div>
               <br />
               <hr class="my-4" />
-                <div class="col-12 d-flex justify-content-end">
+                <div class="col-12 d-flex justify-content-between">
                   <button
                     mat-button
                     matStepperPrevious
@@ -456,8 +456,7 @@
                     mat-button
                     matStepperNext
                     [disabled]="!thirdFormGroup.valid"
-                    class="btn btn-secondary me-2"
-                    style="color: white"
+                    class="btn btn-lg btn-secondary text-white me-2"
                   > Next
                   </button>
                 </div>
@@ -674,35 +673,39 @@
                     </div>
                     <hr class="my-4" />
 
-                    <div class="col-12 d-flex justify-content-end">
-                      <button
-                        mat-button
-                        matStepperPrevious
-                        type="submit"
-                        class="btn btn-lg btn-warning text-white me-2"
-                      >
-                        Previous
-                      </button>
-                      <button
-                      type="submit"
-                      [disabled]="
-                        !forthFormGroup.valid ||
-                        !thirdFormGroup.valid ||
-                        !secondFormGroup.valid ||
-                        !firstFormGroup.valid
-                      "
-                      class="btn btn-secondary text-white me-2"
-                      (click)="submit()"
-                      [formGroup]="surveyForm"
-                      >
-                        Submit
-                      </button>
-                      <button
-                        type="button"
-                        class="btn btn-lg btn-secondary text-white me-2"
-                      >
-                          Cancel
-                      </button>
+                    <div class="row">
+                      <div class="col-2 d-flex justify-content-start">
+                        <button
+                          mat-button
+                          matStepperPrevious
+                          type="submit"
+                          class="btn btn-lg btn-warning text-white me-2"
+                        >
+                          Previous
+                        </button>
+                      </div>
+                      <div class="col-10 d-flex justify-content-end">
+                        <button
+                          type="button"
+                          class="btn btn-lg btn-secondary text-white me-2"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          [disabled]="
+                            !forthFormGroup.valid ||
+                            !thirdFormGroup.valid ||
+                            !secondFormGroup.valid ||
+                            !firstFormGroup.valid
+                          "
+                          class="btn btn-lg btn-primary text-white me-2"
+                          (click)="submit()"
+                          [formGroup]="surveyForm"
+                        >
+                            Submit
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </form>

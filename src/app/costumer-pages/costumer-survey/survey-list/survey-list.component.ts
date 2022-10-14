@@ -27,19 +27,6 @@ export class SurveyListComponent implements OnInit {
   }
 
   loadProducts(){
-    this.isLoading = true
-    this.customerService.getLoan().subscribe({
-      next: (res:ApiResponse<LoanType[]>) => {
-      this.listLoan = res.data
-      console.log(res.data);
-      
-      this.isLoading = false
-      },
-      error: (err) => {
-        this.isLoading = false
-        alert(err.error.message)
-      }
-    })
   }
 
   fillSurvey(){

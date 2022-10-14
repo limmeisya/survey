@@ -32,12 +32,14 @@ export class CustomerGuard implements CanActivate, CanActivateChild {
 
   private authorized(): Observable<boolean> {
     let user = this.service.getUserFromStorage();
-
     if (user && user.token) {
       return this.service.getUserFromToken().pipe(
         map(({data}) => {
-          if (data.role === Role.CUSTOMER) {
-            console.log('CUSTOMER GUARD PASSED');
+          let userRole = ''
+          data.role.forEach(function (role: any){
+            userRole = role            
+          })
+          if (userRole === Role.CUSTOMER) {
             return true;
           }
           this.router.navigateByUrl('/dashboard').then();

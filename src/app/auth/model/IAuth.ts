@@ -1,21 +1,27 @@
 export interface AuthRequest {
-    identifier: string;
+    nik: string;
     password: string;
   }
   
   export interface UserResponse {
-    identifier: string;
-    role: string;
+    nik: string;
+    role: [];
   }
   
   export interface LoginResponse {
-    identifier: string;
+    nik: string;
+    role: [];
+    token: string;
+  }
+
+  export interface NewSigninResponse {
+    nik: string;
     role: string;
     token: string;
   }
   
   export enum AuthForm {
-    identifier = 'email',
+    nik = 'NIK',
     password = 'password'
   }
   
@@ -24,5 +30,5 @@ export interface AuthRequest {
     SUPERVISOR='ROLE_SUPERVISOR',
     STAFF='ROLE_STAFF',
     CUSTOMER='ROLE_CUSTOMER',
-    ADMIN = 'ROLE_ADMIN' // Testing Purpose Only, Using the Spring Loan JAR as the Backend
+    ADMIN = 'ROLE_ADMIN'
   }

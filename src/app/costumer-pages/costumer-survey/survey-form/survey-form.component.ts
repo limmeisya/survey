@@ -187,10 +187,23 @@ export class SurveyFormComponent implements OnInit {
           this.address = res.data.address
           this.rw = res.data.rw
           this.rt = res.data.rt
-          this.ward = res.data.ward
-          this.district = res.data.district
-          this.province = res.data.province
-          this.city = res.data.city
+
+          this.customerService.getWard(res.data.ward).subscribe((resp)=>{
+            this.ward = resp.name
+          })
+          
+          this.customerService.getDistrict(res.data.district).subscribe((resp)=>{
+            this.district = resp.name
+          })
+          
+          this.customerService.getProvice(res.data.province).subscribe((resp)=>{
+            this.province = resp.name
+          })
+          
+          this.customerService.getCity(res.data.city).subscribe((resp)=>{
+            this.city = resp.name
+          })
+          
           this.officeLocation = res.data.officeLocation
           this.businessPhoto = res.data.businessPhoto
           this.postalCode = res.data.postalCode
@@ -247,13 +260,7 @@ export class SurveyFormComponent implements OnInit {
 
 
   dataBanks: Banks[] = allBank;
-  // loadBanks() {
-  //   this.customerService.getBanks().subscribe({
-  //     next: (res: Banks[]) => {
-  //       this.dataBanks = res;
-  //     },
-  //   });
-  // }
+ 
 
   dataProvincies: Province[] = [];
   loadProvinces() {
