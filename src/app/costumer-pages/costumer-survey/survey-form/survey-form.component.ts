@@ -57,12 +57,12 @@ export class SurveyFormComponent implements OnInit {
   
   secondFormGroup: FormGroup = new FormGroup({
     spouseId: new FormControl(null),
-    spouseNik: new FormControl('', Validators.required),
-    spouseName: new FormControl('', Validators.required),
-    spouseBirthdate: new FormControl('', [Validators.required]),
-    gender: new FormControl('', Validators.required),
-    spouseBirthplace: new FormControl('', Validators.required),
-    spouseMothersMaidenName: new FormControl('', Validators.required),
+    spouseNik: new FormControl(null),
+    spouseName: new FormControl(null),
+    spouseBirthdate: new FormControl(null),
+    gender: new FormControl(null),
+    spouseBirthplace: new FormControl(null),
+    spouseMothersMaidenName: new FormControl(null),
   });
   secondForm(property: string): FormGroup{
     return this.secondFormGroup.get(property) as FormGroup
@@ -73,7 +73,7 @@ export class SurveyFormComponent implements OnInit {
     relativesName: new FormControl('', Validators.required),
     relativesRelation: new FormControl('', Validators.required),
     relativesPhoneNumber: new FormControl(''),
-    relativesCellNumber: new FormControl('', [Validators.required, Validators.pattern("^((\\+62-?)|0)?[0-9]{10}$")]),
+    relativesCellNumber: new FormControl('', [Validators.required]),
     relativesAddress: new FormControl('', Validators.required),
     relativesRt: new FormControl(''),
     relativesRw: new FormControl(''),
@@ -231,7 +231,7 @@ export class SurveyFormComponent implements OnInit {
   getSurveyData(){
     this.route.params.subscribe((parameter) => {
       if (parameter['id2']){
-        console.log(parameter['id2']);
+        console.log('GET SURVEY DATA AFTER EDIT: ',parameter['id2']);
         this.customerService.getSurveyById(parameter['id2']).subscribe((res: ApiResponse<AllSurveyReview>) => {
           console.log('Survey DATA for Edit: ', res.data);
           this.surveyRes = res.data;

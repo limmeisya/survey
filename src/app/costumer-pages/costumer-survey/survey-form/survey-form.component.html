@@ -113,7 +113,6 @@
                   <option value="S2">Graduate/ S2</option>
                   <option value="S3">Post-Graduate/ S3</option>
                 </select>
-                <div class="warn" *ngIf="firstForm('latestEducationalLevel').touched">This field is required.</div>
               </div>
               <div class="form-group col-6" style="line-height: 3">
                 <label class="required" for="dependents">Dependents</label>
@@ -156,7 +155,6 @@
                       {{ item.name }}
                     </option>
                   </select>
-                  <div class="warn" *ngIf="firstForm('bankName').touched">This field is required.</div>
                 </div>
                 <div class="col-4">
                   <label class="required" for="accountName">Account Name</label>
@@ -214,7 +212,7 @@
           <mat-step [stepControl]="secondFormGroup" label="Spouse Information">
             <form [formGroup]="secondFormGroup" class="m-4">
               <div class="form-group col-6" style="line-height: 3">
-                <label class="required" for="spouseNik"
+                <label for="spouseNik"
                   >Spouse Identity Number</label
                 >
                 <input
@@ -224,13 +222,10 @@
                   placeholder="Enter your spouse identity number"
                   formControlName="spouseNik"
                 />
-                <div class="warn" *ngIf="secondForm('spouseNik').invalid">Please input number.</div>
-                <div *ngIf="secondForm('spouseNik').invalid && secondForm('spouseNik').dirty || secondForm('spouseNik').touched">
-                    <div class="warn" *ngIf="secondForm('spouseNik').errors?.['required']">This field is required.</div>
-                </div>
+                <div class="warn">Please input number.</div>
               </div>
               <div class="form-group col-6" style="line-height: 3">
-                <label class="required" for="spouseName">Spouse Name</label>
+                <label for="spouseName">Spouse Name</label>
                 <input
                   id="spouseName"
                   type="text"
@@ -238,12 +233,9 @@
                   placeholder="Enter your spouse name"
                   formControlName="spouseName"
                 />
-                <div *ngIf="secondForm('spouseName').invalid && secondForm('spouseName').dirty || secondForm('spouseName').touched">
-                    <div class="warn" *ngIf="secondForm('spouseName').errors?.['required']">This field is required.</div>
-                </div>
               </div>
               <div class="form-group col-6" style="line-height: 3">
-                <label class="required" for="gender">Gender</label>
+                <label for="gender">Gender</label>
                 <select
                   name="gender"
                   id="gender"
@@ -253,13 +245,12 @@
                   <option style="color: #7c7f81e7" value="" disabled selected>
                     Choose one
                   </option>
-                  <option value="FEMALE">Female</option>
-                  <option value="MALE">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
                 </select>
-                <div class="warn" *ngIf="secondForm('gender').touched">Choose one gender.</div>
               </div>
               <div class="form-group col-6" style="line-height: 3">
-                <label class="required" for="spouseMothersMaidenName"
+                <label for="spouseMothersMaidenName"
                   >Spouse's Mother Name</label
                 >
                 <input
@@ -269,13 +260,10 @@
                   placeholder="Enter your spouse's mother name"
                   formControlName="spouseMothersMaidenName"
                 />
-                <div *ngIf="secondForm('spouseMothersMaidenName').invalid && secondForm('spouseMothersMaidenName').dirty || secondForm('spouseMothersMaidenName').touched">
-                    <div class="warn" *ngIf="secondForm('spouseMothersMaidenName').errors?.['required']">This field is required.</div>
-                  </div>
               </div>
               <div class="form-group row" style="line-height: 3">
                 <div class="col-6">
-                  <label class="required" for="spouseBirthplace"
+                  <label for="spouseBirthplace"
                     >Spouse Birthplace</label
                   >
                   <input
@@ -285,12 +273,9 @@
                     placeholder="Enter your spouse birthplace"
                     formControlName="spouseBirthplace"
                   />
-                  <div *ngIf="secondForm('spouseBirthplace').invalid && secondForm('spouseBirthplace').dirty || secondForm('spouseBirthplace').touched">
-                    <div class="warn" *ngIf="secondForm('spouseBirthplace').errors?.['required']">This field is required.</div>
-                  </div>
                 </div>
                 <div class="col-6">
-                  <label class="required" for="spouseBirthdate"
+                  <label for="spouseBirthdate"
                     >Spouse Birthdate</label
                   >
                   <input
@@ -300,7 +285,6 @@
                     placeholder="Enter your spouse birthdate"
                     formControlName="spouseBirthdate"
                   />
-                  <div class="warn" *ngIf="secondForm('spouseBirthdate').touched">Choose birthdate</div>
                 </div>
               </div>
               <br />
@@ -316,9 +300,7 @@
                   <button
                     mat-button
                     matStepperNext
-                    [disabled]="!secondFormGroup.valid"
-                    class="btn btn-lg btn-secondary me-2"
-                    style="color: white"
+                    class="btn btn-lg btn-secondary text-white me-2"
                   > Next
                   </button>
                 </div>
@@ -366,16 +348,13 @@
                   >
                   <input
                     id="relativesCellNumber"
-                    type="number"
+                    type="tel"
                     class="form-control"
                     placeholder="Enter your relative's phone number"
                     formControlName="relativesCellNumber"
+                    pattern="^(\+62)[1-9]{9,11}$"
                   />
-                  <div class="warn" *ngIf="thirdForm('relativesCellNumber').invalid">Fill with number and start with +62</div>
-                  <div *ngIf="thirdForm('relativesCellNumber').invalid && thirdForm('relativesCellNumber').dirty || thirdForm('relativesCellNumber').touched">
-                    <div class="warn" *ngIf="thirdForm('relativesCellNumber').errors?.['required']">This field is required.</div>
-                    <div class="warn" *ngIf="thirdForm('relativesCellNumber').errors?.['pattern']">Phone number should start with +62.</div>
-                  </div>
+                  <div class="warn" *ngIf="thirdForm('relativesCellNumber').invalid">Input 10-12 digits' phone number and start with +62</div>
                 </div>
                 <div class="col-4">
                   <label for="relativesPhoneNumber">Telephone Number</label>
@@ -432,7 +411,6 @@
                     <option value="" disabled selected>Select province</option>
                     <option *ngFor="let prov of dataProvincies" [value]="prov.id">{{ prov.name }}</option>
                   </select>
-                  <div class="warn" *ngIf="thirdForm('relativesProvince').touched">This field is required.</div>
                 </div>
                 <div class="col-3">
                   <label class="required" for="relativesCity">City</label>
@@ -450,7 +428,6 @@
                       {{ city.name }}
                     </option>
                   </select>
-                  <div class="warn" *ngIf="thirdForm('relativesCity').touched">This field is required.</div>
                 </div>
                 <div class="col-3">
                   <label class="required" for="relativesDistrict"
@@ -473,7 +450,6 @@
                       {{ district.name }}
                     </option>
                   </select>
-                  <div class="warn" *ngIf="thirdForm('relativesDistrict').touched">This field is required.</div>
                 </div>
                 <div class="col-3">
                   <label class="required" for="relativesWard">Ward</label>
@@ -489,7 +465,6 @@
                       {{ ward.name }}
                     </option>
                   </select>
-                  <div class="warn" *ngIf="thirdForm('relativesWard').touched">This field is required.</div>
                 </div>
               </div>
               <br />
@@ -740,7 +715,6 @@
                         [disabled]="
                           !forthFormGroup.valid ||
                           !thirdFormGroup.valid ||
-                          !secondFormGroup.valid ||
                           !firstFormGroup.valid
                         "
                         class="btn btn-lg btn-primary text-white me-2"

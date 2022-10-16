@@ -21,13 +21,21 @@
             </thead>
             <div *ngIf="!hasData()">No Data Found</div>
             <tbody *ngIf="hasData()" >
-                <tr *ngFor="let loan of listLoan let i = index">
+                <tr *ngFor="let transaction of listCustomerTransaction let i = index">
                     <th>{{i+1}}</th>
-                    <td>{{loan.type}}</td>
-                    <td>{{loan.maxLoan | currency:"IDR "}}</td>
+                    <td>{{transaction.trxId}}</td>
+                    <td>{{transaction.trxDate | date: 'dd/MM/yyyy'}}</td>
                     <td>
-                        <button (click)="fillSurvey()">Survey</button>
-                        <button (click)="detailsSurvey()">Details</button>
+                        <!-- <button class='btn btn-lg btn-secondary text-white me-2' (click)="fillSurvey()">Fill Survey</button>
+                        <button class='btn btn-lg btn-secondary text-white me-2' (click)="detailsSurvey()">Details Survey</button> -->
+                        <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Toggle dropdown</button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
+                                <button class="dropdown-item">Action - 1</button>
+                                <button class="dropdown-item">Another Action</button>
+                                <button class="dropdown-item">Something else is here</button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>

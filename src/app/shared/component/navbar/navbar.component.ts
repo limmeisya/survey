@@ -55,7 +55,7 @@ export class NavbarComponent implements OnInit {
      if(this.roleAdminCheck) this.route.navigateByUrl('/admin-survey-list')
       else{
         this.nik = this.authService.getUserFromStorage()!.nik
-        this.route.navigateByUrl('/cust-survey-form/' + this.nik)
+        this.route.navigateByUrl('/cust-survey-list/' + this.nik)
       }
   }
 

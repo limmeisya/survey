@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/shared/model/ApiResponse';
-import { AllSurveyReview, Banks, City, CustomerData, CustomerSurveyData, District, LoanType, LoginData, ProfilingData, Province, RelativesData, SpouseData, Ward } from './customer-survey.model';
+import { PaginationResponse } from 'src/app/shared/model/PaginationResponse';
+import { AllSurveyReview, Banks, City, CustomerData, CustomerSurveyData, District, LoanType, LoginData, ProfilingData, Province, RelativesData, SpouseData, Transaction, Ward } from './customer-survey.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,6 @@ export class CostumerSurveyService {
 
   constructor(private readonly http: HttpClient) { }
 
-  public getCustomerDataByNik(nik: string): Observable<ApiResponse<CustomerData>>{
-    return this.http.get<ApiResponse<CustomerData>>('/bank/customers/' + nik)
-  }
-
-//================================BANK=======================================
-  public getBanks(): Observable<Banks[]>{
-    return this.http.get<Banks[]>('/bank/banks')
-  }
 //===========================INDONESIA AREA==================================
   public getProvicies(): Observable<Province[]>{
     return this.http.get<Province[]>('/area/api/provinces.json')
@@ -52,16 +45,24 @@ export class CostumerSurveyService {
     return this.http.get<Ward>(`/area/api/village/${wardId}.json`)
   }
 //=============================SURVEY========================================
+  public getCustomerDataByNik(nik: string): Observable<ApiResponse<CustomerData>>{
+    return this.http.get<ApiResponse<CustomerData>>('/api/api/customer/' + nik)
+  }
+
   public postSurvey(data: AllSurveyReview): Observable<ApiResponse<AllSurveyReview>>{
-    return this.http.post<ApiResponse<AllSurveyReview>>('/post/api/survey/', data)
+    return this.http.post<ApiResponse<AllSurveyReview>>('/api/api/survey/', data)
   }
 
   public getSurveyById(id: string): Observable<ApiResponse<AllSurveyReview>>{
-    return this.http.get<ApiResponse<AllSurveyReview>>('/post/api/survey/' + id)
+    return this.http.get<ApiResponse<AllSurveyReview>>('/api/api/survey/' + id)
   }
 
   public updateSurvey(data:AllSurveyReview):Observable<ApiResponse<AllSurveyReview>>{
-    return this.http.put<ApiResponse<AllSurveyReview>>('/post/api/survey/', data);
+    return this.http.put<ApiResponse<AllSurveyReview>>('/api/api/survey/', data);
+  }
+
+  public getTransactionById(id:string): Observable<ApiResponse<PaginationResponse<Transaction>>>{
+    return this.http.get<ApiResponse<PaginationResponse<Transaction>>>('/mock/api/transaction/'+id)
   }
 
 }

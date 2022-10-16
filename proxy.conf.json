@@ -1,28 +1,10 @@
 {
   "/api": {
-    "target": "http://localhost:8084/",
+    "target": "http://localhost:8081/",
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {
       "^/api": ""
-    }
-  },
-
-  "/bank": {
-    "target": "http://localhost:3000/",
-    "logLevel": "debug",
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/bank": ""
-    }
-  },
-
-  "/all": {
-    "target": "https://mocki.io/v1/9af24f7c-7337-4180-a041-19b888c541e2",
-    "logLevel": "debug",
-    "changeOrigin": true,
-    "pathRewrite": {
-      "^/all": ""
     }
   },
 
@@ -35,12 +17,12 @@
     }
   },
 
-  "/post": {
-    "target": "http://localhost:8081/",
+  "/mock": {
+    "target": "http://localhost:3000/",
     "logLevel": "debug",
     "changeOrigin": true,
     "pathRewrite": {
-      "^/post": ""
+      "^/mock": ""
     }
   }
 }

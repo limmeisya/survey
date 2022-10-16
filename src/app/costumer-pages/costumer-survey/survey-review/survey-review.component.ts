@@ -45,10 +45,12 @@ export class SurveyReviewComponent implements OnInit {
   getCustomerData(){
     this.route.params.subscribe((parameter) => {
       if (parameter && parameter['id']){
+        console.log('this.nik: ', parameter['id']);
+        this.nik = parameter['id']
         console.log(parameter);
         this.customerService.getCustomerDataByNik(parameter['id']).subscribe((res: ApiResponse<CustomerData>) => {
-          console.log('Data loan', res);
-          this.nik = res.data.nik
+          console.log(' this Data loan', res);
+          
           this.customerFullName = res.data.customerFullName
           this.birthPlace = res.data.birthPlace
           this.birthDate = res.data.birthDate
@@ -77,7 +79,6 @@ export class SurveyReviewComponent implements OnInit {
             this.province = res.name
           })
           this.officeLocation = res.data.officeLocation
-          this.businessPhoto = res.data.businessPhoto
           this.postalCode = res.data.postalCode
         })
       }
@@ -171,6 +172,8 @@ export class SurveyReviewComponent implements OnInit {
   }
 
   edit(){
+    console.log(`/cust-survey-form/${this.nik}/${this.surveyId}`);
+    
     this.router.navigateByUrl(`/cust-survey-form/${this.nik}/${this.surveyId}`)
   }
 }

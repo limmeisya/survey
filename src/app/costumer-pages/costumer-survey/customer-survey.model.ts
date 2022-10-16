@@ -1,9 +1,27 @@
 export interface LoginData{
-    identifier: string,
+    nik: string,
     role: string,
     token: string
 }
 
+export interface Transaction{
+    nik: string,
+    fullName: string,
+    trxId: string,
+    trxDate: Date,
+    survey: boolean,
+    customerId: CustomerId
+}
+
+export interface CustomerId{
+    customerId: string,
+    nik: string
+}
+
+export interface OccupationType{
+    occupationId: string,
+    occupation: string
+}
 export interface CustomerData{
     customerId: string,
     nik: string,
@@ -24,7 +42,8 @@ export interface CustomerData{
     officeLocation: string,
     businessPhoto: string,
     postalCode: string,
-    occupationType: string
+    occupationType: string,
+    supportingDocument: []
 }
 
 export interface CustomerSurveyData{

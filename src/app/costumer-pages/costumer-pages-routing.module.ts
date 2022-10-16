@@ -53,7 +53,7 @@ const routes: Routes = [
         component : SurveyReviewComponent
       },
       {
-        path : 'cust-survey-list',
+        path : 'cust-survey-list/:id',
         component : SurveyListComponent
       },
     ]
