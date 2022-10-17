@@ -27,6 +27,7 @@ export class NavbarComponent implements OnInit {
       if(this.authService.getUserFromStorage()?.role !== Role.CUSTOMER){
       this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       this.roleAdminCheck = true
+      this.customerName = this.authService.getUserFromStorage()!.nik
       }else{
         this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
         this.getCustomerData(this.identifierForView)
@@ -43,7 +44,7 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-  logOut(){
+  logout(){
     sessionStorage.clear()
     this.route.navigateByUrl('/login')
   }

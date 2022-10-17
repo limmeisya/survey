@@ -14,6 +14,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AdminPagesModule } from './admin-pages/admin-pages.module';
+import { NgChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AdminPagesModule } from './admin-pages/admin-pages.module';
     MatIconModule,
     MatNativeDateModule,
     MatStepperModule,
+    NgChartsModule,
   ],
   providers: [{provide:HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi:true}],
   bootstrap: [AppComponent]

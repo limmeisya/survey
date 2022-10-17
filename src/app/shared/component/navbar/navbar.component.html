@@ -7,6 +7,34 @@
           src="https://files.klob.id/public/mco01/kuibbwwu/Danamon_by_mufg.png"
         />
       </a>
+      <div
+        class="border border-top-0 border-bottom-0 border-end-0 border-start-0"
+      >
+        <div class="dropdown">
+          <button
+            type="button"
+            data-bs-toggle="dropdown"
+            class="btn btn-white text-primary"
+          >
+            Hi {{ customerName }}!
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <!-- <nav class="navbar shadow-sm bg-light p-0" style="height: 10%">
+    <div class="container h-100 w-100 d-flex justify-content-between">
+      <a class="navbar-brand h-100">
+        <img
+          class="img-fluid w-100 h-75"
+          src="https://files.klob.id/public/mco01/kuibbwwu/Danamon_by_mufg.png"
+        />
+      </a>
       <div class="border border-top-0 border-bottom-0 border-end-0">
         <button
           type="button"
@@ -17,7 +45,7 @@
         </button>
       </div>
     </div>
-  </nav>
+  </nav> -->
 
   <div class="sidebar shadow-sm overflow-auto" style="height: 90%">
     <div class="d-flex flex-column justify-content-between">
@@ -79,6 +107,7 @@
           <a
             class="btn text-start px-3 mx-4 my-2"
             (click)="surveyRoute()"
+            routerLinkActive="btn-primary text-white"
           >
             <i class="fa fa-chart-pie fa-lg me-2"></i>
             Survey
@@ -92,9 +121,7 @@
           >
         </div>
       </div>
-      <a class="btn btn-primary text-white px-3 mx-4 my-5" (click)="logOut()"
-        >Logout</a
-      >
+      
     </div>
   </div>
 

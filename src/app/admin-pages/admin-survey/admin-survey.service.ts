@@ -58,6 +58,11 @@ export class AdminSurveyService {
     return this.http.get<ApiResponse<AllSurveyReview>>('/api/api/survey/id/' + trxId)
   }
 
+  public deleteSurvey(trxId: string): Observable<AllSurveyReview>{
+      return this.http.delete<AllSurveyReview>(`/api/api/survey/id/${trxId}`)
+  }
+
+//=============================TRANSACTION========================================
   public getAllTransaction(params: any): Observable<ApiResponse<PaginationResponse<Transaction>>>{
     console.log(params);
     let reqParams: any = {};
@@ -68,4 +73,9 @@ export class AdminSurveyService {
     }
     return this.http.get<ApiResponse<PaginationResponse<Transaction>>>(`/api/api/transaction`, {params: reqParams});
   }
+
+  public getTransactionByTrxId(trxId: string): Observable<ApiResponse<Transaction>>{
+    return this.http.get<ApiResponse<Transaction>>('/api/api/transaction/id/' + trxId)
+  }
+
 }

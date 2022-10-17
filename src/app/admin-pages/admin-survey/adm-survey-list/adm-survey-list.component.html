@@ -8,42 +8,65 @@
     <div class="card-body d-flex justify-content-center">
 
       <!-- CONTENT -->
-      <table class="table">
-        <thead *ngIf="!isLoading; else loading" class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Identity Number</th>
-                <th scope="col">Name</th>
-                <th scope="col">Transaction ID</th>
-                <th scope="col">Transaction Date</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <div *ngIf="!hasData()">No Data Found</div>
-        <tbody *ngIf="hasData()" >
-            <tr *ngFor="let transaction of listCustomerTransaction | paginate:{itemsPerPage: paginate?.size, currentPage: currentPaginate['page'], totalItems: paginate?.totalElements}; let i = index">
-                <th style="vertical-align: bottom">{{(currentPaginate['page'] - 1) * paginate?.size! + (i + 1)}}</th>
-                <td style="vertical-align: bottom">{{transaction.customerId.nik}}</td>
-                <td style="vertical-align: bottom">{{transaction.customerId.fullName}}</td>
-                <td style="vertical-align: bottom">{{transaction.trxId}}</td>
-                <td style="vertical-align: bottom">{{transaction.trxDate | date: 'dd/MM/yyyy'}}</td>
-                <td>
+      <div class="col-lg-12 grid-margin stretch-card ">
+        <div class="row mb-3">
+          <div class="col-12">
+            <div class="col-md-3 ms-auto">
+              <div class="input-group rounded align-self-end">
+                <input type="search" class="form-control rounded justify-content-center" placeholder="Search" aria-label="Search" aria-describedby="search-addon"  />
+                <span class="input-group-text border-0" id="search-addon">
+                  <i class="fas fa-search"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="table table-responsive" style="width:100%">
+            <table class="table">
+              <thead *ngIf="!isLoading; else loading" class="thead-dark">
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Identity Number</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Transaction ID</th>
+                      <th scope="col">Transaction Date</th>
+                      <th scope="col">Transaction Status</th>
+                      <th scope="col">Action</th>
+                  </tr>
+              </thead>
+              <div *ngIf="!hasData()">No Data Found</div>
+              <tbody *ngIf="hasData()" >
+                <tr *ngFor="let transaction of listCustomerTransaction | paginate:{itemsPerPage: paginate?.size, currentPage: currentPaginate['page'], totalItems: paginate?.totalElements}; let i = index">
+                  <th style="vertical-align: bottom">{{(currentPaginate['page'] - 1) * paginate?.size! + (i + 1)}}</th>
+                  <td style="vertical-align: bottom">{{transaction.customerId.nik}}</td>
+                  <td style="vertical-align: bottom">{{transaction.customerId.fullName}}</td>
+                  <td style="vertical-align: bottom">{{transaction.trxId}}</td>
+                  <td style="vertical-align: bottom">{{transaction.trxDate | date: 'dd/MM/yyyy'}}</td>
+                  <td style="vertical-align: bottom">{{transaction.trxStatus}}</td>
+                  
+                  <td>
                     <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Details</button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
-                            <button class="dropdown-item" (click)="fillSurvey(transaction.trxId)">Fill Survey</button>
-                            <button class="dropdown-item" (click)="detailsSurvey(transaction.trxId)">Details Survey</button>
-                        </div>
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
+                        <button class="dropdown-item" (click)="fillSurvey(transaction.trxId)">Fill Survey</button>
+                        <button class="dropdown-item" (click)="detailsSurvey(transaction.trxId)">Details Survey</button>
+                        <button class="dropdown-item" (click)="deleteSurvey(transaction.trxId)">Delete Survey</button>
+                      </div>
                     </div>
-                </td>
-            </tr>
-        </tbody>
-      </table>
-      <ng-template #loading>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <ng-template #loading>
         <div class="spinner-border spinner-border-sm" role="status">
             <span class="sr-only"></span>
         </div>
       </ng-template>
+      </div>
       <!-- END OF CONTENT -->
 
     </div>

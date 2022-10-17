@@ -38,3 +38,8 @@ $custom-typography: mat-typography-config(
   --bs-card-spacer-x: 1.5rem;
   --bs-card-spacer-y: 1.5rem;
 }
+
+.btn-outline-primary {
+  --bs-btn-hover-color: #ffffff;
+  --bs-btn-active-color: #ffffff;
+}
