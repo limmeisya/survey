@@ -4,15 +4,18 @@ import {RouterModule} from "@angular/router";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FooterComponent } from './component/footer/footer.component';
 import { NavbarComponent } from './component/navbar/navbar.component';
+import { TrueFalsePipe } from './pipe/true-false.pipe';
 
 @NgModule({
   declarations: [
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    TrueFalsePipe
   ],
     exports: [
       FooterComponent,
-      NavbarComponent
+      NavbarComponent,
+      TrueFalsePipe
     ],
   imports: [
     CommonModule,

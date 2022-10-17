@@ -42,8 +42,6 @@ export class AdmSurveyListComponent implements OnInit {
   loadTransactionCustomer(){
     this.route.queryParams.pipe(
       switchMap((val) => {
-        console.log('Val', val);
-        
         return this.adminService.getAllTransaction(val).pipe(map(({data}) => {
           if (Object.getOwnPropertyNames(val).length !== 0) {
             return {params: val, data: data};
@@ -54,7 +52,6 @@ export class AdmSurveyListComponent implements OnInit {
       }),
     ).subscribe({
       next: ({data}) => {
-        console.log(data);
         this.listCustomerTransaction = data.data
         this.paginate = data;
       },
@@ -93,6 +90,8 @@ export class AdmSurveyListComponent implements OnInit {
               this.adminService.deleteSurvey(transactionId).subscribe({
                 next: (res) => {
                   this.loadTransactionCustomer()
+                  console.log("delete success");
+                  
                   Swal.fire('Removed')
                 },
                 error: (err) => alert (err.message)

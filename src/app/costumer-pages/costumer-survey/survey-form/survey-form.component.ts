@@ -26,6 +26,8 @@ import {
 } from '../customer-survey.model';
 import { DatePipe } from '@angular/common';
 import allBank from './allBank.json'
+import { AuthService } from 'src/app/auth/service/auth.service';
+import { Role } from 'src/app/auth/model/IAuth';
 
 @Component({
   selector: 'app-survey-form',
@@ -104,8 +106,10 @@ export class SurveyFormComponent implements OnInit {
     trxId: new FormControl(this.trxId)
   });
 
+  roleUser: string = this.authService.getUserFromStorage()!.role.toString()
   surveyForm: FormGroup = new FormGroup({
     surveyId: new FormControl(null),
+    roleName: new FormControl(this.roleUser),
     transaction: this.transactionForm,
     surveyData:this.firstFormGroup,
     profile:this.forthFormGroup,
@@ -116,7 +120,8 @@ export class SurveyFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private readonly customerService: CostumerSurveyService,
-    private router: Router
+    private router: Router,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -225,27 +230,36 @@ export class SurveyFormComponent implements OnInit {
             console.log('Survey Trx Id: ', parameter['id2']);
             this.trxId = parameter['id2']
             this.transactionForm.controls['trxId'].setValue(this.trxId)
-            if (res.data !== null){
+            if(res.data.roleName === Role.CUSTOMER){
+              if (res.data !== null){
+                Swal.fire({
+                  title: 'You have filled this survey.',
+                  text: 'Do you want to edit survey?',
+                  icon: 'question',
+                  confirmButtonText: `Edit`,
+                  showDenyButton: true
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.surveyRes = res.data;
+                    this.setFormGroup(this.surveyRes);
+                    this.loadAddressesApi();
+                    this.profiles[0] = this.surveyRes.profile.breadwinner
+                    this.profiles[1] = this.surveyRes.profile.literacyAbility
+                    this.profiles[2] = this.surveyRes.profile.transportationOwner
+                    this.profiles[3] = this.surveyRes.profile.insuranceOwner
+                    this.profiles[4] = this.surveyRes.profile.internetAccess
+                  }else{
+                    this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
+                  }
+                })
+              }
+            }else{
               Swal.fire({
-                title: 'You have filled this survey.',
-                text: 'Do you want to edit survey?',
-                icon: 'question',
-                confirmButtonText: `Edit`,
-                showDenyButton: true
-              }).then((result) => {
-                if (result.isConfirmed) {
-                  this.surveyRes = res.data;
-                  this.setFormGroup(this.surveyRes);
-                  this.loadAddressesApi();
-                  this.profiles[0] = this.surveyRes.profile.breadwinner
-                  this.profiles[1] = this.surveyRes.profile.literacyAbility
-                  this.profiles[2] = this.surveyRes.profile.transportationOwner
-                  this.profiles[3] = this.surveyRes.profile.insuranceOwner
-                  this.profiles[4] = this.surveyRes.profile.internetAccess
-                }else{
-                  this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
-                }
+                icon: 'error',
+                title: 'Sorry!',
+                text: `You can't edit this survey again!`
               })
+              this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
             }
           },
           error: (err) => alert ('Error!')

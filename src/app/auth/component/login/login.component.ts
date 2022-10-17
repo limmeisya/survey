@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   constructor(private router : Router, private authService : AuthService) { }
 
   ngOnInit(): void {
+    // this.password = 'password';
   }
 
 
@@ -24,11 +25,23 @@ export class LoginComponent implements OnInit {
     password : new FormControl(''),
   })
 
+   showPassword: boolean= false
+  // password: any;
+  // show = false;
+  // onClick() {
+  //   if (this.password === 'password') {
+  //     this.password = 'text';
+  //     this.show = true;
+  //   } else {
+  //     this.password = 'password';
+  //     this.show = false;
+  //   }
+  // }
+
+
   clearForm(): void {
     this.loginForm.reset();
   }
-
-
 
   login(){
     if(this.loginForm.valid){

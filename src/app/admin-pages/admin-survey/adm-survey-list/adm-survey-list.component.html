@@ -33,6 +33,7 @@
                       <th scope="col">Transaction ID</th>
                       <th scope="col">Transaction Date</th>
                       <th scope="col">Transaction Status</th>
+                      <th scope="col">Survey Status</th>
                       <th scope="col">Action</th>
                   </tr>
               </thead>
@@ -45,7 +46,13 @@
                   <td style="vertical-align: bottom">{{transaction.trxId}}</td>
                   <td style="vertical-align: bottom">{{transaction.trxDate | date: 'dd/MM/yyyy'}}</td>
                   <td style="vertical-align: bottom">{{transaction.trxStatus}}</td>
-                  
+                  <td style="vertical-align: bottom; align-content: center;">
+                      <span class ="dot" [ngClass]="{
+                        'dot-red' : transaction.isSurvey == false,
+                        'dot-green' : transaction.isSurvey == true}">
+                      </span>
+                      {{transaction.isSurvey | trueFalse}}
+                  </td>
                   <td>
                     <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Details</button>
