@@ -19,10 +19,10 @@
         </thead>
         <div *ngIf="!hasData()">No Data Found</div>
         <tbody *ngIf="hasData()" >
-            <tr *ngFor="let transaction of listCustomerTransaction | paginate:{itemsPerPage: paginationSize, currentPage: currentPaginate['page'], totalItems: totalData}; let i = index">
-                <th>{{i+1}}</th>
-                <td>{{transaction.trxId}}</td>
-                <td>{{transaction.trxDate | date: 'dd/MM/yyyy'}}</td>
+            <tr *ngFor="let transaction of listCustomerTransaction | paginate:{itemsPerPage: paginate?.size, currentPage: currentPaginate['page'], totalItems: paginate?.totalElements}; let i = index">
+                <th style="vertical-align: bottom">{{(currentPaginate['page'] - 1) * paginate?.size! + (i + 1)}}</th>
+                <td style="vertical-align: bottom">{{transaction.trxId}}</td>
+                <td style="vertical-align: bottom">{{transaction.trxDate | date: 'dd/MM/yyyy'}}</td>
                 <td>
                     <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Details</button>
@@ -40,12 +40,12 @@
             <span class="sr-only"></span>
         </div>
       </ng-template>
-      
       <!-- END OF CONTENT -->
-  </div>
-      <div class="d-flex justify-content-center">
-        <pagination-controls (pageChange)="pageChanged($event)"
-            previousLabel="Previous" nextLabel="Next" >
-        </pagination-controls>
-      </div>
+
+    </div>
+    <div class="d-flex justify-content-center">
+      <pagination-controls (pageChange)="pageChanged($event)"
+          previousLabel="Previous" nextLabel="Next" >
+      </pagination-controls>
+    </div>
 </div>

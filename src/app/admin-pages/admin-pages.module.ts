@@ -12,6 +12,14 @@ import { AdminProspectComponent } from './admin-prospect/admin-prospect.componen
 import { AdmSurveyFormComponent } from './admin-survey/adm-survey-form/adm-survey-form.component';
 import { AdmSurveyListComponent } from './admin-survey/adm-survey-list/adm-survey-list.component';
 import { AdmSurveyReviewComponent } from './admin-survey/adm-survey-review/adm-survey-review.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { MatNativeDateModule } from '@angular/material/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 @NgModule({
@@ -30,6 +38,15 @@ import { AdmSurveyReviewComponent } from './admin-survey/adm-survey-review/adm-s
     CommonModule,
     AdminPagesRoutingModule,
     SharedModule,
+    BrowserAnimationsModule,
+    MatStepperModule,
+    MatIconModule,
+    MatNativeDateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgbModule,
+    NgxPaginationModule
   ]
 })
 

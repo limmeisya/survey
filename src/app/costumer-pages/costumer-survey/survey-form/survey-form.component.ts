@@ -40,7 +40,6 @@ export class SurveyFormComponent implements OnInit {
 
   profileReview = new FormControl('');
 
-  
   firstFormGroup: FormGroup = new FormGroup({
     surveyDataId: new FormControl(null),
     mothersMaidenName: new FormControl('', Validators.required),
@@ -125,6 +124,8 @@ export class SurveyFormComponent implements OnInit {
     this.getCustomerData()
     this.getSurveyData()
   }
+
+  today = new Date().toJSON().split('T')[0]
 
   submit() {
     Swal.fire({
