@@ -1,4 +1,6 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AdmSurveyListComponent } from './adm-survey-list.component';
 
@@ -8,7 +10,9 @@ describe('AdmSurveyListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdmSurveyListComponent ]
+      declarations: [ AdmSurveyListComponent ],
+      imports: [HttpClientTestingModule, RouterTestingModule],
+
     })
     .compileComponents();
 
