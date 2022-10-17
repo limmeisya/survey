@@ -1,4 +1,4 @@
-<h1 class="px-5 py-4 m-0 fw-bold" style="font-size: 24pt">Survey Form</h1>
+<h1 class="px-5 py-4 m-0 fw-bold" style="font-size: 24pt">Survey</h1>
 
 <div class="container px-5">
   <div class="card">
@@ -29,10 +29,10 @@
               </div>
               <div class="col-4">
                 <p>: {{nik}}</p>
-                <p>: {{customerFullName}}</p>
+                <p>: {{fullName}}</p>
                 <p>: {{gender}}</p>
                 <p>: {{birthPlace}}</p>
-                <p>: {{birthDate}}</p>
+                <p>: {{birthDate | date: 'dd/MM/yyyy'}}</p>
                 <p>: {{maritalStatus}}</p>
                 <p>: {{occupationType}}</p>
                 <p>: {{phoneNumber}}</p>
@@ -50,10 +50,10 @@
                 <p>: {{address}}</p>
                 <p>: {{rt}}</p>
                 <p>: {{rw}}</p>
-                <p>: {{province}}</p>
-                <p>: {{city}}</p>
-                <p>: {{district}}</p>
-                <p>: {{ward}}</p>
+                <p>: {{province.toString() | titlecase}}</p>
+                <p>: {{city.toString() | titlecase}}</p>
+                <p>: {{district.toString() | titlecase}}</p>
+                <p>: {{ward.toString() | titlecase}}</p>
               </div>
             </div>
             <br />
@@ -62,6 +62,7 @@
                   <button
                     type="submit"
                     class="btn btn-lg btn-warning text-white me-2"
+                    (click)="back()"
                   > Cancel
                   </button>
                   <button
@@ -222,7 +223,7 @@
                   placeholder="Enter your spouse identity number"
                   formControlName="spouseNik"
                 />
-                <div class="warn">Please input number.</div>
+                <div class="warn" *ngIf="firstForm('dependents').invalid">Please input number.</div>
               </div>
               <div class="form-group col-6" style="line-height: 3">
                 <label for="spouseName">Spouse Name</label>
@@ -711,6 +712,13 @@
                       </div>
                       <div class="col-10 d-flex justify-content-end">
                         <button
+                          type="button"
+                          class="btn btn-lg btn-secondary text-white me-2"
+                          (click)="back()"
+                        >
+                            Cancel
+                        </button>
+                        <button
                         type="submit"
                         [disabled]="
                           !forthFormGroup.valid ||
@@ -723,12 +731,7 @@
                         >
                           Submit
                         </button>
-                        <button
-                          type="button"
-                          class="btn btn-lg btn-secondary text-white me-2"
-                        >
-                            Cancel
-                        </button>
+                        
                       </div>
                     </div>
                   </div>

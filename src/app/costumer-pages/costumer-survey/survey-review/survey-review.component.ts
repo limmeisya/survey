@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiResponse } from 'src/app/shared/model/ApiResponse';
+import Swal from 'sweetalert2';
 import { CostumerSurveyService } from '../costumer-survey.service';
 import { AllSurveyReview, CustomerData } from '../customer-survey.model';
 
@@ -23,7 +24,7 @@ export class SurveyReviewComponent implements OnInit {
   }
 
   nik: string = ''
-  customerFullName: string = ''
+  fullName: string = ''
   birthPlace: string = ''
   birthDate: Date = new Date()
   gender: string = ''
@@ -50,8 +51,7 @@ export class SurveyReviewComponent implements OnInit {
         console.log(parameter);
         this.customerService.getCustomerDataByNik(parameter['id']).subscribe((res: ApiResponse<CustomerData>) => {
           console.log(' this Data loan', res);
-          
-          this.customerFullName = res.data.customerFullName
+          this.fullName = res.data.fullName
           this.birthPlace = res.data.birthPlace
           this.birthDate = res.data.birthDate
           this.gender = res.data.gender
@@ -113,21 +113,22 @@ export class SurveyReviewComponent implements OnInit {
   relativesCity: string = ''
   relativesProvince: string = ''
 
-  breadwinner: boolean = true
-  literacyAbility: boolean = true
-  transportationOwner: boolean = true
-  insuranceOwner: boolean = true
-  internetAccess: boolean = true
+  breadwinner: string = ''
+  literacyAbility: string = ''
+  transportationOwner: string = ''
+  insuranceOwner: string = ''
+  internetAccess: string = ''
 
-  surveyId:string = ''
+  trxId:string = ''
 
   getSurveyData(){
     this.route.params.subscribe((parameter) => {
-      if (parameter && parameter['id2']){
-        console.log('Survey ID in Details: ', parameter['id2']);
-        this.surveyId = parameter['id2']
-        this.customerService.getSurveyById(parameter['id2']).subscribe((res: ApiResponse<AllSurveyReview>) => {
-          console.log('Data loan', res.data);
+      console.log('Trx ID in Details: ', parameter['id2']);
+      this.trxId = parameter['id2']
+      this.customerService.getSurveyByTrxId(parameter['id2']).subscribe({
+        next: (res: ApiResponse<AllSurveyReview>) => {
+          if(res.data){
+            console.log('Data loan', res.data);
             this.mothersMaidenName = res.data.surveyData.mothersMaidenName
             this.latestEducationalLevel = res.data.surveyData.latestEducationalLevel
             this.dependents = res.data.surveyData.dependents
@@ -143,11 +144,25 @@ export class SurveyReviewComponent implements OnInit {
             this.spouseMothersMaidenName = res.data.spouse.spouseMothersMaidenName
             this.relativesName = res.data.relatives.relativesName
             this.relativesRelation = res.data.relatives.relativesRelation
-            this.relativesPhoneNumber = res.data.relatives.relativesPhoneNumber
+
+            if(res.data.relatives.relativesPhoneNumber){
+              this.relativesPhoneNumber = res.data.relatives.relativesPhoneNumber
+            }else{
+              this.relativesPhoneNumber ='-'
+            } 
             this.relativesCellNumber = res.data.relatives.relativesCellNumber
             this.relativesAddress = res.data.relatives.relativesAddress
-            this.relativesRt = res.data.relatives.relativesRt
-            this.relativesRw = res.data.relatives.relativesRw
+            if(res.data.relatives.relativesRt){
+              this.relativesRt = res.data.relatives.relativesRt
+            }else{
+              this.relativesRt = '-'
+            }
+            if(res.data.relatives.relativesRw){
+              this.relativesRw = res.data.relatives.relativesRw
+            }else{
+              this.relativesRw = '-'
+            }
+
             this.relativesWard = res.data.relatives.relativesWard
             this.customerService.getWard(res.data.relatives.relativesWard).subscribe((res)=>{
               this.relativesWard = res.name
@@ -161,19 +176,50 @@ export class SurveyReviewComponent implements OnInit {
             this.customerService.getProvice(res.data.relatives.relativesProvince).subscribe((res)=>{
               this.relativesProvince = res.name
             })
-            this.breadwinner = res.data.profile.breadwinner
-            this.literacyAbility = res.data.profile.literacyAbility
-            this.transportationOwner = res.data.profile.transportationOwner
-            this.insuranceOwner = res.data.profile.insuranceOwner
-            this.internetAccess = res.data.profile.internetAccess
-        })
-      }
+
+            if (res.data.profile.breadwinner){
+              this.breadwinner = 'Yes'
+            }else this.breadwinner = 'No'
+
+            if (res.data.profile.literacyAbility){
+              this.literacyAbility = 'Yes'
+            }else this.literacyAbility = 'No'
+
+            if (res.data.profile.transportationOwner){
+              this.transportationOwner = 'Yes'
+            }else this.transportationOwner = 'No'
+
+            if (res.data.profile.insuranceOwner){
+              this.insuranceOwner = 'Yes'
+            }else this.insuranceOwner = 'No'
+
+            if (res.data.profile.internetAccess){
+              this.internetAccess = 'Yes'
+            }else this.internetAccess = 'No'
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'No Data!',
+              text: `You haven't fill the survey!`
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
+              }
+            })
+          }
+        },
+        error: (err) => alert ('Error!')
+      })
+      
     })
   }
 
   edit(){
-    console.log(`/cust-survey-form/${this.nik}/${this.surveyId}`);
-    
-    this.router.navigateByUrl(`/cust-survey-form/${this.nik}/${this.surveyId}`)
+    // console.log(`/cust-survey-form/${this.nik}/${this.trxId}`);
+    this.router.navigateByUrl(`/cust-survey-form/${this.nik}/${this.trxId}`)
+  }
+
+  back(){
+    this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
   }
 }

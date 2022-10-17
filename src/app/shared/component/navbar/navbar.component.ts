@@ -24,11 +24,23 @@ export class NavbarComponent implements OnInit {
     console.log();
     if(this.authService.getUserFromStorage()?.role){
       this.identifierForView = this.authService.getUserFromStorage()!.nik
+      this.getCustomerData(this.identifierForView)
       if(this.authService.getUserFromStorage()?.role !== Role.CUSTOMER){
       this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       this.roleAdminCheck = true
+      }else{
+        this.roleForView = this.authService.getUserFromStorage()!.role.toString().slice(5)
       }
     }
+  }
+  customerName: string= ''
+  getCustomerData(nik:any){
+    this.customerService.getCustomerDataByNik(nik).subscribe({
+      next: (res) => {
+        this.customerName= res.data.fullName
+      },
+      error: (err) => alert('Failed to get data!')
+    })
   }
 
   logOut(){
@@ -55,7 +67,7 @@ export class NavbarComponent implements OnInit {
      if(this.roleAdminCheck) this.route.navigateByUrl('/admin-survey-list')
       else{
         this.nik = this.authService.getUserFromStorage()!.nik
-        this.route.navigateByUrl('/cust-survey-list/' + this.nik)
+        this.route.navigateByUrl(`/cust-survey-list/${this.nik}`)
       }
   }
 

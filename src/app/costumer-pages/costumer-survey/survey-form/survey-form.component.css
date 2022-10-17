@@ -3,12 +3,6 @@
   color: red;
 }
 
-/* .required-before::before {
-  content: "*";
-  color: red;
-  font-size: 8 pt;
-} */
-
 .warn {
   font-size: 8pt;
   color: red;
@@ -26,6 +20,6 @@ button{
   width: 120px;
 }
 
-/* ::ng-deep .mat-horizontal-stepper-header {
+::ng-deep .mat-horizontal-stepper-header {
   pointer-events: none !important;
-} */
+}

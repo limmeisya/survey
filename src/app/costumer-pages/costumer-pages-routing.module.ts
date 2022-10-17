@@ -56,6 +56,10 @@ const routes: Routes = [
         path : 'cust-survey-list/:id',
         component : SurveyListComponent
       },
+      {
+        path : 'cust-survey-list/:id',
+        component : SurveyListComponent
+      },
     ]
   }
 ];

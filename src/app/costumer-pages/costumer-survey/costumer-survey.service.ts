@@ -49,20 +49,27 @@ export class CostumerSurveyService {
     return this.http.get<ApiResponse<CustomerData>>('/api/api/customer/' + nik)
   }
 
-  public postSurvey(data: AllSurveyReview): Observable<ApiResponse<AllSurveyReview>>{
-    return this.http.post<ApiResponse<AllSurveyReview>>('/api/api/survey/', data)
+  public postUpdateSurvey(data: AllSurveyReview): Observable<ApiResponse<AllSurveyReview>>{
+    if(data.surveyId) return this.http.put<ApiResponse<AllSurveyReview>>('/api/api/survey/', data)
+    else return this.http.post<ApiResponse<AllSurveyReview>>('/api/api/survey/', data);
   }
 
-  public getSurveyById(id: string): Observable<ApiResponse<AllSurveyReview>>{
-    return this.http.get<ApiResponse<AllSurveyReview>>('/api/api/survey/' + id)
+  public getSurveyByTrxId(trxId: string): Observable<ApiResponse<AllSurveyReview>>{
+    return this.http.get<ApiResponse<AllSurveyReview>>('/api/api/survey/id/' + trxId)
   }
 
-  public updateSurvey(data:AllSurveyReview):Observable<ApiResponse<AllSurveyReview>>{
-    return this.http.put<ApiResponse<AllSurveyReview>>('/api/api/survey/', data);
-  }
+  // public getTransactionById(id:string): Observable<ApiResponse<PaginationResponse<Transaction>>>{
+  //   return this.http.get<ApiResponse<PaginationResponse<Transaction>>>('/api/api/transaction/'+id)
+  // }
 
-  public getTransactionById(id:string): Observable<ApiResponse<PaginationResponse<Transaction>>>{
-    return this.http.get<ApiResponse<PaginationResponse<Transaction>>>('/mock/api/transaction/'+id)
+  public getTransactionById(id: string,params: any): Observable<ApiResponse<PaginationResponse<Transaction>>>{
+    console.log(params);
+    let reqParams: any = {};
+    if (params){
+      Object.keys(params).map(k => {
+        reqParams[k] = params[k];
+      })
+    }
+    return this.http.get<ApiResponse<PaginationResponse<Transaction>>>(`/api/api/transaction/${id}`, {params: reqParams});
   }
-
 }

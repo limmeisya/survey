@@ -13,6 +13,14 @@ export interface Transaction{
     customerId: CustomerId
 }
 
+export interface Trx{
+    trxId: string,
+    trxDate: Date,
+    nominalCredit: number,
+    trxStatus: string,
+    customerId: CustomerData
+}
+
 export interface CustomerId{
     customerId: string,
     nik: string
@@ -25,7 +33,7 @@ export interface OccupationType{
 export interface CustomerData{
     customerId: string,
     nik: string,
-    customerFullName: string,
+    fullName: string,
     birthPlace: string,
     birthDate: Date,
     gender: string,
@@ -121,7 +129,7 @@ export interface Ward{
 
 export interface AllSurveyReview{
     surveyId: string,
-    trxId: string,
+    transaction: Trx,
     surveyData: CustomerSurveyData,
     spouse: SpouseData,
     relatives: RelativesData,

@@ -100,8 +100,14 @@ export class SurveyFormComponent implements OnInit {
     return this.forthFormGroup.get(property) as FormGroup
   }
 
+  trxId: string = ''
+  transactionForm: FormGroup = new FormGroup({
+    trxId: new FormControl(this.trxId)
+  });
+
   surveyForm: FormGroup = new FormGroup({
-    surveyId: new FormControl(''),
+    surveyId: new FormControl(null),
+    transaction: this.transactionForm,
     surveyData:this.firstFormGroup,
     profile:this.forthFormGroup,
     spouse:this.secondFormGroup,
@@ -120,45 +126,27 @@ export class SurveyFormComponent implements OnInit {
     this.getSurveyData()
   }
 
-
-  formOne(property: string): FormGroup {
-    return this.firstFormGroup.get(property) as FormGroup;
-  }
-
-  surveyId: string = ''
   submit() {
-    this.route.params.subscribe((parameter) => {
-      if (parameter['id2']){
-        console.log('SURVEY ID Before Update: ', parameter['id2']);
-        Swal.fire({
-          title: 'Do you want to update the survey?',
-          showDenyButton: true,
-          confirmButtonText: `Update`,
-          denyButtonText: `Cancel`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire('Updated!', '', 'success');
-            this.customerService.updateSurvey(this.surveyForm.value).subscribe((res) => {
-              this.surveyId = res.data.surveyId
-              console.log("Survey Id after Update ", this.surveyId);
-              this.router.navigateByUrl(`/cust-survey-details/${this.nikCustomer}/${this.surveyId}`)
-            });
-          }
-        })
-      }else{
-        Swal.fire({
-          title: 'Do you want to submit the survey?',
-          showDenyButton: true,
-          confirmButtonText: `Submit`,
-          denyButtonText: `Cancel`,
-        }).then((result) => {
-          if (result.isConfirmed) {
-            Swal.fire('Submited!', '', 'success');
-            this.customerService.postSurvey(this.surveyForm.value).subscribe((res) => {
-              this.surveyId = res.data.surveyId
-              console.log("Survey Id is ", this.surveyId);
-              this.router.navigateByUrl(`/cust-survey-details/${this.nikCustomer}/${this.surveyId}`)
-            });
+    Swal.fire({
+      title: 'Do you want to submit the survey?',
+      showDenyButton: true,
+      confirmButtonText: `Submit`,
+      denyButtonText: `Cancel`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire('Submit!', '', 'success');
+        console.log('SURVEY FORM VALUE', this.surveyForm.value);
+        this.customerService.postUpdateSurvey(this.surveyForm.value).subscribe({
+          next: (res) => {
+            console.log("Trx Id after Update ", res.data);
+            this.router.navigateByUrl(`/cust-survey-details/${this.nikCustomer}/${res.data.transaction.trxId}`)
+          },
+          error: (err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error...',
+              text: 'Failed to submit!'
+            })
           }
         })
       }
@@ -166,7 +154,7 @@ export class SurveyFormComponent implements OnInit {
   }
 
   nik: string = ''
-  customerFullName: string = ''
+  fullName: string = ''
   birthPlace: string = ''
   birthDate: Date = new Date()
   gender: string = ''
@@ -191,7 +179,7 @@ export class SurveyFormComponent implements OnInit {
       if (parameter && parameter['id']){
         this.customerService.getCustomerDataByNik(this.nikCustomer).subscribe((res: ApiResponse<CustomerData>) => {
           this.nik = res.data.nik
-          this.customerFullName = res.data.customerFullName
+          this.fullName = res.data.fullName
           this.birthPlace = res.data.birthPlace
           this.birthDate = res.data.birthDate
           this.gender = res.data.gender
@@ -231,17 +219,35 @@ export class SurveyFormComponent implements OnInit {
   getSurveyData(){
     this.route.params.subscribe((parameter) => {
       if (parameter['id2']){
-        console.log('GET SURVEY DATA AFTER EDIT: ',parameter['id2']);
-        this.customerService.getSurveyById(parameter['id2']).subscribe((res: ApiResponse<AllSurveyReview>) => {
-          console.log('Survey DATA for Edit: ', res.data);
-          this.surveyRes = res.data;
-          this.setFormGroup(this.surveyRes);
-          this.loadAddressesApi();
-          this.profiles[0] = this.surveyRes.profile.breadwinner
-          this.profiles[1] = this.surveyRes.profile.literacyAbility
-          this.profiles[2] = this.surveyRes.profile.transportationOwner
-          this.profiles[3] = this.surveyRes.profile.insuranceOwner
-          this.profiles[4] = this.surveyRes.profile.internetAccess
+        this.customerService.getSurveyByTrxId(parameter['id2']).subscribe({
+          next: (res: ApiResponse<AllSurveyReview>) => {
+            console.log('Survey Trx Id: ', parameter['id2']);
+            this.trxId = parameter['id2']
+            this.transactionForm.controls['trxId'].setValue(this.trxId)
+            if (res.data !== null){
+              Swal.fire({
+                title: 'You have filled this survey.',
+                text: 'Do you want to edit survey?',
+                icon: 'question',
+                confirmButtonText: `Edit`,
+                showDenyButton: true
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.surveyRes = res.data;
+                  this.setFormGroup(this.surveyRes);
+                  this.loadAddressesApi();
+                  this.profiles[0] = this.surveyRes.profile.breadwinner
+                  this.profiles[1] = this.surveyRes.profile.literacyAbility
+                  this.profiles[2] = this.surveyRes.profile.transportationOwner
+                  this.profiles[3] = this.surveyRes.profile.insuranceOwner
+                  this.profiles[4] = this.surveyRes.profile.internetAccess
+                }else{
+                  this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
+                }
+              })
+            }
+          },
+          error: (err) => alert ('Error!')
         })
       }
     })
@@ -275,7 +281,7 @@ export class SurveyFormComponent implements OnInit {
 
 
   dataBanks: Banks[] = allBank;
- 
+
 
   dataProvincies: Province[] = [];
   loadProvinces() {
@@ -360,5 +366,11 @@ export class SurveyFormComponent implements OnInit {
     this.forthFormGroup.controls['transportationOwner'].setValue(surveyForm.profile.transportationOwner)
     this.forthFormGroup.controls['insuranceOwner'].setValue(surveyForm.profile.insuranceOwner)
     this.forthFormGroup.controls['internetAccess'].setValue(surveyForm.profile.internetAccess)
+
+    this.transactionForm.controls['trxId'].setValue(surveyForm.transaction.trxId)
+  }
+
+  back(){
+    this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
   }
 }

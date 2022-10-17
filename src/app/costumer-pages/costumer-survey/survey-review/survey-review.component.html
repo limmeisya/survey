@@ -14,10 +14,13 @@
 
           <div class="col-6">
             <dl class="row">
+              <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
+                Customer Identity
+              </b></h6>
               <dt class="col-4 fw-lighter">Identity Number</dt>
               <dd class="col-8">: {{nik}}</dd>
               <dt class="col-4 fw-lighter">Name</dt>
-              <dd class="col-8">: {{customerFullName}}</dd>
+              <dd class="col-8">: {{fullName}}</dd>
               <dt class="col-4 fw-lighter">Gender</dt>
               <dd class="col-8">: {{gender}}</dd>
               <dt class="col-4 fw-lighter">Place of Birth</dt>
@@ -27,7 +30,7 @@
               <dt class="col-4 fw-lighter">Marital Status</dt>
               <dd class="col-8">: {{maritalStatus}}</dd>
               <dt class="col-4 fw-lighter">Occupation</dt>
-              <dd class="col-8">: {{officeLocation}}</dd>
+              <dd class="col-8">: {{occupationType}}</dd>
               <dt class="col-4 fw-lighter">Phone Number</dt>
               <dd class="col-8">: {{phoneNumber}}</dd>
             </dl>
@@ -35,6 +38,8 @@
 
           <div class="col-6">
             <dl class="row">
+              <h6 style="font-size: large;font-weight: bold; color: #F7931D; height: 13pt;" ><b> 
+              </b></h6>
               <dt class="col-4 fw-lighter">Address</dt>
               <dd class="col-8">: {{address}}</dd>
               <dt class="col-4 fw-lighter">RT / RW</dt>
@@ -132,16 +137,16 @@
               <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
                 Customer Profiling
               </b></h6>
-              <dt class="col-4 fw-lighter">Main Breadwinner</dt>
-              <dd class="col-8">: {{breadwinner}}</dd>
-              <dt class="col-4 fw-lighter">Literacy Ability</dt>
-              <dd class="col-8">: {{literacyAbility}}</dd>
-              <dt class="col-4 fw-lighter">Transportation Ownership</dt>
-              <dd class="col-8">: {{transportationOwner}}</dd>
-              <dt class="col-4 fw-lighter">Health Insurance Ownership</dt>
-              <dd class="col-8">: {{insuranceOwner}}</dd>
-              <dt class="col-4 fw-lighter">Internet Accessbility</dt>
-              <dd class="col-8">: {{internetAccess}}</dd>
+              <dt class="col-5 fw-lighter">Main Breadwinner</dt>
+              <dd class="col-4">: {{breadwinner}}</dd>
+              <dt class="col-5 fw-lighter">Literacy Ability</dt>
+              <dd class="col-4">: {{literacyAbility}}</dd>
+              <dt class="col-5 fw-lighter">Transportation Ownership</dt>
+              <dd class="col-4">: {{transportationOwner}}</dd>
+              <dt class="col-5 fw-lighter">Health Insurance Ownership</dt>
+              <dd class="col-4">: {{insuranceOwner}}</dd>
+              <dt class="col-5 fw-lighter">Internet Accessbility</dt>
+              <dd class="col-4">: {{internetAccess}}</dd>
             </dl>
           </div>
         </div>
@@ -154,7 +159,7 @@
     <div class="col-12">
       <div class="col-10">
       <div class="d-flex mb-5 justify-content-end">
-        <button type="submit" class="btn btn-primary text-white me-2" routerLink="cust-survey-list">
+        <button type="submit" class="btn btn-primary text-white me-2" (click)="back()">
             Back  
         </button>
         <button type="submit" class="btn btn-secondary text-white me-2" (click)="edit()">
