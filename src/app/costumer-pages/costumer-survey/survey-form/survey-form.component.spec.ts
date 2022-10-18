@@ -4,7 +4,7 @@ import { MockInstance, ngMocks } from 'ng-mocks';
 import { SurveyFormComponent } from './survey-form.component';
 import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DebugElement } from '@angular/core';
+import { DebugElement, ModuleWithComponentFactories } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { from, Observable, of, subscribeOn, Subscriber } from 'rxjs';
 import { CostumerSurveyService } from '../costumer-survey.service';
@@ -57,11 +57,11 @@ describe('SurveyFormComponent', () => {
     }
   }
 
-    it('reactive form validation - firstFormGroup', ()=>{
-      let mothersMaidenName = component.firstFormGroup.controls['mothersMaidenName']
-      expect(mothersMaidenName.valid).toBeFalsy()
-      // expect(mothersMaidenName.errors['required']).toBeTruthy()
-    })
+    // it('reactive form validation - firstFormGroup', ()=>{
+    //   let mothersMaidenName = component.firstFormGroup.controls['mothersMaidenName']
+    //   expect(mothersMaidenName.valid).toBeFalsy()
+    //   expect(mothersMaidenName.errors['required']).toBeTruthy()
+    // })
 
 // describe('back', ()=>{
 //   const de = fixture.debugElement.query(By.css('button[type=button]'))
@@ -123,6 +123,10 @@ describe('SurveyFormComponent', () => {
     let respProvince = [{id: 123, name: 'dummy'}]
 
     spyOn(costumerService, 'getProvicies').and.returnValue(of(respProvince))
+    // spyOn(costumerService, 'getProvicies').and.returnValue({subscribe: (value)=>{
+    //   expect(value).toBe(respProvince)
+    // }})
+
     component.dataProvincies.values()
     fixture.detectChanges()
     component.loadProvinces()
@@ -170,6 +174,21 @@ describe('SurveyFormComponent', () => {
         expect(component.firstFormGroup.get('accountNumber')).toBeDefined()
         expect(component.firstFormGroup.get('accountNumber')).toBeInstanceOf(AbstractControl)
       })
+    })
+    describe('1.2 mothersMaidenName should be validated',()=>{
+      let mothersMaidenNameControl : AbstractControl
+
+      beforeEach(()=>{
+        mothersMaidenNameControl = component.firstFormGroup.get('mothersMaidenName') as AbstractControl
+      })
+      describe('1.2.1 Validation required should be working',()=>{
+        it('required validator should be truthy if mothersMaidenName value is blank',()=>{
+          mothersMaidenNameControl.setValue('')
+          fixture.detectChanges()
+          
+        })
+    })
+
     })
   })
 

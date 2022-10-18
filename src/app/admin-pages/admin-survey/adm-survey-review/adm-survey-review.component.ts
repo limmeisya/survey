@@ -6,6 +6,7 @@ import { ApiResponse } from 'src/app/shared/model/ApiResponse';
 import Swal from 'sweetalert2';
 import { AllSurveyReview, CustomerData, Transaction } from '../admin-survey.model';
 import { AdminSurveyService } from '../admin-survey.service';
+import { Pipe } from '@angular/core';
 
 @Component({
   selector: 'app-adm-survey-review',

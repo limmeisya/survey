@@ -40,8 +40,10 @@ describe('CostumerSurveyService', () => {
   it('make GET request of getSurveyByNik return response API response', ()=>{
     const nik = '1'
     const url = `/api/api/customer/${nik}`
+   
     const expectedResponse : ApiResponse<CustomerData> = {message: 'submitted', data: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
     'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}}
+    
     service.getCustomerDataByNik(nik).subscribe((actualResponse)=>{
       expect(actualResponse).toEqual(expectedResponse)
     })
@@ -138,7 +140,7 @@ describe('CostumerSurveyService', () => {
       method: 'GET',
       url: url
     })
-    expect(request.method).toMatch('GET')
+     expect(request.method).toMatch('GET')
     expect(request.url).toMatch(url) 
   })
 

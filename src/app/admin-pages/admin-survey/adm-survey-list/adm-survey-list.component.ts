@@ -8,6 +8,7 @@ import { PaginationResponse } from 'src/app/shared/model/PaginationResponse';
 import Swal from 'sweetalert2';
 import { Transaction } from '../admin-survey.model';
 import { AdminSurveyService } from '../admin-survey.service';
+import { Pipe} from '@angular/core';
 
 @Component({
   selector: 'app-adm-survey-list',
