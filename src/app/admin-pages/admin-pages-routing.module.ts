@@ -40,7 +40,7 @@ const routes: Routes = [
         component : AdminProspectComponent
       },
       {
-        path : 'adm-survey-form',
+        path : 'adm-survey-form/:id/:id2',
         component : AdmSurveyFormComponent
       },
       {
@@ -48,7 +48,7 @@ const routes: Routes = [
         component : AdmSurveyListComponent
       },
       {
-        path : 'adm-survey-details',
+        path : 'adm-survey-details/:id/:id2',
         component : AdmSurveyReviewComponent
       },
     ]

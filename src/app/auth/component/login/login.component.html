@@ -15,14 +15,14 @@
           <form [formGroup]="loginForm" method="post">
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"> 👤 </span>
-              <input type="number" class="form-control" placeholder="NIK/NIP" id="nik" formControlName="nik"/>
+              <input type="number" name="nik" class="form-control" placeholder="NIK/NIP" id="nik" formControlName="nik" maxlength="16" minlength="8"/>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"> 🔑 </span>
               <input name="password" [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control" placeholder="Password" id="password-field" formControlName="password"
               />
-              <i style="vertical-align: bottom" alt="show" class="far fa-eye eye-show" (click)="showPassword = !showPassword" [class.hide]="!showPassword"></i>
-              <i style="vertical-align: bottom" alt="hide" class="far fa-eye-slash eye-hide" (click)="showPassword = !showPassword" [class.hide]="showPassword"></i>
+              <span style="vertical-align: bottom" alt="show" class="far fa-eye eye-show input-group-text" (click)="showPassword = !showPassword" [class.hide]="!showPassword"></span>
+              <span style="vertical-align: bottom" alt="hide" class="far fa-eye-slash eye-hide input-group-text" (click)="showPassword = !showPassword" [class.hide]="showPassword"></span>
             </div>
             <div class="mb-3">
               <a routerLink="/" class="link-primary fw-bold">Lupa Password?</a>
