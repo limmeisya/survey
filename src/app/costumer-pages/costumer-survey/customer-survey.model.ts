@@ -9,6 +9,7 @@ export interface Transaction{
     fullName: string,
     trxId: string,
     trxDate: Date,
+    trxStatus: string,
     survey: boolean,
     customerId: CustomerId
 }
@@ -129,6 +130,7 @@ export interface Ward{
 
 export interface AllSurveyReview{
     surveyId: string,
+    roleName: string,
     transaction: Trx,
     surveyData: CustomerSurveyData,
     spouse: SpouseData,

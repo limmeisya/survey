@@ -1,6 +1,66 @@
-<h1>DASHBOARD</h1>
+<h1 class="px-5 py-4 m-0 fw-bold">Dashboard</h1>
 
-<h3>If you can see this page. It means that you are logged with administrative previlege</h3>
-<h4>Whoever you are a manager, supervisor, or staff</h4>
-
-<h6>or.. you could be an admin. If the spring loan jar is used as the backend</h6>
+<div class="container px-5">
+  <div class="card mb-5">
+    <!-- <div class="card-header bg-white p-4">
+      <h5 class="m-0">Home Page</h5>
+    </div> -->
+    <div class="card-body background-dashboard p-5">
+      <!-- CONTENT -->
+      <div class="row mb-3">
+        <div class="col-lg-4 col-12">
+          <div class="card border-0 bg-secondary text-white mb-3">
+            <div class="card-body">
+              <div>Total Customer</div>
+              <h1>199.000</h1>
+              <div class="text-end">Last Update: 12.00 p.m.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="card border-0 bg-primary text-white mb-3">
+            <div class="card-body">
+              <div>Active Customer</div>
+              <h1>20.000</h1>
+              <div class="text-end">Last Update: 10.00 a.m.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-12">
+          <div class="card border-0 bg-warning text-white mb-3">
+            <div class="card-body">
+              <div>Credit Amount</div>
+              <h1>Rp.2.98M</h1>
+              <div class="text-end">Last Update: 09.00 p.m.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+        <div class="row">
+          <div class="col-xl-8 col-12 mb-lg-0 mb-5">
+            <canvas
+              baseChart
+              [data]="lineChartData"
+              [options]="lineChartOptions"
+              [type]="'line'"
+              class="w-100"
+            >
+            </canvas>
+          </div>
+          <div class="col-xl-4 col-12">
+            <canvas
+              baseChart
+              [data]="pieChartData"
+              [options]="pieChartOptions"
+              [type]="'pie'"
+              class="w-100"
+            >
+            </canvas>
+          </div>
+        </div>
+      </div>
+      <!-- END OF CONTENT -->
+    </div>
+  </div>
+</div>

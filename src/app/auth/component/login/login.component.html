@@ -4,27 +4,25 @@
       <div class="row">
         <div class="col me-2 d-flex align-items-center">
           <div class="">
-            <h4 class="card-title text-center text-primary fw-bold mb-4">
+            <h1 class="card-title text-center text-primary fw-bold mb-4">
               Loan Originating System
-            </h4>
+            </h1>
             <!-- <div class="text-center w-100 mb-4">
             <img
               src="https://www.danamon.co.id/-/media/ICON-DCWCOID/LOGO-HEADER/MUFG-endorsment-Line-01.png?h=65&la=id&mh=65&w=260&hash=EF3844C2BC26B0159F9311207D5466122464C4A5"
             />
           </div> -->
-          <form [formGroup]="loginForm" method="post" (ngSubmit)="login()">
+          <form [formGroup]="loginForm" method="post">
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"> 👤 </span>
-              <input type="number" class="form-control" placeholder="NIK" id="nik" formControlName="nik"/>
+              <input type="number" class="form-control" placeholder="NIK/NIP" id="nik" formControlName="nik"/>
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1"> 🔑 </span>
-              <input
-                type="password"
-                class="form-control"
-                placeholder="Kata Sandi"
-                id="password" formControlName="password"
+              <input name="password" [type]="showPassword ? 'text' : 'password'" class="form-control pwd-control" placeholder="Password" id="password-field" formControlName="password"
               />
+              <i style="vertical-align: bottom" alt="show" class="far fa-eye eye-show" (click)="showPassword = !showPassword" [class.hide]="!showPassword"></i>
+              <i style="vertical-align: bottom" alt="hide" class="far fa-eye-slash eye-hide" (click)="showPassword = !showPassword" [class.hide]="showPassword"></i>
             </div>
             <div class="mb-3">
               <a routerLink="/" class="link-primary fw-bold">Lupa Password?</a>
@@ -33,6 +31,7 @@
               <button
                 type="submit"
                 class="btn btn-primary text-white"
+                (click)="login()"
               >
                 Login
               </button>

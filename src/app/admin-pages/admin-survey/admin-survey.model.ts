@@ -9,8 +9,9 @@ export interface Transaction{
     fullName: string,
     trxId: string,
     trxDate: Date,
-    survey: boolean,
-    customerId: CustomerId
+    isSurvey: boolean,
+    customerId: CustomerId,
+    trxStatus: string
 }
 
 export interface Trx{

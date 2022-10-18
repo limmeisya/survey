@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 import { ApiResponse } from 'src/app/shared/model/ApiResponse';
 import { PaginationResponse } from 'src/app/shared/model/PaginationResponse';
+import Swal from 'sweetalert2';
 import { Transaction } from '../admin-survey.model';
 import { AdminSurveyService } from '../admin-survey.service';
 
@@ -31,10 +32,6 @@ export class AdmSurveyListComponent implements OnInit {
   }
 
   paginate?: Omit<PaginationResponse<any>, "data">
-  // currentPaginate = {
-  //   page: 1,
-  //   size: 3,
-  // };
 
   currentPaginate: { [key: string]: any } = {page: 1, size: 3};
 
@@ -45,8 +42,6 @@ export class AdmSurveyListComponent implements OnInit {
   loadTransactionCustomer(){
     this.route.queryParams.pipe(
       switchMap((val) => {
-        console.log('Val', val);
-        
         return this.adminService.getAllTransaction(val).pipe(map(({data}) => {
           if (Object.getOwnPropertyNames(val).length !== 0) {
             return {params: val, data: data};
@@ -57,12 +52,17 @@ export class AdmSurveyListComponent implements OnInit {
       }),
     ).subscribe({
       next: ({data}) => {
-        console.log(data);
         this.listCustomerTransaction = data.data
         this.paginate = data;
       },
       error: console.error,
     })
+  }
+
+  pageChanged(page: any){
+    this.currentPaginate = {...this.currentPaginate, page}
+    this.router.navigateByUrl(`/adm-survey-list?page=${page}&size=${this.currentPaginate['size']}`);
+    this.loadTransactionCustomer();
   }
 
   fillSurvey(transactionId:string){
@@ -74,9 +74,34 @@ export class AdmSurveyListComponent implements OnInit {
     this.router.navigateByUrl(`/adm-survey-details/${this.customerNik}/${transactionId}`)
   }
 
-  pageChanged(page: any){
-    this.currentPaginate = {...this.currentPaginate, page}
-    this.router.navigateByUrl(`/adm-survey-list?page=${page}&size=${this.currentPaginate['size']}`);
-    this.loadTransactionCustomer();
+  deleteSurvey(transactionId:string){
+    this.adminService.getTransactionByTrxId(transactionId).subscribe({
+      next: (res: ApiResponse<Transaction>) => {
+        if (res.data.isSurvey === true){
+          Swal.fire({
+            title: 'Are you sure to delete this survey?',
+            text: 'This process is irreversible.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, go ahead.',
+            cancelButtonText: 'No, let me think',
+          }).then((result)=>{
+            if(result.value){
+              this.adminService.deleteSurvey(transactionId).subscribe({
+                next: (res) => {
+                  this.loadTransactionCustomer()
+                  console.log("delete success");
+                  
+                  Swal.fire('Removed')
+                },
+                error: (err) => alert (err.message)
+              })
+              
+            }
+          })
+        }
+      },
+      error: (err) => alert (`Error! Data not available`)
+    })
   }
 }
