@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, tick } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { MockInstance, ngMocks } from 'ng-mocks';
 import { SurveyFormComponent } from './survey-form.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -23,8 +23,8 @@ describe('SurveyFormComponent', () => {
 
 
   beforeEach(async () => {
-    // let costumerServiceSpy = jasmine.createSpyObj('CostumerSurveyService', ['getProvice', 'getCity', 'getDistrict', 'getWard'])
-    let costumerServiceSpy = jasmine.createSpyObj('CostumerSurveyService', ['getProvicies'])
+    let costumerServiceSpy = jasmine.createSpyObj('CostumerSurveyService', ['getProvicies', 'getCity', 'getDistrict', 'getWard'])
+    // let costumerServiceSpy = jasmine.createSpyObj('CostumerSurveyService', ['getProvicies'])
     let authServiceSpy = jasmine.createSpyObj('AuthService', {'getUserFromStorage': {'role' : 'toString'}})
     // costumerService.getProvicies=[]
     await TestBed.configureTestingModule({
@@ -44,8 +44,7 @@ describe('SurveyFormComponent', () => {
     fixture.detectChanges();
     costumerService = TestBed.inject(CostumerSurveyService) as jasmine.SpyObj<CostumerSurveyService>
     authService = TestBed.inject(AuthService) as jasmine.SpyObj<AuthService>
-    console.log('AUTH SERVICE', authService);
-    costumerServiceSpy.getProvicies.and.returnValue(of(respProvince))
+    // costumerServiceSpy.getProvicies.and.returnValue(of(respProvince))
   
     
   });
@@ -78,16 +77,16 @@ describe('SurveyFormComponent', () => {
 //   })
 //   })
 
-  it('should tell Router to navigate when button cancel is clicked', ()=>{
-    let router = fixture.debugElement.injector.get(Router)
-    let buttonElements = fixture.debugElement.query(By.css('button[type=button]'))
-    buttonElements.triggerEventHandler('click', null)
-    tick()
-    const spy = router.navigateByUrl as jasmine.Spy
-    const navArgs = spy.calls.first().args[0]
-    const nik = '1234'
-    expect(navArgs).withContext('should navigate to cust survey list').toBe(`/cust-survey-list/${nik}`)
-  })
+  // it('should tell Router to navigate when button cancel is clicked', ()=>{
+  //   let router = fixture.debugElement.injector.get(Router)
+  //   let buttonElements = fixture.debugElement.query(By.css('button[type=button]'))
+  //   buttonElements.triggerEventHandler('click', null)
+  //   tick()
+  //   const spy = router.navigateByUrl as jasmine.Spy
+  //   const navArgs = spy.calls.first().args[0]
+  //   const nik = '1234'
+  //   expect(navArgs).withContext('should navigate to cust survey list').toBe(`/cust-survey-list/${nik}`)
+  // })
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -102,22 +101,22 @@ describe('SurveyFormComponent', () => {
   //   expect(component.submit).toHaveBeenCalledTimes(1)
   // })
 
-  it('should load the Address API',()=>{
+  // it('should load the Address API',()=>{
 
-    let respProvince = {id: 123, name: 'dummy'}
-    let respCity = {id: '123', province_id: '123', name: 'dummy'}
-    let respDistrict = {id: '123', regency_id: '123', name: 'dummy'}
-    let respWard = {id: '123', district_id: '123', name: 'dummy'}
+  //   let respProvince = {id: 123, name: 'dummy'}
+  //   let respCity = {id: '123', province_id: '123', name: 'dummy'}
+  //   let respDistrict = {id: '123', regency_id: '123', name: 'dummy'}
+  //   let respWard = {id: '123', district_id: '123', name: 'dummy'}
 
 
-    spyOn(costumerService, 'getProvice').and.returnValue(of(respProvince))
-    component.loadAddressesApi.call(respProvince)    
+  //   spyOn(costumerService, 'getProvice').and.returnValue(of(respProvince))
+  //   fixture.detectChanges()
+  //   component.loadAddressesApi.call(respProvince)    
     // spyOn(costumerService, 'getDistrict').and.returnValue(of(respDistrict))
     // spyOn(costumerService, 'getWard').and.returnValue(of(respWard))
     
-    fixture.detectChanges()
     // component.loadAddressesApi()
-  })
+  // })
 
   it('should load Provincies',()=>{
 
@@ -125,9 +124,8 @@ describe('SurveyFormComponent', () => {
 
     spyOn(costumerService, 'getProvicies').and.returnValue(of(respProvince))
     component.dataProvincies.values()
-    component.loadProvinces()
     fixture.detectChanges()
-
+    component.loadProvinces()
     expect(costumerService.getProvicies.calls.count()).toBe(1)
 
   })
@@ -143,5 +141,16 @@ describe('SurveyFormComponent', () => {
     expect(costumerService.getProvicies.calls.count()).toBe(1)
 
   })
+
+  describe('1.  FormGroup test scenario', ()=>{
+    describe('1.1 FormGroup and FormControl should be initialized',()=>{
+      it('should be successfully initialized.',()=>{
+        expect(component.firstFormGroup).toBeTruthy()
+        expect(component.firstFormGroup.get('surveyDataId')).toBeDefined()
+        expect(component.firstFormGroup.get('surveyDataId')).toBeInstanceOf(AbstractControl)
+      })
+    })
+  })
+
 
 });

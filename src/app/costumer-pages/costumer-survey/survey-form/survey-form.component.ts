@@ -45,6 +45,7 @@ export class SurveyFormComponent implements OnInit {
     accountName: new FormControl('', Validators.required),
     accountNumber: new FormControl('', Validators.required),
   });
+  
   firstForm(property: string): FormGroup{
     return this.firstFormGroup.get(property) as FormGroup
   }

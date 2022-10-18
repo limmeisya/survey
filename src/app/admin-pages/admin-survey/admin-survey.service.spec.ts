@@ -197,7 +197,7 @@ it('make GET request of getSurveyByNik return response API response', ()=>{
 
 it('make PUT request from AllSurveyReview return response API response', () =>{
   const url = `/api/api/survey/`
-  const expectedSurveyReview: AllSurveyReview = {surveyId: '123', 
+  const expectedSurveyReview: AllSurveyReview = {surveyId: '123',  roleName: 'dummy',
   transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
                 'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}},
   surveyData: {surveyDataId: '1234', mothersMaidenName: 'salala', latestEducationalLevel:'elementary', dependents:3, email:'sakaka@mail.com', bankName: 'Bank', accountName:'syaya', accountNumber:'12345'}, 
@@ -205,7 +205,7 @@ it('make PUT request from AllSurveyReview return response API response', () =>{
   relatives: {relativesId:'1234', relativesName:'sasasa', relativesRelation:'dummy', relativesPhoneNumber:'12345', relativesCellNumber:'12345', relativesAddress:'sasasa', relativesRt:'1', relativesRw:'2', relativesProvince:'sasasa', relativesCity:'sasasa', relativesDistrict:'sasasa', relativesWard:'sasasa'},
   profile: {profileId: true, breadwinner: true, literacyAbility: true, transportationOwner: true, insuranceOwner: true, internetAccess: true}}
 
-  const expectedResponse : ApiResponse<AllSurveyReview> = {message: 'submitted', data: {surveyId: '123', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
+  const expectedResponse : ApiResponse<AllSurveyReview> = {message: 'submitted', data: {surveyId: '123', roleName: 'dummy', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
   'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}}, 
   surveyData: {surveyDataId: '1234', mothersMaidenName: 'salala', latestEducationalLevel:'elementary', dependents:3, email:'sakaka@mail.com', bankName: 'Bank', accountName:'syaya', accountNumber:'12345'}, 
   spouse: {spouseId: '1234', spouseNik:'12345', spouseName:'sasasa', spouseBirthdate:'12345', gender:'female', spouseBirthplace:'dummy', spouseMothersMaidenName:'sasasa'},
@@ -222,7 +222,7 @@ it('make PUT request from AllSurveyReview return response API response', () =>{
 
 it('make POST request from AllSurveyReview return response API response', () =>{
   const url = `/api/api/survey/`
-  const expectedSurveyReview : AllSurveyReview = {surveyId: '', 
+  const expectedSurveyReview : AllSurveyReview = {surveyId: '',  roleName: 'dummy',
   transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
                 'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}},
   surveyData: {surveyDataId: '1234', mothersMaidenName: 'salala', latestEducationalLevel:'elementary', dependents:3, email:'sakaka@mail.com', bankName: 'Bank', accountName:'syaya', accountNumber:'12345'}, 
@@ -230,7 +230,7 @@ it('make POST request from AllSurveyReview return response API response', () =>{
   relatives: {relativesId:'1234', relativesName:'sasasa', relativesRelation:'dummy', relativesPhoneNumber:'12345', relativesCellNumber:'12345', relativesAddress:'sasasa', relativesRt:'1', relativesRw:'2', relativesProvince:'sasasa', relativesCity:'sasasa', relativesDistrict:'sasasa', relativesWard:'sasasa'},
   profile: {profileId: true, breadwinner: true, literacyAbility: true, transportationOwner: true, insuranceOwner: true, internetAccess: true}}
 
-  const expectedResponse : ApiResponse<AllSurveyReview> = {message: 'submitted', data: {surveyId: '123', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
+  const expectedResponse : ApiResponse<AllSurveyReview> = {message: 'submitted', data: {surveyId: '123',  roleName: 'dummy', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
   'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}}, 
   surveyData: {surveyDataId: '1234', mothersMaidenName: 'salala', latestEducationalLevel:'elementary', dependents:3, email:'sakaka@mail.com', bankName: 'Bank', accountName:'syaya', accountNumber:'12345'}, 
   spouse: {spouseId: '1234', spouseNik:'12345', spouseName:'sasasa', spouseBirthdate:'12345', gender:'female', spouseBirthplace:'dummy', spouseMothersMaidenName:'sasasa'},
@@ -249,7 +249,7 @@ it('make GET request of getSurveyByTrxId return response API response with data'
   const trxId = '1'
   const url = `/api/api/survey/id/${trxId}`
 
-  const expectedResponse : ApiResponse<AllSurveyReview> = {message: 'submitted', data: {surveyId: '123', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
+  const expectedResponse : ApiResponse<AllSurveyReview> = {message: 'submitted', data: {surveyId: '123',  roleName: 'dummy', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
   'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}}, 
   surveyData: {surveyDataId: '1234', mothersMaidenName: 'salala', latestEducationalLevel:'elementary', dependents:3, email:'sakaka@mail.com', bankName: 'Bank', accountName:'syaya', accountNumber:'12345'}, 
   spouse: {spouseId: '1234', spouseNik:'12345', spouseName:'sasasa', spouseBirthdate:'12345', gender:'female', spouseBirthplace:'dummy', spouseMothersMaidenName:'sasasa'},
@@ -267,4 +267,28 @@ it('make GET request of getSurveyByTrxId return response API response with data'
   expect(request.method).toMatch('GET')
   expect(request.url).toMatch(url) 
 })
+
+it('make DELETE request to delete survey by trxId return AllSurveyRevie', ()=>{
+  const trxId = '1'
+  const url = `/api/api/survey/id/${trxId}`
+
+  const expectedResponse : AllSurveyReview = {surveyId: '123',  roleName: 'dummy', transaction: {trxId: '1234', trxDate: new Date(), nominalCredit: 123, trxStatus: 'dummy', customerId: {customerId: '123', nik: '1234', fullName: 'sasasa', birthPlace: 'dummy', birthDate: new Date(), gender: 'female', maritalStatus: 'marriage', religion:'dummy', phoneNumber: '1234', address: 'dummy', rt: '12', rw:'123', ward: 
+  'dummy', district: 'dummy', city: 'dummy', province: 'dummy', officeLocation: 'dummy', businessPhoto: 'dummy', postalCode:'dummy', occupationType:'dummy',supportingDocument: []}}, 
+  surveyData: {surveyDataId: '1234', mothersMaidenName: 'salala', latestEducationalLevel:'elementary', dependents:3, email:'sakaka@mail.com', bankName: 'Bank', accountName:'syaya', accountNumber:'12345'}, 
+  spouse: {spouseId: '1234', spouseNik:'12345', spouseName:'sasasa', spouseBirthdate:'12345', gender:'female', spouseBirthplace:'dummy', spouseMothersMaidenName:'sasasa'},
+  relatives: {relativesId:'1234', relativesName:'sasasa', relativesRelation:'dummy', relativesPhoneNumber:'12345', relativesCellNumber:'12345', relativesAddress:'sasasa', relativesRt:'1', relativesRw:'2', relativesProvince:'sasasa', relativesCity:'sasasa', relativesDistrict:'sasasa', relativesWard:'sasasa'},
+  profile: {profileId: true, breadwinner: true, literacyAbility: true, transportationOwner: true, insuranceOwner: true, internetAccess: true}}
+ 
+  service.deleteSurvey(trxId).subscribe((actualResponse)=>{
+    expect(actualResponse).toEqual(expectedResponse)
+  })
+
+  const {request}: TestRequest = httpMock.expectOne({
+    method: 'DELETE',
+    url: url
+  })
+  expect(request.method).toMatch('DELETE')
+  expect(request.url).toMatch(url) 
+})
+
 });

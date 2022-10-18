@@ -33,27 +33,16 @@ describe('SurveyReviewComponent', () => {
     expect(component).toBeTruthy();
   });
 // =====================HTML================================
-  it('should match H6 text', fakeAsync(()=>{
-    fixture.detectChanges()
-    expect(h6.textContent).toContain('Customer Identity')
-  }))
-
-  it('should match H6 text', fakeAsync(()=>{
-    fixture.detectChanges()
-    // expect(h6.textContent).toContain('Customer Identity')
-    expect(h6.textContent).toContain('Customer Survey Data')
-    // expect(h6.textContent).toContain('Spouse Information')
-    // expect(h6.textContent).toContain('Relative Information')
-    // expect(h6.textContent).toContain('Customer Profiling')
-  }))
+  // it('should match H6 text', fakeAsync(()=>{
+  //   fixture.detectChanges()
+  //   expect(h6.textContent).toContain('Customer Identity')
+  // }))
 
 
-
-
-  it('should set NIK some default value',()=>{
-    component.nik = 'dummy'
-    expect(component.nik).toContain('dummy')
-  })
+  // it('should set NIK some default value',()=>{
+  //   component.nik = 'dummy'
+  //   expect(component.nik).toContain('dummy')
+  // })
 
   // it('should click edit and run the function of edit()', ()=>{
   //   const btn = deb.query(By.css('button[type=submit]'))
@@ -63,13 +52,13 @@ describe('SurveyReviewComponent', () => {
   //   expect(component.edit).toEqual
   // })
 
-  it('should call the right function of button back', ()=>{
-    spyOn(component, 'back')
-    let btn = deb.nativeElement.query(By.css('input[type=submit]'))
-    btn.click()
-    tick()
-    expect(component.back).toHaveBeenCalled()
-  })
+  // it('should call the right function of button back', ()=>{
+  //   spyOn(component, 'back')
+  //   let btn = deb.nativeElement.query(By.css('input[type=submit]'))
+  //   btn.click()
+  //   tick()
+  //   expect(component.back).toHaveBeenCalled()
+  // })
 
 
 });
