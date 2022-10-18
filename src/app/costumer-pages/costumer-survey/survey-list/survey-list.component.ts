@@ -32,7 +32,7 @@ export class SurveyListComponent implements OnInit {
 
   paginate?: Omit<PaginationResponse<any>, "data">
 
-  currentPaginate: { [key: string]: any } = {page: 1, size: 3};
+  currentPaginate: { [key: string]: any } = {page: 1, size: 6};
 
   totalData: number = 0
   paginationSize: number = 0
@@ -42,19 +42,17 @@ export class SurveyListComponent implements OnInit {
       if (parameter['id']){
         this.route.queryParams.pipe(
           switchMap((val) => {
-            console.log('Val', val);
             this.customerNik = parameter['id']
             return this.customerService.getTransactionById(this.customerNik,val).pipe(map(({data}) => {
               if (Object.getOwnPropertyNames(val).length !== 0) {
                 return {params: val, data: data};
               } else {
-                return {params: {page: 1, size: 3}, data: data};
+                return {params: {page: 1, size: 6}, data: data};
               }
             }))
           }),
         ).subscribe({
           next: ({data}) => {
-            console.log(data);
             this.listCustomerTransaction = data.data
             this.paginate = data;
           },
@@ -65,7 +63,6 @@ export class SurveyListComponent implements OnInit {
   }
   
   fillSurvey(transactionId:string){
-    console.log('TrxId: ', transactionId);
     this.router.navigateByUrl(`/cust-survey-form/${this.customerNik}/${transactionId}`)  
   }
 

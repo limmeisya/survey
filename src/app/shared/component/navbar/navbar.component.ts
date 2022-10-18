@@ -21,7 +21,6 @@ export class NavbarComponent implements OnInit {
   nik: string =""
 
   ngOnInit(): void {
-    console.log();
     if(this.authService.getUserFromStorage()?.role){
       this.identifierForView = this.authService.getUserFromStorage()!.nik
       if(this.authService.getUserFromStorage()?.role !== Role.CUSTOMER){

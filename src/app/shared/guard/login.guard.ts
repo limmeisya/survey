@@ -19,15 +19,10 @@ export class LoginGuard implements CanActivate {
 
   async authorize(): Promise<boolean> {
     let user = this.service.getUserFromStorage();
-
-    console.log(user);
-    
-
     if (user && user.token) {
       await this.router.navigateByUrl('/');
       return false;
     }
-
     return true;
   }
 

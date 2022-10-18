@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 import { Role } from 'src/app/auth/model/IAuth';
@@ -63,10 +64,32 @@ export class AdmSurveyListComponent implements OnInit {
     })
   }
 
-  pageChanged(page: any){
-    this.currentPaginate = {...this.currentPaginate, page}
-    this.router.navigateByUrl(`/adm-survey-list?page=${page}&size=${this.currentPaginate['size']}`);
+  pageChanged(page: any) {
+    this.currentPaginate = { ...this.currentPaginate, page }
+    let input: any = this.formSearch.get('search')?.value;
+    if(input){
+      if (Number.isInteger(parseInt(input))) {
+        this.router.navigateByUrl(`/adm-survey-list?page=${page}&size=${this.currentPaginate['size']}&nik=${input}`);
+      } else {
+        this.router.navigateByUrl(`/adm-survey-list?page=${page}&size=${this.currentPaginate['size']}&fullName=${input}`);
+      }
+    } else{
+      this.router.navigateByUrl(`/adm-survey-list?page=${page}&size=${this.currentPaginate['size']}`);
+    }
     this.loadTransactionCustomer();
+  }
+
+  formSearch = new FormGroup({
+    search: new FormControl()
+  })
+
+  searching(): void {
+    let input: any = this.formSearch.get('search')?.value;
+    if (Number.isInteger(parseInt(input))) {
+      this.router.navigateByUrl(`/adm-survey-list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}&nik=${input}`);
+    } else {
+      this.router.navigateByUrl(`/adm-survey-list?page=${this.currentPaginate['page']}&size=${this.currentPaginate['size']}&fullName=${input}`);
+    }
   }
 
   fillSurvey(customerNik: string,transactionId:string){
@@ -98,7 +121,6 @@ export class AdmSurveyListComponent implements OnInit {
                 this.adminService.deleteSurvey(transactionId).subscribe({
                   next: (res) => {
                     this.loadTransactionCustomer()
-                    console.log("delete success");
                     Swal.fire('Removed')
                   },
                   error: (err) => alert (err.message)

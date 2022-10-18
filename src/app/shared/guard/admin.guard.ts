@@ -41,7 +41,6 @@ export class AdminGuard implements CanActivate, CanActivateChild {
             userRole = role            
           })
           if (userRole === Role.MANAGER || userRole === Role.SUPERVISOR || userRole === Role.STAFF) {
-            console.log('ADMIN GUARD PASSED');
             return true;
           }
 

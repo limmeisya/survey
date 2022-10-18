@@ -46,11 +46,8 @@ export class SurveyReviewComponent implements OnInit {
   getCustomerData(){
     this.route.params.subscribe((parameter) => {
       if (parameter && parameter['id']){
-        console.log('this.nik: ', parameter['id']);
         this.nik = parameter['id']
-        console.log(parameter);
         this.customerService.getCustomerDataByNik(parameter['id']).subscribe((res: ApiResponse<CustomerData>) => {
-          console.log(' this Data loan', res);
           this.fullName = res.data.fullName
           this.birthPlace = res.data.birthPlace
           this.birthDate = res.data.birthDate
@@ -123,12 +120,10 @@ export class SurveyReviewComponent implements OnInit {
 
   getSurveyData(){
     this.route.params.subscribe((parameter) => {
-      console.log('Trx ID in Details: ', parameter['id2']);
       this.trxId = parameter['id2']
       this.customerService.getSurveyByTrxId(parameter['id2']).subscribe({
         next: (res: ApiResponse<AllSurveyReview>) => {
           if(res.data){
-            console.log('Data loan', res.data);
             this.mothersMaidenName = res.data.surveyData.mothersMaidenName
             this.latestEducationalLevel = res.data.surveyData.latestEducationalLevel
             this.dependents = res.data.surveyData.dependents
@@ -189,7 +184,6 @@ export class SurveyReviewComponent implements OnInit {
   }
 
   edit(){
-    // console.log(`/cust-survey-form/${this.nik}/${this.trxId}`);
     this.router.navigateByUrl(`/cust-survey-form/${this.nik}/${this.trxId}`)
   }
 

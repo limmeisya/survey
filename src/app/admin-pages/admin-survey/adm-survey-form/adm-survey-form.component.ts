@@ -111,7 +111,6 @@ export class AdmSurveyFormComponent implements OnInit {
     this.getCustomerData()
     this.getSurveyData()
     this.roleUser = this.authService.getUserFromStorage()!.role.toString()
-    console.log('roleUser: ' ,this.roleUser);
   }
 
   today = new Date().toJSON().split('T')[0]
@@ -125,10 +124,8 @@ export class AdmSurveyFormComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire('Submit!', '', 'success');
-        console.log('SURVEY FORM VALUE', this.surveyForm.value);
         this.adminSurvey.postUpdateSurvey(this.surveyForm.value).subscribe({
           next: (res) => {
-            console.log("Trx Id after Update ", res.data);
             this.router.navigateByUrl(`/adm-survey-details/${this.nikCustomer}/${res.data.transaction.trxId}`)
           },
           error: (err) => {
@@ -211,9 +208,9 @@ export class AdmSurveyFormComponent implements OnInit {
       if (parameter['id2']){
         this.adminSurvey.getSurveyByTrxId(parameter['id2']).subscribe({
           next: (res: ApiResponse<AllSurveyReview>) => {
-            console.log('Survey Trx Id: ', parameter['id2']);
             this.trxId = parameter['id2']
             this.transactionForm.controls['trxId'].setValue(this.trxId)
+            this.surveyForm.controls['roleName'].setValue(this.roleUser)
             if (res.data !== null){
               Swal.fire({
                 title: 'You have filled this survey.',
@@ -224,7 +221,6 @@ export class AdmSurveyFormComponent implements OnInit {
               }).then((result) => {
                 if (result.isConfirmed) {
                   this.surveyRes = res.data;
-                  this.surveyForm.controls['roleName'].setValue(this.roleUser)
                   this.setFormGroup(this.surveyRes);
                   this.loadAddressesApi();
                   this.profiles[0] = this.surveyRes.profile.breadwinner
@@ -283,7 +279,6 @@ export class AdmSurveyFormComponent implements OnInit {
 
   dataCities: City[] = [];
   loadCity(provId: any) {
-    console.log('Prov ID: ', provId);
     this.adminSurvey.getCities(provId).subscribe({
       next: (res: City[]) => {
         this.dataCities = res;

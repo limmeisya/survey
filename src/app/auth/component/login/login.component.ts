@@ -31,10 +31,8 @@ export class LoginComponent implements OnInit {
 
   login(){
     if(this.loginForm.valid){
-      console.log(this.loginForm.value);
       let loginData : any = {nik:this.loginForm.value['nik'],
                           password:this.loginForm.value['password']}
-      // console.log(loginData);
       this.authService.login(loginData).subscribe({
         next : (res : any) => 
         {
@@ -52,11 +50,9 @@ export class LoginComponent implements OnInit {
                   text: `Welcome ${res.data.nik}`
                 }).then(() => {
                   if(userRole === Role.MANAGER ||userRole=== Role.SUPERVISOR ||userRole ===Role.STAFF){
-                    console.log('ROLE: ', userRole);
                     this.router.navigateByUrl("/dashboard")   
                   }
                   else if(userRole === Role.CUSTOMER){
-                    console.log('ROLE: ', userRole);
                     this.router.navigateByUrl(`/home`)   
                   }
                 }) 

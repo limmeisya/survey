@@ -64,7 +64,6 @@ export class AdminSurveyService {
 
 //=============================TRANSACTION========================================
   public getAllTransaction(params: any): Observable<ApiResponse<PaginationResponse<Transaction>>>{
-    console.log(params);
     let reqParams: any = {};
     if (params){
       Object.keys(params).map(k => {
