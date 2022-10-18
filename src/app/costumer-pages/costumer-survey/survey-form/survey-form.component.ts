@@ -106,10 +106,10 @@ export class SurveyFormComponent implements OnInit {
     trxId: new FormControl(this.trxId)
   });
 
-  roleUser: string = this.authService.getUserFromStorage()!.role.toString()
+  
   surveyForm: FormGroup = new FormGroup({
     surveyId: new FormControl(null),
-    roleName: new FormControl(this.roleUser),
+    roleName: new FormControl(''),
     transaction: this.transactionForm,
     surveyData:this.firstFormGroup,
     profile:this.forthFormGroup,
@@ -124,10 +124,13 @@ export class SurveyFormComponent implements OnInit {
     private readonly authService: AuthService
   ) {}
 
+  roleUser: string = ''
   ngOnInit(): void {
     this.loadProvinces();
     this.getCustomerData()
     this.getSurveyData()
+    this.roleUser = this.authService.getUserFromStorage()!.role.toString()
+    console.log('roleUser: ' ,this.roleUser);
   }
 
   today = new Date().toJSON().split('T')[0]
@@ -230,7 +233,8 @@ export class SurveyFormComponent implements OnInit {
             console.log('Survey Trx Id: ', parameter['id2']);
             this.trxId = parameter['id2']
             this.transactionForm.controls['trxId'].setValue(this.trxId)
-            if(res.data.roleName === Role.CUSTOMER){
+            if(res.data.roleName === null || res.data.roleName === Role.CUSTOMER){
+              this.surveyForm.controls['roleName'].setValue(this.roleUser)
               if (res.data !== null){
                 Swal.fire({
                   title: 'You have filled this survey.',

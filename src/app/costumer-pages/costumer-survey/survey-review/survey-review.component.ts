@@ -113,11 +113,11 @@ export class SurveyReviewComponent implements OnInit {
   relativesCity: string = ''
   relativesProvince: string = ''
 
-  breadwinner: string = ''
-  literacyAbility: string = ''
-  transportationOwner: string = ''
-  insuranceOwner: string = ''
-  internetAccess: string = ''
+  breadwinner: boolean = true
+  literacyAbility: boolean = true
+  transportationOwner: boolean = true
+  insuranceOwner: boolean = true
+  internetAccess: boolean = true
 
   trxId:string = ''
 
@@ -144,24 +144,11 @@ export class SurveyReviewComponent implements OnInit {
             this.spouseMothersMaidenName = res.data.spouse.spouseMothersMaidenName
             this.relativesName = res.data.relatives.relativesName
             this.relativesRelation = res.data.relatives.relativesRelation
-
-            if(res.data.relatives.relativesPhoneNumber){
-              this.relativesPhoneNumber = res.data.relatives.relativesPhoneNumber
-            }else{
-              this.relativesPhoneNumber ='-'
-            } 
+            this.relativesPhoneNumber = res.data.relatives.relativesPhoneNumber
             this.relativesCellNumber = res.data.relatives.relativesCellNumber
             this.relativesAddress = res.data.relatives.relativesAddress
-            if(res.data.relatives.relativesRt){
-              this.relativesRt = res.data.relatives.relativesRt
-            }else{
-              this.relativesRt = '-'
-            }
-            if(res.data.relatives.relativesRw){
-              this.relativesRw = res.data.relatives.relativesRw
-            }else{
-              this.relativesRw = '-'
-            }
+            this.relativesRt = res.data.relatives.relativesRt
+            this.relativesRw = res.data.relatives.relativesRw
 
             this.relativesWard = res.data.relatives.relativesWard
             this.customerService.getWard(res.data.relatives.relativesWard).subscribe((res)=>{
@@ -177,25 +164,12 @@ export class SurveyReviewComponent implements OnInit {
               this.relativesProvince = res.name
             })
 
-            if (res.data.profile.breadwinner){
-              this.breadwinner = 'Yes'
-            }else this.breadwinner = 'No'
+            this.breadwinner = res.data.profile.breadwinner
+            this.literacyAbility = res.data.profile.literacyAbility
+            this.transportationOwner = res.data.profile.transportationOwner
+            this.insuranceOwner = res.data.profile.insuranceOwner
+            this.internetAccess = res.data.profile.internetAccess
 
-            if (res.data.profile.literacyAbility){
-              this.literacyAbility = 'Yes'
-            }else this.literacyAbility = 'No'
-
-            if (res.data.profile.transportationOwner){
-              this.transportationOwner = 'Yes'
-            }else this.transportationOwner = 'No'
-
-            if (res.data.profile.insuranceOwner){
-              this.insuranceOwner = 'Yes'
-            }else this.insuranceOwner = 'No'
-
-            if (res.data.profile.internetAccess){
-              this.internetAccess = 'Yes'
-            }else this.internetAccess = 'No'
           }else{
             Swal.fire({
               icon: 'error',

@@ -91,12 +91,10 @@ export class AdmSurveyListComponent implements OnInit {
                 next: (res) => {
                   this.loadTransactionCustomer()
                   console.log("delete success");
-                  
                   Swal.fire('Removed')
                 },
                 error: (err) => alert (err.message)
               })
-              
             }
           })
         }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { ApiResponse } from 'src/app/shared/model/ApiResponse';
 import Swal from 'sweetalert2';
@@ -15,29 +15,15 @@ export class LoginComponent implements OnInit {
 
   constructor(private router : Router, private authService : AuthService) { }
 
-  ngOnInit(): void {
-    // this.password = 'password';
-  }
+  ngOnInit(): void { }
 
 
   loginForm: FormGroup = new FormGroup({
-    nik : new FormControl(''),
-    password : new FormControl(''),
+    nik : new FormControl('', [Validators.required]),
+    password : new FormControl('', [Validators.required]),
   })
 
-   showPassword: boolean= false
-  // password: any;
-  // show = false;
-  // onClick() {
-  //   if (this.password === 'password') {
-  //     this.password = 'text';
-  //     this.show = true;
-  //   } else {
-  //     this.password = 'password';
-  //     this.show = false;
-  //   }
-  // }
-
+  showPassword: boolean= false
 
   clearForm(): void {
     this.loginForm.reset();
@@ -48,8 +34,7 @@ export class LoginComponent implements OnInit {
       console.log(this.loginForm.value);
       let loginData : any = {nik:this.loginForm.value['nik'],
                           password:this.loginForm.value['password']}
-
-      console.log(loginData);
+      // console.log(loginData);
       this.authService.login(loginData).subscribe({
         next : (res : any) => 
         {
@@ -85,6 +70,10 @@ export class LoginComponent implements OnInit {
         }
       })
     }
+  }
+
+  loginForms(property: string): FormGroup{
+    return this.loginForm.get(property) as FormGroup
   }
 
   register(){

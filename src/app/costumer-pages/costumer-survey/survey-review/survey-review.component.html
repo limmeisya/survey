@@ -17,22 +17,22 @@
               <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
                 Customer Identity
               </b></h6>
-              <dt class="col-4 fw-lighter">Identity Number</dt>
-              <dd class="col-8">: {{nik}}</dd>
-              <dt class="col-4 fw-lighter">Name</dt>
-              <dd class="col-8">: {{fullName}}</dd>
-              <dt class="col-4 fw-lighter">Gender</dt>
-              <dd class="col-8">: {{gender}}</dd>
-              <dt class="col-4 fw-lighter">Place of Birth</dt>
-              <dd class="col-8">: {{birthPlace}}</dd>
-              <dt class="col-4 fw-lighter">Date of Birth</dt>
-              <dd class="col-8">: {{birthDate | date: 'dd/MM/yyyy'}}</dd>
-              <dt class="col-4 fw-lighter">Marital Status</dt>
-              <dd class="col-8">: {{maritalStatus}}</dd>
-              <dt class="col-4 fw-lighter">Occupation</dt>
-              <dd class="col-8">: {{occupationType}}</dd>
-              <dt class="col-4 fw-lighter">Phone Number</dt>
-              <dd class="col-8">: {{phoneNumber}}</dd>
+              <dt class="col-5 fw-lighter">Identity Number</dt>
+              <dd class="col-7">: {{nik}}</dd>
+              <dt class="col-5 fw-lighter">Name</dt>
+              <dd class="col-7">: {{fullName}}</dd>
+              <dt class="col-5 fw-lighter">Gender</dt>
+              <dd class="col-7">: {{gender}}</dd>
+              <dt class="col-5 fw-lighter">Place of Birth</dt>
+              <dd class="col-7">: {{birthPlace}}</dd>
+              <dt class="col-5 fw-lighter">Date of Birth</dt>
+              <dd class="col-7">: {{birthDate | date: 'dd/MM/yyyy'}}</dd>
+              <dt class="col-5 fw-lighter">Marital Status</dt>
+              <dd class="col-7">: {{maritalStatus}}</dd>
+              <dt class="col-5 fw-lighter">Occupation</dt>
+              <dd class="col-7">: {{occupationType}}</dd>
+              <dt class="col-5 fw-lighter">Phone Number</dt>
+              <dd class="col-7">: {{phoneNumber}}</dd>
             </dl>
           </div>
 
@@ -63,20 +63,20 @@
               <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
                 Customer Survey Data
               </b></h6>
-              <dt class="col-4 fw-lighter">Mother's Maiden Name</dt>
-              <dd class="col-8">: {{mothersMaidenName}}</dd>
-              <dt class="col-4 fw-lighter">Degree</dt>
-              <dd class="col-8">: {{latestEducationalLevel}}</dd>
-              <dt class="col-4 fw-lighter">Dependent</dt>
-              <dd class="col-8">: {{dependents}}</dd>
-              <dt class="col-4 fw-lighter">Email</dt>
-              <dd class="col-8">: {{email}}</dd>
-              <dt class="col-4 fw-lighter">Bank</dt>
-              <dd class="col-8">: {{bankName.toString() | titlecase}}</dd>
-              <dt class="col-4 fw-lighter">Account Name</dt>
-              <dd class="col-8">: {{accountName}}</dd>
-              <dt class="col-4 fw-lighter">Account Number</dt>
-              <dd class="col-8">: {{accountName}}</dd>
+              <dt class="col-5 fw-lighter">Mother's Maiden Name</dt>
+              <dd class="col-7">: {{mothersMaidenName}}</dd>
+              <dt class="col-5 fw-lighter">Degree</dt>
+              <dd class="col-7">: {{latestEducationalLevel}}</dd>
+              <dt class="col-5 fw-lighter">Dependent</dt>
+              <dd class="col-7">: {{dependents}}</dd>
+              <dt class="col-5 fw-lighter">Email</dt>
+              <dd class="col-7">: {{email}}</dd>
+              <dt class="col-5 fw-lighter">Bank</dt>
+              <dd class="col-7">: {{bankName.toString() | titlecase}}</dd>
+              <dt class="col-5 fw-lighter">Account Name</dt>
+              <dd class="col-7">: {{accountName}}</dd>
+              <dt class="col-5 fw-lighter">Account Number</dt>
+              <dd class="col-7">: {{accountName}}</dd>
             </dl>
           </div>
 
@@ -85,18 +85,18 @@
               <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
                 Spouse Information
               </b></h6>
-              <dt class="col-4 fw-lighter">Identity Number</dt>
-              <dd class="col-8">: {{spouseNik}}</dd>
-              <dt class="col-4 fw-lighter">Name</dt>
-              <dd class="col-8">: {{spouseName}}</dd>
-              <dt class="col-4 fw-lighter">Gender</dt>
-              <dd class="col-8">: {{genderSpouse}}</dd>
-              <dt class="col-4 fw-lighter">Place of Birth</dt>
-              <dd class="col-8">: {{spouseBirthplace}}</dd>
-              <dt class="col-4 fw-lighter">Date of Birth</dt>
-              <dd class="col-8">: {{spouseBirthdate | date: 'dd/MM/yyyy'}}</dd>
-              <dt class="col-4 fw-lighter">Mother's Maiden Name</dt>
-              <dd class="col-8">: {{spouseMothersMaidenName}}</dd>
+              <dt class="col-5 fw-lighter">Identity Number</dt>
+              <dd class="col-7">: {{spouseNik | nullValue}}</dd>
+              <dt class="col-5 fw-lighter">Name</dt>
+              <dd class="col-7">: {{spouseName | nullValue}}</dd>
+              <dt class="col-5 fw-lighter">Gender</dt>
+              <dd class="col-7">: {{genderSpouse | nullValue}}</dd>
+              <dt class="col-5 fw-lighter">Place of Birth</dt>
+              <dd class="col-7">: {{spouseBirthplace | nullValue}}</dd>
+              <dt class="col-5 fw-lighter">Date of Birth</dt>
+              <dd class="col-7">: {{spouseBirthdate | date: 'dd/MM/yyyy' | nullValue }}</dd>
+              <dt class="col-5 fw-lighter">Mother's Maiden Name</dt>
+              <dd class="col-7">: {{spouseMothersMaidenName | nullValue}}</dd>
             </dl>
           </div>
           
@@ -109,26 +109,26 @@
               <h6 style="font-size: large;font-weight: bold; color: #F7931D;"><b>
                 Relative Information
               </b></h6>
-              <dt class="col-4 fw-lighter">Relative Name</dt>
-              <dd class="col-8">: {{relativesName}}</dd>
-              <dt class="col-4 fw-lighter">Relation</dt>
-              <dd class="col-8">: {{relativesRelation}}</dd>
-              <dt class="col-4 fw-lighter">Telephone Number</dt>
-              <dd class="col-8">: {{relativesPhoneNumber}}</dd>
-              <dt class="col-4 fw-lighter">Phone Number</dt>
-              <dd class="col-8">: {{relativesCellNumber}}</dd>
-              <dt class="col-4 fw-lighter">Address</dt>
-              <dd class="col-8">: {{relativesAddress}}</dd>
-              <dt class="col-4 fw-lighter">RT / RW</dt>
-              <dd class="col-8">: {{relativesRt}} / {{relativesRw}}</dd>
-              <dt class="col-4 fw-lighter">Province</dt>
-              <dd class="col-8">: {{relativesProvince.toString() | titlecase}}</dd>
-              <dt class="col-4 fw-lighter">City</dt>
-              <dd class="col-8">: {{relativesCity.toString() | titlecase}}</dd>
-              <dt class="col-4 fw-lighter">District</dt>
-              <dd class="col-8">: {{relativesDistrict.toString() | titlecase}}</dd>
-              <dt class="col-4 fw-lighter">Ward</dt>
-              <dd class="col-8">: {{relativesWard.toString() | titlecase}}</dd>
+              <dt class="col-5 fw-lighter">Relative Name</dt>
+              <dd class="col-7">: {{relativesName}}</dd>
+              <dt class="col-5 fw-lighter">Relation</dt>
+              <dd class="col-7">: {{relativesRelation}}</dd>
+              <dt class="col-5 fw-lighter">Phone Number</dt>
+              <dd class="col-7">: {{relativesCellNumber}}</dd>
+              <dt class="col-5 fw-lighter">Telephone Number</dt>
+              <dd class="col-7">: {{relativesPhoneNumber | nullValue}}</dd>
+              <dt class="col-5 fw-lighter">Address</dt>
+              <dd class="col-7">: {{relativesAddress}}</dd>
+              <dt class="col-5 fw-lighter">RT / RW</dt>
+              <dd class="col-7">: {{relativesRt | nullValue}} / {{relativesRw | nullValue}}</dd>
+              <dt class="col-5 fw-lighter">Province</dt>
+              <dd class="col-7">: {{relativesProvince.toString() | titlecase}}</dd>
+              <dt class="col-5 fw-lighter">City</dt>
+              <dd class="col-7">: {{relativesCity.toString() | titlecase}}</dd>
+              <dt class="col-5 fw-lighter">District</dt>
+              <dd class="col-7">: {{relativesDistrict.toString() | titlecase}}</dd>
+              <dt class="col-5 fw-lighter">Ward</dt>
+              <dd class="col-7">: {{relativesWard.toString() | titlecase}}</dd>
             </dl>   
           </div>
 
@@ -138,15 +138,15 @@
                 Customer Profiling
               </b></h6>
               <dt class="col-5 fw-lighter">Main Breadwinner</dt>
-              <dd class="col-4">: {{breadwinner}}</dd>
+              <dd class="col-7">: {{breadwinner | yesNo}}</dd>
               <dt class="col-5 fw-lighter">Literacy Ability</dt>
-              <dd class="col-4">: {{literacyAbility}}</dd>
+              <dd class="col-7">: {{literacyAbility | yesNo}}</dd>
               <dt class="col-5 fw-lighter">Transportation Ownership</dt>
-              <dd class="col-4">: {{transportationOwner}}</dd>
+              <dd class="col-7">: {{transportationOwner | yesNo}}</dd>
               <dt class="col-5 fw-lighter">Health Insurance Ownership</dt>
-              <dd class="col-4">: {{insuranceOwner}}</dd>
+              <dd class="col-7">: {{insuranceOwner | yesNo}}</dd>
               <dt class="col-5 fw-lighter">Internet Accessbility</dt>
-              <dd class="col-4">: {{internetAccess}}</dd>
+              <dd class="col-7">: {{internetAccess | yesNo}}</dd>
             </dl>
           </div>
         </div>

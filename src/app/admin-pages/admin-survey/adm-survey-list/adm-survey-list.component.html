@@ -55,11 +55,11 @@
                   </td>
                   <td>
                     <div ngbDropdown class="d-inline-block">
-                    <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Details</button>
+                    <button class="btn btn-outline-primary" [disabled]="transaction.trxStatus === 'APPROVED'" id="dropdownMenu1" ngbDropdownToggle>Details</button>
                       <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
                         <button class="dropdown-item" (click)="fillSurvey(transaction.trxId)">Fill Survey</button>
                         <button class="dropdown-item" (click)="detailsSurvey(transaction.trxId)">Details Survey</button>
-                        <button class="dropdown-item" (click)="deleteSurvey(transaction.trxId)">Delete Survey</button>
+                        <button class="dropdown-item" [disabled]="transaction.isSurvey === false" (click)="deleteSurvey(transaction.trxId)">Delete Survey</button>
                       </div>
                     </div>
                   </td>

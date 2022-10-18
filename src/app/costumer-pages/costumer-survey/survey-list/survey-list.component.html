@@ -4,6 +4,7 @@
   <div class="card">
     <div class="card-header bg-white p-4">
       <h5 class="m-0" style="font-size: 16pt">Survey List</h5>
+      
     </div>
     <div class="card-body d-flex justify-content-center">
 
@@ -35,7 +36,7 @@
                 </td>
                 <td>
                     <div ngbDropdown class="d-inline-block">
-                    <button class="btn btn-outline-primary" id="dropdownMenu1" ngbDropdownToggle>Details</button>
+                    <button class="btn btn-outline-primary" [disabled]="transaction.trxStatus === 'APPROVED'" id="dropdownMenu1" ngbDropdownToggle>Details</button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1" ngbDropdownMenu>
                             <button class="dropdown-item" (click)="fillSurvey(transaction.trxId)">Fill Survey</button>
                             <button class="dropdown-item" (click)="detailsSurvey(transaction.trxId)">Details Survey</button>
