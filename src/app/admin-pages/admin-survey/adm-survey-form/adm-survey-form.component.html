@@ -1,1 +1,749 @@
-<p>adm-survey-form works!</p>
+<h1 class="px-5 py-4 m-0 fw-bold" style="font-size: 24pt">Survey</h1>
+
+<div class="container px-5">
+  <div class="card">
+    <div class="card-header bg-white p-4">
+      <h5 class="m-0" style="font-size: 16pt">Customer Survey</h5>
+    </div>
+    <div class="card-body d-flex justify-content-center">
+      <div class="container">
+        <mat-horizontal-stepper class="stepper" labelPosition="bottom" #stepper>
+          <ng-template matStepperIcon="edit">
+            <mat-icon>done</mat-icon>
+          </ng-template>
+          <form [formGroup]="surveyForm">
+
+          <!-- TABLE -->
+          <mat-step [stepControl]="profileReview" label="Customer Profile">
+            <div class="form-group row" style="line-height: 1.2em">
+              <h2>Customer Profile</h2>
+              <div class="col-2">
+                <p>Identity Number</p>
+                <p>Name</p>
+                <p>Gender</p>
+                <p>Place of Birth</p>
+                <p>Date of Birth</p>
+                <p>Marital Status</p>
+                <p>Occupation</p>
+                <p>Phone Number</p>
+              </div>
+              <div class="col-4">
+                <p>: {{nik}}</p>
+                <p>: {{fullName}}</p>
+                <p>: {{gender}}</p>
+                <p>: {{birthPlace}}</p>
+                <p>: {{birthDate | date: 'dd/MM/yyyy'}}</p>
+                <p>: {{maritalStatus}}</p>
+                <p>: {{occupationType}}</p>
+                <p>: {{phoneNumber}}</p>
+              </div>
+              <div class="col-2">
+                <p>Address</p>
+                <p>RT</p>
+                <p>RW</p>
+                <p>Province</p>
+                <p>City</p>
+                <p>District</p>
+                <p>Ward</p>
+              </div>
+              <div class="col-4">
+                <p>: {{address}}</p>
+                <p>: {{rt}}</p>
+                <p>: {{rw}}</p>
+                <p>: {{province.toString() | titlecase}}</p>
+                <p>: {{city.toString() | titlecase}}</p>
+                <p>: {{district.toString() | titlecase}}</p>
+                <p>: {{ward.toString() | titlecase}}</p>
+              </div>
+            </div>
+            <br />
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-end">
+                  <button
+                    type="submit"
+                    class="btn btn-lg btn-outline-primary me-2"
+                    (click)="back()"
+                  > Cancel
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    class="btn btn-lg btn-primary text-white me-2"
+                  > Next
+                  </button>
+                </div>
+          </mat-step>
+          <!-- END OF TABLE -->
+
+          <!-- CONTENT  1-->
+          <mat-step [stepControl]="firstFormGroup" label="Customer Survey">
+            <form [formGroup]="firstFormGroup" class="m-4">
+              <div class="form-group col-6" style="line-height: 3">
+                <label class="required" for="mothersMaidenName"
+                  >Mother's Maiden Name</label
+                >
+                <input
+                  id="mothersMaidenName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Mother's Maiden Name"
+                  formControlName="mothersMaidenName"
+                />
+                <div *ngIf="firstForm('mothersMaidenName').invalid && firstForm('mothersMaidenName').dirty || firstForm('mothersMaidenName').touched">
+                    <div class="warn" *ngIf="firstForm('mothersMaidenName').errors?.['required']">This field is required.</div>
+                </div>
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label class="required" for="latestEducationalLevel"
+                  >Latest Educational Level</label
+                >
+                <select
+                  name="latestEducationalLevel"
+                  id="latestEducationalLevel"
+                  class="form-select"
+                  formControlName="latestEducationalLevel"
+                >
+                  <option style="color: #7c7f81e7" value="" disabled selected>
+                    Select your latest degree
+                  </option>
+                  <option value="SD">Elementary School/ SD</option>
+                  <option value="SMP">Junior High School/ SMP</option>
+                  <option value="SMA">Senior High School/ SMA</option>
+                  <option value="D3">Diploma/ D3</option>
+                  <option value="S1">Undergraduate/ S1</option>
+                  <option value="S2">Graduate/ S2</option>
+                  <option value="S3">Post-Graduate/ S3</option>
+                </select>
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label class="required" for="dependents">Dependents</label>
+                <input
+                  id="dependents"
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter total dependents (in number)"
+                  formControlName="dependents"
+                />
+                <div class="warn" *ngIf="firstForm('dependents').invalid">Please input number.</div>
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label class="required" for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control"
+                  placeholder="Enter email"
+                  formControlName="email"
+                />
+                <div *ngIf="firstForm('email').invalid && firstForm('email').dirty || firstForm('email').touched">
+                    <div class="warn" *ngIf="firstForm('email').errors?.['required']">This field is required.</div>
+                    <div class="warn" *ngIf="firstForm('email').errors?.['email']">Invalid email format.</div>
+                </div>
+              </div>
+              <div class="form-group row" style="line-height: 3">
+                <div class="col-4">
+                  <label class="required" for="bankName">Bank Name</label>
+                  <select
+                    name="bankName"
+                    id="bankName"
+                    class="form-select"
+                    formControlName="bankName"
+                  >
+                    <option value="" disabled selected>
+                      Select your bank name
+                    </option>
+                    <option *ngFor="let item of dataBanks" [value]="item.name">
+                      {{ item.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <label class="required" for="accountName">Account Name</label>
+                  <input
+                    id="accountName"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter bank account name"
+                    formControlName="accountName"
+                  />
+                  <div *ngIf="firstForm('accountName').invalid && firstForm('accountName').dirty || firstForm('accountName').touched">
+                    <div class="warn" *ngIf="firstForm('accountName').errors?.['required']">This field is required.</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <label class="required" for="accountNumber"
+                    >Account Number</label
+                  >
+                  <input
+                    id="accountNumber"
+                    type="number"
+                    class="form-control"
+                    placeholder="Enter account number"
+                    formControlName="accountNumber"
+                  />
+                  <div class="warn" *ngIf="firstForm('accountNumber').invalid">Please input number.</div>
+                  <div *ngIf="firstForm('accountNumber').invalid && firstForm('accountNumber').dirty || firstForm('accountNumber').touched">
+                      <div class="warn" *ngIf="firstForm('accountNumber').errors?.['required']">This field is required.</div>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-between">
+                  <button
+                    mat-button
+                    matStepperPrevious
+                    type="submit"
+                    class="btn btn-lg btn-outline-primary me-2"
+                    >Previous
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    [disabled]="!firstFormGroup.valid"
+                    class="btn btn-lg btn-primary text-white me-2"
+                  > Next
+                  </button>
+                </div>
+            </form>
+          </mat-step>
+          <!-- END OF CONTENT 1 -->
+
+          <!-- CONTENT  2-->
+          <mat-step [stepControl]="secondFormGroup" label="Spouse Information">
+            <form [formGroup]="secondFormGroup" class="m-4">
+              <div class="form-group col-6" style="line-height: 3">
+                <label for="spouseNik"
+                  >Spouse Identity Number</label
+                >
+                <input
+                  id="spouseNik"
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter your spouse identity number"
+                  formControlName="spouseNik"
+                />
+                <div class="warn" *ngIf="firstForm('dependents').invalid">Please input number.</div>
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label for="spouseName">Spouse Name</label>
+                <input
+                  id="spouseName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter your spouse name"
+                  formControlName="spouseName"
+                />
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label for="gender">Gender</label>
+                <select
+                  name="gender"
+                  id="gender"
+                  class="form-select"
+                  formControlName="gender"
+                >
+                  <option style="color: #7c7f81e7" value="" disabled selected>
+                    Choose one
+                  </option>
+                  <option value="Female">Female</option>
+                  <option value="Male">Male</option>
+                </select>
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label for="spouseMothersMaidenName"
+                  >Spouse's Mother Name</label
+                >
+                <input
+                  id="spouseMothersMaidenName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter your spouse's mother name"
+                  formControlName="spouseMothersMaidenName"
+                />
+              </div>
+              <div class="form-group row" style="line-height: 3">
+                <div class="col-6">
+                  <label for="spouseBirthplace"
+                    >Spouse Birthplace</label
+                  >
+                  <input
+                    id="spouseBirthplace"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter your spouse birthplace"
+                    formControlName="spouseBirthplace"
+                  />
+                </div>
+                <div class="col-6">
+                  <label for="spouseBirthdate"
+                    >Spouse Birthdate</label
+                  >
+                  <input
+                    id="spouseBirthdate"
+                    type="date"
+                    class="form-control"
+                    placeholder="Enter your spouse birthdate"
+                    formControlName="spouseBirthdate"
+                    [max]="today"
+                  />
+                </div>
+              </div>
+              <br />
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-between">
+                  <button
+                    mat-button
+                    matStepperPrevious
+                    type="submit"
+                    class="btn btn-lg btn-outline-primary me-2"
+                    >Previous
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    class="btn btn-lg btn-primary text-white me-2"
+                  > Next
+                  </button>
+                </div>
+            </form>
+          </mat-step>
+          <!-- END OF CONTENT 2 -->
+
+          <!-- CONTENT  3-->
+          <mat-step [stepControl]="thirdFormGroup" label="Relative Information">
+            <form [formGroup]="thirdFormGroup" class="m-4">
+              <div class="form-group col-6" style="line-height: 3">
+                <label class="required" for="relativesName"
+                  >Relative Name</label
+                >
+                <input
+                  id="relativesName"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter relative name"
+                  formControlName="relativesName"
+                />
+                <div *ngIf="thirdForm('relativesName').invalid && thirdForm('relativesName').dirty || thirdForm('relativesName').touched">
+                    <div class="warn" *ngIf="thirdForm('relativesName').errors?.['required']">This field is required.</div>
+                </div>
+              </div>
+              <div class="form-group col-6" style="line-height: 3">
+                <label class="required" for="relativesRelation"
+                  >Relationship</label
+                >
+                <input
+                  id="relativesRelation"
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter your relation"
+                  formControlName="relativesRelation"
+                />
+                <div *ngIf="thirdForm('relativesRelation').invalid && thirdForm('relativesRelation').dirty || thirdForm('relativesRelation').touched">
+                    <div class="warn" *ngIf="thirdForm('relativesRelation').errors?.['required']">This field is required.</div>
+                </div>
+              </div>
+              <div class="form-group row" style="line-height: 3">
+                <div class="col-4">
+                  <label class="required" for="relativesCellNumber"
+                    >Phone Number</label
+                  >
+                  <input
+                    id="relativesCellNumber"
+                    type="tel"
+                    class="form-control"
+                    placeholder="Enter your relative's phone number"
+                    formControlName="relativesCellNumber"
+                    pattern="^(\+62)[1-9]{9,11}$"
+                  />
+                  <div class="warn" *ngIf="thirdForm('relativesCellNumber').invalid">Input 10-12 digits' phone number and start with +62</div>
+                </div>
+                <div class="col-4">
+                  <label for="relativesPhoneNumber">Telephone Number</label>
+                  <input
+                    id="relativesPhoneNumber"
+                    type="number"
+                    class="form-control"
+                    placeholder="Enter your relative's telephone number"
+                    formControlName="relativesPhoneNumber"
+                  />
+                </div>
+              </div>
+              <div class="form-group row" style="line-height: 3">
+                <div class="col-8">
+                  <label class="required" for="relativesAddress">Address</label>
+                  <input
+                    id="relativesAddress"
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter your relative's address"
+                    formControlName="relativesAddress"
+                  />
+                  <div *ngIf="thirdForm('relativesAddress').invalid && thirdForm('relativesAddress').dirty || thirdForm('relativesAddress').touched">
+                    <div class="warn" *ngIf="thirdForm('relativesAddress').errors?.['required']">This field is required.</div>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <label for="relativesRt">RT</label>
+                  <input
+                    id="relativesRt"
+                    type="text"
+                    class="form-control"
+                    placeholder="No. RT"
+                    formControlName="relativesRt"
+                  />
+                </div>
+                <div class="col-2">
+                  <label for="relativesRw">RW</label>
+                  <input
+                    id="relativesRw"
+                    type="text"
+                    class="form-control"
+                    placeholder="No. RW"
+                    formControlName="relativesRw"
+                  />
+                </div>
+              </div>
+              <div class="form-group row" style="line-height: 3">
+                <div class="col-3">
+                  <label class="required" for="relativesProvince"
+                    >Province</label
+                  >
+                  <select name="relativesProvince" id="relativesProvince" class="form-select" formControlName="relativesProvince" #selectListCity (change)="loadCity(selectListCity.value)" [(ngModel)]="this.relativeProvince.id">
+                    <option value="" disabled selected>Select province</option>
+                    <option *ngFor="let prov of dataProvincies" [value]="prov.id">{{ prov.name }}</option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <label class="required" for="relativesCity">City</label>
+                  <select
+                    name="relativesCity"
+                    id="relativesCity"
+                    class="form-select"
+                    formControlName="relativesCity"
+                    #selectListDistric
+                    (change)="loadDistrict(selectListDistric.value)"
+                    [(ngModel)]="this.relativeCity.id"
+                  >
+                    <option value="" disabled selected>Select city</option>
+                    <option *ngFor="let city of dataCities" [value]="city.id">
+                      {{ city.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <label class="required" for="relativesDistrict"
+                    >District</label
+                  >
+                  <select
+                    name="relativesDistrict"
+                    id="relativesDistrict"
+                    class="form-select"
+                    formControlName="relativesDistrict"
+                    [(ngModel)]="this.relativeDistrict.id"
+                    #selectListWard
+                    (change)="loadWard(selectListWard.value)"
+                  >
+                    <option value="" disabled selected>Select district</option>
+                    <option
+                      *ngFor="let district of dataDistricts"
+                      [value]="district.id"
+                    >
+                      {{ district.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-3">
+                  <label class="required" for="relativesWard">Ward</label>
+                  <select
+                    name="relativesWard"
+                    id="relativesWard"
+                    class="form-select"
+                    formControlName="relativesWard"
+                    [(ngModel)]="this.relativeWard.id"
+                  >
+                    <option value="" disabled selected>Select ward</option>
+                    <option *ngFor="let ward of dataWards" [value]="ward.id">
+                      {{ ward.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <br />
+              <hr class="my-4" />
+                <div class="col-12 d-flex justify-content-between">
+                  <button
+                    mat-button
+                    matStepperPrevious
+                    type="submit"
+                    class="btn btn-lg btn-outline-primary me-2"
+                    >Previous
+                  </button>
+                  <button
+                    mat-button
+                    matStepperNext
+                    [disabled]="!thirdFormGroup.valid"
+                    class="btn btn-lg btn-primary text-white me-2"
+                  > Next
+                  </button>
+                </div>
+            </form>
+          </mat-step>
+          <!-- END OF CONTENT 3 -->
+
+          <!-- CONTENT  4-->
+          <mat-step [stepControl]="forthFormGroup" label="Profilling Customer">
+            <div class="row">
+              <div class="col">
+                <form class="profiling-customer" [formGroup]="forthFormGroup">
+                  <div class="form-body">
+                    <div>
+                      <span class="required"
+                        >Are you the main breadwinner?</span
+                      >
+                      <br />
+                      <span style="color: rgb(96, 96, 99)"
+                        ><small
+                          ><i
+                            >Apakah anda sebagai pencari nafkah utama?</i
+                          ></small
+                        ></span
+                      >
+                    </div>
+                    <div>
+                      <br />
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="breadwinner"
+                        id="breadwinner"
+                        [value]="true"
+                        formControlName="breadwinner"
+                        required
+                        [(ngModel)]="profiles[0]"
+                      />
+                      <label class="form-check-label" for="breadwinner"
+                        >Yes</label
+                      >
+                      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="breadwinner"
+                        id="breadwinner"
+                        [value]="false"
+                        formControlName="breadwinner"
+                        required
+                        [(ngModel)]="profiles[0]"
+                      />
+                      <label class="form-check-label" for="breadwinner"
+                        >No</label
+                      >
+                    </div>
+                    <br />
+                    <div class="mb-2">
+                      <span class="required"
+                        >Do you able to write and read?
+                      </span>
+                      <br />
+                      <span style="color: rgb(96, 96, 99)"
+                        ><small
+                          ><i>Apakah anda dapat membaca dan menulis?</i></small
+                        ></span
+                      >
+                      <div>
+                        <br />
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="literacyAbility"
+                          id="literacyAbility"
+                          [value]="true"
+                          formControlName="literacyAbility"
+                          [(ngModel)]="profiles[1]"
+                        />
+                        <label class="form-check-label" for="literacyAbility"
+                          >Yes</label
+                        >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="literacyAbility"
+                          id="literacyAbility"
+                          formControlName="literacyAbility"
+                          [value]="false"
+                          [(ngModel)]="profiles[1]"
+                        />
+                        <label class="form-check-label" for="literacyAbility"
+                          >No</label
+                        >
+                      </div>
+                    </div>
+                    <br />
+                    <div class="mb-2">
+                      <span class="required"
+                        >Do you have your own transportation? </span
+                      ><br />
+                      <span style="color: rgb(96, 96, 99)"
+                        ><small
+                          ><i>Apakah anda memiliki kendaraan pribadi?</i></small
+                        ></span
+                      >
+                      <div>
+                        <br />
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="transportationOwner"
+                          id="transportationOwner"
+                          [value]="true"
+                          formControlName="transportationOwner"
+                          [(ngModel)]="profiles[2]"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="tranportation_owner"
+                          >Yes</label
+                        >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="transportationOwner"
+                          id="transportationOwner"
+                          [value]="false"
+                          formControlName="transportationOwner"
+                          [(ngModel)]="profiles[2]"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="transportationOwner"
+                          >No</label
+                        >
+                      </div>
+                    </div>
+                    <br />
+                    <div class="mb-2">
+                      <span class="required">Do you have health insurance?</span
+                      ><br />
+                      <span style="color: rgb(96, 96, 99)"
+                        ><i
+                          >Apakah anda memiliki Jaminan Asuransi/Jaminan
+                          Kesehatan?</i
+                        >
+                      </span>
+                      <div>
+                        <br />
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="insuranceOwner"
+                          id="insuranceOwner"
+                          [value]="true"
+                          formControlName="insuranceOwner"
+                          [(ngModel)]="profiles[3]"
+                        />
+                        <label class="form-check-label" for="insuranceOwner"
+                          >Yes</label
+                        >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="insuranceOwner"
+                          id="insuranceOwner"
+                          [value]="false"
+                          formControlName="insuranceOwner"
+                          [(ngModel)]="profiles[3]"
+                        />
+                        <label class="form-check-label" for="insuranceOwner"
+                          >No</label
+                        >
+                      </div>
+                    </div>
+                    <br />
+                    <div class="mb-2">
+                      <span class="required">Do you have internet access?</span
+                      ><br />
+                      <span style="color: rgb(96, 96, 99)"
+                        ><i>Apakah anda memiliki akses internet?</i></span
+                      >
+                      <div>
+                        <br />
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="internetAccess"
+                          id="internetAccess"
+                          [value]="true"
+                          formControlName="internetAccess"
+                          [(ngModel)]="profiles[4]"
+                        />
+                        <label class="form-check-label" for="internetAccess"
+                          >Yes</label
+                        >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          name="internetAccess"
+                          id="internetAccess"
+                          [value]="false"
+                          formControlName="internetAccess"
+                          [(ngModel)]="profiles[4]"
+                        />
+                        <label class="form-check-label" for="internetAccess"
+                          >No</label
+                        >
+                      </div>
+                    </div>
+                    <hr class="my-4" />
+
+                    <div class="row">
+                      <div class="col-2 d-flex justify-content-start">
+                        <button
+                          mat-button
+                          matStepperPrevious
+                          type="submit"
+                          class="btn btn-lg btn-outline-primary me-2"
+                        >
+                          Previous
+                        </button>
+                      </div>
+                      <div class="col-10 d-flex justify-content-end">
+                        <button
+                          type="button"
+                          class="btn btn-lg btn-secondary text-white me-2"
+                          (click)="back()"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                        type="submit"
+                        [disabled]="
+                          !forthFormGroup.valid ||
+                          !thirdFormGroup.valid ||
+                          !firstFormGroup.valid
+                        "
+                        class="btn btn-lg btn-primary text-white me-2"
+                        (click)="submit()"
+                        [formGroup]="surveyForm"
+                        >
+                          Submit
+                        </button>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </mat-step>
+          <!-- END OF CONTENT 4 -->
+          </form>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>

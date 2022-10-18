@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
-  FormBuilder,
   FormControl,
   FormGroup,
-  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -16,12 +13,8 @@ import {
   Banks,
   City,
   CustomerData,
-  CustomerSurveyData,
   District,
-  ProfilingData,
   Province,
-  RelativesData,
-  SpouseData,
   Ward,
 } from '../customer-survey.model';
 import { DatePipe } from '@angular/common';
@@ -233,38 +226,39 @@ export class SurveyFormComponent implements OnInit {
             console.log('Survey Trx Id: ', parameter['id2']);
             this.trxId = parameter['id2']
             this.transactionForm.controls['trxId'].setValue(this.trxId)
-            if(res.data.roleName === null || res.data.roleName === Role.CUSTOMER){
-              this.surveyForm.controls['roleName'].setValue(this.roleUser)
+            // if(res.data.roleName === null || res.data.roleName === Role.CUSTOMER){
               if (res.data !== null){
-                Swal.fire({
-                  title: 'You have filled this survey.',
-                  text: 'Do you want to edit survey?',
-                  icon: 'question',
-                  confirmButtonText: `Edit`,
-                  showDenyButton: true
-                }).then((result) => {
-                  if (result.isConfirmed) {
-                    this.surveyRes = res.data;
-                    this.setFormGroup(this.surveyRes);
-                    this.loadAddressesApi();
-                    this.profiles[0] = this.surveyRes.profile.breadwinner
-                    this.profiles[1] = this.surveyRes.profile.literacyAbility
-                    this.profiles[2] = this.surveyRes.profile.transportationOwner
-                    this.profiles[3] = this.surveyRes.profile.insuranceOwner
-                    this.profiles[4] = this.surveyRes.profile.internetAccess
-                  }else{
-                    this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
-                  }
-                })
+                if(res.data.roleName === Role.CUSTOMER){
+                  Swal.fire({
+                    title: 'You have filled this survey.',
+                    text: 'Do you want to edit survey?',
+                    icon: 'question',
+                    confirmButtonText: `Edit`,
+                    showDenyButton: true
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      this.surveyRes = res.data;
+                      this.surveyForm.controls['roleName'].setValue(this.roleUser)
+                      this.setFormGroup(this.surveyRes);
+                      this.loadAddressesApi();
+                      this.profiles[0] = this.surveyRes.profile.breadwinner
+                      this.profiles[1] = this.surveyRes.profile.literacyAbility
+                      this.profiles[2] = this.surveyRes.profile.transportationOwner
+                      this.profiles[3] = this.surveyRes.profile.insuranceOwner
+                      this.profiles[4] = this.surveyRes.profile.internetAccess
+                    }else{
+                      this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
+                    }
+                  })
+                }else{
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Sorry!',
+                    text: `You can't edit this survey again!`
+                  })
+                  this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
+                }
               }
-            }else{
-              Swal.fire({
-                icon: 'error',
-                title: 'Sorry!',
-                text: `You can't edit this survey again!`
-              })
-              this.router.navigateByUrl(`/cust-survey-list/${this.nik}`)
-            }
           },
           error: (err) => alert ('Error!')
         })
@@ -298,9 +292,7 @@ export class SurveyFormComponent implements OnInit {
     });
   }
 
-
   dataBanks: Banks[] = allBank;
-
 
   dataProvincies: Province[] = [];
   loadProvinces() {

@@ -131,6 +131,7 @@ export interface Ward{
 
 export interface AllSurveyReview{
     surveyId: string,
+    roleName: string,
     transaction: Trx,
     surveyData: CustomerSurveyData,
     spouse: SpouseData,
