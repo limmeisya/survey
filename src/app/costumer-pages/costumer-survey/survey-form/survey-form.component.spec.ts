@@ -148,6 +148,27 @@ describe('SurveyFormComponent', () => {
         expect(component.firstFormGroup).toBeTruthy()
         expect(component.firstFormGroup.get('surveyDataId')).toBeDefined()
         expect(component.firstFormGroup.get('surveyDataId')).toBeInstanceOf(AbstractControl)
+        
+        expect(component.firstFormGroup.get('mothersMaidenName')).toBeDefined()
+        expect(component.firstFormGroup.get('mothersMaidenName')).toBeInstanceOf(AbstractControl)
+
+        expect(component.firstFormGroup.get('latestEducationalLevel')).toBeDefined()
+        expect(component.firstFormGroup.get('latestEducationalLevel')).toBeInstanceOf(AbstractControl)
+
+        expect(component.firstFormGroup.get('dependents')).toBeDefined()
+        expect(component.firstFormGroup.get('dependents')).toBeInstanceOf(AbstractControl)
+
+        expect(component.firstFormGroup.get('email')).toBeDefined()
+        expect(component.firstFormGroup.get('email')).toBeInstanceOf(AbstractControl)
+
+        expect(component.firstFormGroup.get('bankName')).toBeDefined()
+        expect(component.firstFormGroup.get('bankName')).toBeInstanceOf(AbstractControl)
+
+        expect(component.firstFormGroup.get('accountName')).toBeDefined()
+        expect(component.firstFormGroup.get('accountName')).toBeInstanceOf(AbstractControl)
+
+        expect(component.firstFormGroup.get('accountNumber')).toBeDefined()
+        expect(component.firstFormGroup.get('accountNumber')).toBeInstanceOf(AbstractControl)
       })
     })
   })
